@@ -7,6 +7,30 @@ An engaging 1-3 sentence description of your lab.
 
 {% include section.html %}
 
+## Latest News
+
+{% assign latest_news = site.posts | sort: "date" | reverse %}
+{% for post in latest_news limit:3 %}
+  {%
+    include post-excerpt.html
+    title=post.title
+    url=post.url
+    image=post.image
+    author=post.author
+    date=post.date
+    last_modified_at=post.last_modified_at
+    tags=post.tags
+    content=post.content
+    excerpt=post.excerpt
+  %}
+{% else %}
+No news yet. Check back soon for updates!
+{% endfor %}
+
+{% include button.html link="/blog/" text="View All News →" style="bare" %}
+
+{% include section.html %}
+
 ## Highlights
 
 {% capture text %}
