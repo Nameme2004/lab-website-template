@@ -1,27 +1,31 @@
 ---
 title: Research
 nav:
-  order: 1
-  tooltip: Published works
+  order: 2
+  tooltip: Research directions and projects
 ---
 
 # {% include icon.html icon="fa-solid fa-microscope" %}Research
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+**Placeholder:** Research directions will be added once the lab's scope and descriptions are confirmed.
 
 {% include section.html %}
 
-## Highlighted
+{% capture text %}
+**Placeholder:** Add the research question, approach, and goals for this direction here.
+{% endcapture %}
 
-{% include citation.html lookup="Open collaborative writing with Manubot" style="rich" %}
+{%
+  include feature.html
+  image="images/photo.jpg"
+  title="Research Direction — Placeholder"
+  text=text
+%}
 
 {% include section.html %}
 
-## All
+## Explore More
 
-{% include search-box.html %}
+{% include button.html link="/projects/" text="Browse our projects" style="bare" %}
 
-{% include search-info.html %}
-
-{% include list.html data="citations" component="citation" style="rich" %}
+{% include button.html link="/publications/" text="See our publications" style="bare" %}
