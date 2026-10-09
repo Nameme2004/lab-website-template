@@ -28,6 +28,8 @@ nav:
     tags=post.tags
     content=post.content
     excerpt=post.excerpt
+    summary=post.summary
+    image_caption=post.image_caption
   %}
 {% else %}
 No news yet. Check back soon for updates!

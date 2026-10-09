@@ -1,0 +1,69 @@
+# Pages CMS pilot: edit a test branch, never publish test content to main.
+settings:
+  content:
+    merge: true
+media:
+  input: images/uploads
+  output: /images/uploads
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+content:
+  - name: news
+    label: News
+    type: collection
+    path: _posts
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{year}-{month}-{day}-{primary}.md"
+      field: create
+    operations:
+      create: true
+      rename: false
+      delete: false
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+        default: ""
+        description: "Use YYYY-MM-DD. On creation, match the filename prefix; when editing old news, use its existing filename date. Changing this date can change the Jekyll URL."
+        options:
+          time: false
+          format: yyyy-MM-dd
+      - name: category
+        label: Category
+        type: select
+        options:
+          values: [Publication, Research, Lab Life, Event, Recruitment]
+      - name: summary
+        label: Summary
+        type: text
+      - name: author
+        label: Author
+        type: string
+        description: "Use an existing member slug where applicable; preserve the original value on old news."
+      - name: image
+        label: Cover image
+        type: image
+      - name: image_caption
+        label: Image caption
+        type: text
+      - name: doi
+        label: DOI or related link
+        type: string
+      - name: body
+        label: Body
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+          switcher: true
