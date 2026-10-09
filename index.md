@@ -1,4 +1,8 @@
 ---
+title: Home
+nav:
+  order: 1
+  tooltip: Home
 ---
 
 # Nameme2004's Website
@@ -39,7 +43,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 {%
   include button.html
-  link="research"
+  link="/publications/"
   text="See our publications"
   icon="fa-solid fa-arrow-right"
   flip=true
@@ -51,7 +55,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 {%
   include feature.html
   image="images/photo.jpg"
-  link="research"
+  link="/research/"
   title="Our Research"
   text=text
 %}
@@ -62,7 +66,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 {%
   include button.html
-  link="projects"
+  link="/projects/"
   text="Browse our projects"
   icon="fa-solid fa-arrow-right"
   flip=true
@@ -74,7 +78,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 {%
   include feature.html
   image="images/photo.jpg"
-  link="projects"
+  link="/projects/"
   title="Our Projects"
   flip=true
   style="bare"
@@ -87,8 +91,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 {%
   include button.html
-  link="team"
-  text="Meet our team"
+  link="/team/"
+  text="Meet our people"
   icon="fa-solid fa-arrow-right"
   flip=true
   style="bare"
@@ -99,7 +103,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 {%
   include feature.html
   image="images/photo.jpg"
-  link="team"
-  title="Our Team"
+  link="/team/"
+  title="Our People"
   text=text
 %}
