@@ -17,6 +17,10 @@ layout: default
 
 {% include section.html %}
 
+{% if page.image and page.image_caption %}
+<p class="center">{{ page.image_caption | xml_escape }}</p>
+{% endif %}
+
 {{ content }}
 
 {% include section.html %}

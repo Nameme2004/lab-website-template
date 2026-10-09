@@ -14,7 +14,7 @@
     {% assign title = post.title %}
     {% assign image = post.image | relative_url | uri_escape %}
 
-    {% if image %}
+    {% if post.image and post.image != "" %}
       <a
         href="{{ url }}"
         class="post-excerpt-image"
@@ -22,7 +22,7 @@
       >
         <img
           src="{{ image }}"
-          alt="{{ title | default: "excerpt image" | regex_strip }}"
+          alt="{{ post.image_caption | default: title | default: "excerpt image" | regex_strip | xml_escape }}"
           loading="lazy"
           {% include fallback.html %}
         >
@@ -47,13 +47,14 @@
         | default: ""
         | strip_html
       %}
+      {% assign excerpt = post.summary | default: excerpt | strip_html %}
       {% assign search = post.content
         | strip_html
         | strip_newlines
         | regex_strip
       %}
       <p data-search="{{ search }}">
-        {{ excerpt }}
+        {{ excerpt | xml_escape }}
       </p>
     </div>
   </div>
