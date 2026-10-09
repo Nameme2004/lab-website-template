@@ -92,7 +92,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 {%
   include button.html
   link="/team/"
-  text="Meet our people"
+  text="Meet our team"
   icon="fa-solid fa-arrow-right"
   flip=true
   style="bare"
@@ -104,6 +104,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   include feature.html
   image="images/photo.jpg"
   link="/team/"
-  title="Our People"
+  title="Our Team"
   text=text
 %}

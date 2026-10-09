@@ -1,13 +1,12 @@
 ---
 title: Contact
-nav:
-  order: 7
-  tooltip: Email, address, and location
 ---
 
 # {% include icon.html icon="fa-regular fa-envelope" %}Contact
 
 **Placeholder:** The contact details and location below are template examples. Official contact information will be added once confirmed.
+
+{% include button.html link="/join-us/" text="Join Us — application and contact information" style="bare" %}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis

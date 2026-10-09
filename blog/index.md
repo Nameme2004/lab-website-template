@@ -1,8 +1,5 @@
 ---
 title: News
-nav:
-  order: 5
-  tooltip: Latest news and updates
 ---
 
 # {% include icon.html icon="fa-solid fa-feather-pointed" %}News
