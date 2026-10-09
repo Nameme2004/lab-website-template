@@ -5,9 +5,11 @@ nav:
   tooltip: Home
 ---
 
-# Nameme2004's Website
+# {{ site.title }}
 
-An engaging 1-3 sentence description of your lab.
+**{{ site.subtitle }}**
+
+{{ site.description }}
 
 {% include section.html %}
 
@@ -35,75 +37,34 @@ No news yet. Check back soon for updates!
 
 {% include section.html %}
 
-## Highlights
+## Our Research
 
-{% capture text %}
+These preliminary themes organize the website's content. They are proposed topics, not formally confirmed research directions of the lab or its principal investigator.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+{% capture cancer %}
+### [Cancer Organoids]({{ "/research/" | relative_url }})
 
-{%
-  include button.html
-  link="/publications/"
-  text="See our publications"
-  icon="fa-solid fa-arrow-right"
-  flip=true
-  style="bare"
-%}
-
+A proposed theme exploring organoid-based approaches to cancer disease modeling.
 {% endcapture %}
 
-{%
-  include feature.html
-  image="images/photo.jpg"
-  link="/research/"
-  title="Our Research"
-  text=text
-%}
+{% capture infection %}
+### [Infection Models]({{ "/research/" | relative_url }})
 
-{% capture text %}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-{%
-  include button.html
-  link="/projects/"
-  text="Browse our projects"
-  icon="fa-solid fa-arrow-right"
-  flip=true
-  style="bare"
-%}
-
+A proposed theme exploring organoid-based models of infection and host responses.
 {% endcapture %}
 
-{%
-  include feature.html
-  image="images/photo.jpg"
-  link="/projects/"
-  title="Our Projects"
-  flip=true
-  style="bare"
-  text=text
-%}
+{% capture discovery %}
+### [Organoid-Based Drug Discovery]({{ "/research/" | relative_url }})
 
-{% capture text %}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-{%
-  include button.html
-  link="/team/"
-  text="Meet our team"
-  icon="fa-solid fa-arrow-right"
-  flip=true
-  style="bare"
-%}
-
+A proposed theme exploring organoid-based approaches to therapeutic discovery.
 {% endcapture %}
 
-{%
-  include feature.html
-  image="images/photo.jpg"
-  link="/team/"
-  title="Our Team"
-  text=text
-%}
+{% include cols.html col1=cancer col2=infection col3=discovery %}
+
+{% include section.html %}
+
+{% include button.html link="/publications/" text="Explore publications" style="bare" %}
+
+{% include button.html link="/team/" text="Meet our team" style="bare" %}
+
+{% include button.html link="/join-us/" text="Join Us" style="bare" %}
