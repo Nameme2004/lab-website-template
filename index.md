@@ -5,7 +5,7 @@ nav:
   tooltip: Home
 ---
 
-# {{ site.title }}
+# About Us
 
 **{{ site.subtitle }}**
 
