@@ -442,3 +442,165 @@ content:
           - name: url
             label: Full https URL or internal /path/ — no private links
             type: string
+  - name: publication_sources
+    label: Publication Sources — manual inputs, not generated citations
+    type: file
+    path: _data/sources.yaml
+    format: yaml
+    list: true
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: id
+        label: Stable citation ID (for DOI use doi:10.xxxx/...)
+        type: string
+        required: true
+      - name: type
+        label: Reference type (preserve existing values such as paper)
+        type: string
+      - name: description
+        label: English lab commentary (not bibliographic metadata)
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: description_zh
+        label: Chinese lab commentary — reserved for later
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: image
+        label: Optional authorized display image or existing external image
+        type: image
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: repo
+        label: Related GitHub repository (owner/repo)
+        type: string
+      - name: remove
+        label: Exclude this ID from generated results (does not delete a paper)
+        type: boolean
+        default: false
+      - name: title
+        label: Optional original-title override — normally auto-fetched
+        type: string
+      - name: publisher
+        label: Optional publisher override — normally auto-fetched
+        type: string
+      - name: link
+        label: Optional paper URL override — normally auto-fetched
+        type: string
+      - name: authors
+        label: Optional original author-name overrides — normally auto-fetched
+        type: string
+        list: true
+      - name: date
+        label: Optional publication date override — keep original dates
+        type: date
+        default: ""
+        options:
+          time: false
+          format: yyyy-MM-dd
+      - name: buttons
+        label: Related public links
+        type: object
+        list: true
+        fields:
+          - name: type
+            label: Existing button type (website, source, manubot, etc.)
+            type: string
+          - name: text
+            label: Optional label
+            type: string
+          - name: link
+            label: Destination URL
+            type: string
+          - name: icon
+            label: Optional existing icon
+            type: string
+          - name: tooltip
+            label: Optional tooltip
+            type: string
+  - name: publications_page
+    label: Publications Page — text and highlighted IDs
+    type: file
+    path: _data/publications.yaml
+    format: yaml
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: intro
+        label: Page introduction
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for later
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: highlighted_heading
+        label: Highlighted section heading
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for later
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: all_heading
+        label: All references section heading
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for later
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: empty_highlights
+        label: No highlighted references message
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for later
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: highlighted_ids
+        label: Highlighted IDs — copy exact IDs from citations or sources
+        type: string
+        list: true
