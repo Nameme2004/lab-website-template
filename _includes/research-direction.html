@@ -1,0 +1,28 @@
+{% assign direction = include.direction %}
+{% if include.preview %}
+  {% assign description = direction.home_summary | default: direction.description %}
+{% else %}
+  {% assign description = direction.description %}
+{% endif %}
+{% capture direction_text %}
+{% unless direction.confirmed == true %}
+**Unconfirmed placeholder — not a formally confirmed lab research direction.**
+{% endunless %}
+
+{{ description }}
+{% endcapture %}
+<article>
+  <h3>
+    {% if include.preview %}
+      <a href="{{ '/research/' | relative_url }}">{{ direction.title | xml_escape }}</a>
+    {% else %}
+      {{ direction.title | xml_escape }}
+    {% endif %}
+  </h3>
+  {% assign direction_image = direction.image | default: "" | strip %}
+  {% if direction_image != "" %}
+    {% include feature.html image=direction_image title=direction.title text=direction_text %}
+  {% else %}
+    {{ direction_text | markdownify }}
+  {% endif %}
+</article>
