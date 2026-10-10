@@ -9,8 +9,8 @@ aliases:
 links:
   home-page: https://janesmith.com
   orcid: 0000-0001-8713-9213
-description: CMS field preservation test
 ---
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Faucibus purus in massa tempor nec feugiat nisl pretium fusce.
 Elit at imperdiet dui accumsan.
