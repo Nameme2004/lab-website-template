@@ -7,20 +7,16 @@ nav:
 
 # {% include icon.html icon="fa-solid fa-microscope" %}Research
 
-**Placeholder:** Research directions will be added once the lab's scope and descriptions are confirmed.
+{{ site.data.research.intro | markdownify }}
 
 {% include section.html %}
 
-{% capture text %}
-**Placeholder:** Add the research question, approach, and goals for this direction here.
-{% endcapture %}
-
-{%
-  include feature.html
-  image="images/photo.jpg"
-  title="Research Direction — Placeholder"
-  text=text
-%}
+{% assign directions = site.data.research.directions | sort: "order" %}
+{% for direction in directions %}
+  {% include research-direction.html direction=direction %}
+{% else %}
+<p>Research information will be added once confirmed.</p>
+{% endfor %}
 
 {% include section.html %}
 

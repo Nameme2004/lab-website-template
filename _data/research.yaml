@@ -1,0 +1,32 @@
+{
+  "intro": "**Placeholder:** Research directions will be added once the lab's scope and descriptions are confirmed.",
+  "directions": [
+    {
+      "title": "Cancer Organoids",
+      "description": "A proposed theme exploring organoid-based approaches to cancer disease modeling.",
+      "image": "",
+      "order": 10,
+      "show_on_home": true,
+      "home_summary": "",
+      "confirmed": false
+    },
+    {
+      "title": "Infection Models",
+      "description": "A proposed theme exploring organoid-based models of infection and host responses.",
+      "image": "",
+      "order": 20,
+      "show_on_home": true,
+      "home_summary": "",
+      "confirmed": false
+    },
+    {
+      "title": "Organoid-Based Drug Discovery",
+      "description": "A proposed theme exploring organoid-based approaches to therapeutic discovery.",
+      "image": "",
+      "order": 30,
+      "show_on_home": true,
+      "home_summary": "",
+      "confirmed": false
+    }
+  ]
+}

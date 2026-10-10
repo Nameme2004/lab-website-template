@@ -149,3 +149,81 @@ content:
           format: markdown
           media: false
           switcher: true
+  - name: home
+    label: Home — About Us
+    type: file
+    path: _data/home.yaml
+    format: yaml
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: about_us
+        label: About Us introduction (Markdown)
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: research_preview_intro
+        label: Homepage research introduction (Markdown)
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+  - name: research
+    label: Research — directions and homepage previews
+    type: file
+    path: _data/research.yaml
+    format: yaml
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: intro
+        label: Research page introduction (Markdown)
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: directions
+        label: Research directions — add or edit entries here
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} (order {order})"
+        fields:
+          - name: title
+            label: Direction title
+            type: string
+            required: true
+          - name: description
+            label: Full introduction (Markdown)
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: image
+            label: Optional authorized display image
+            type: image
+          - name: order
+            label: Display order — smaller numbers first
+            type: number
+            required: true
+            default: 10
+          - name: show_on_home
+            label: Show on homepage (first three by order)
+            type: boolean
+            default: false
+          - name: home_summary
+            label: Homepage summary (Markdown; blank uses full introduction)
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: confirmed
+            label: Confirmed by lab lead (leave off for placeholders)
+            type: boolean
+            default: false

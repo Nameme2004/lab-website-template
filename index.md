@@ -9,7 +9,7 @@ nav:
 
 **{{ site.subtitle }}**
 
-{{ site.description }}
+{{ site.data.home.about_us | markdownify }}
 
 {% include section.html %}
 
@@ -41,27 +41,17 @@ No news yet. Check back soon for updates!
 
 ## Our Research
 
-These preliminary themes organize the website's content. They are proposed topics, not formally confirmed research directions of the lab or its principal investigator.
+{{ site.data.home.research_preview_intro | markdownify }}
 
-{% capture cancer %}
-### [Cancer Organoids]({{ "/research/" | relative_url }})
-
-A proposed theme exploring organoid-based approaches to cancer disease modeling.
+{% assign home_directions = site.data.research.directions | where: "show_on_home", true | sort: "order" %}
+{% capture research_preview %}
+{% for direction in home_directions limit:3 %}
+  {% include research-direction.html direction=direction preview=true %}
+{% else %}
+<p>Research information will be added once confirmed.</p>
+{% endfor %}
 {% endcapture %}
-
-{% capture infection %}
-### [Infection Models]({{ "/research/" | relative_url }})
-
-A proposed theme exploring organoid-based models of infection and host responses.
-{% endcapture %}
-
-{% capture discovery %}
-### [Organoid-Based Drug Discovery]({{ "/research/" | relative_url }})
-
-A proposed theme exploring organoid-based approaches to therapeutic discovery.
-{% endcapture %}
-
-{% include cols.html col1=cancer col2=infection col3=discovery %}
+{% include grid.html content=research_preview %}
 
 {% include section.html %}
 
