@@ -1,0 +1,13 @@
+intro:
+  en: Template example references are shown below to demonstrate the citation
+    system. They are not a verified list of Duan Lab publications. Lab
+    publications will be added only after confirmation.
+  zh: CMS 中文字段保存测试（临时内容，稍后删除）
+highlighted_heading:
+  en: Highlighted
+all_heading:
+  en: All
+empty_highlights:
+  en: No highlighted references are available.
+highlighted_ids:
+  - doi:10.1371/journal.pcbi.1007128
