@@ -1,0 +1,14 @@
+{
+  "email": "",
+  "phone": "",
+  "address": {
+    "en": "",
+    "zh": ""
+  },
+  "links": [],
+  "confirmed": false,
+  "placeholder": {
+    "en": "**Placeholder:** No official recruitment email, telephone number, or address has been confirmed for publication here. Contact information will be added once confirmed.",
+    "zh": ""
+  }
+}

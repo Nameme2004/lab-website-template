@@ -1,0 +1,41 @@
+{% assign contact = site.data.contact %}
+{% assign email = contact.email | default: "" | strip %}
+{% assign phone = contact.phone | default: "" | strip %}
+{% assign address = contact.address.en | default: "" | strip %}
+{% if contact.confirmed == true %}
+  {% if email != "" %}
+    {% assign email_link = email | prepend: "mailto:" %}
+    {% include button.html link=email_link text=email style="bare" %}
+  {% endif %}
+  {% if phone != "" %}
+    {% assign phone_link = phone | prepend: "tel:" %}
+    {% include button.html link=phone_link text=phone style="bare" %}
+  {% endif %}
+  {% if address != "" %}
+    <p>{{ address | xml_escape }}</p>
+  {% endif %}
+  {% assign visible_links = 0 %}
+  {% for public_link in contact.links %}
+    {% assign link_url = public_link.url | default: "" | strip %}
+    {% assign first_character = link_url | slice: 0, 1 %}
+    {% assign first_two = link_url | slice: 0, 2 %}
+    {% assign first_seven = link_url | slice: 0, 7 %}
+    {% assign first_eight = link_url | slice: 0, 8 %}
+    {% if first_seven == "http://" or first_eight == "https://" %}
+      {% assign visible_links = visible_links | plus: 1 %}
+      {% assign link_label = public_link.label.en | default: "Public information" | xml_escape %}
+      {% include button.html link=link_url text=link_label style="bare" %}
+    {% elsif first_character == "/" and first_two != "//" %}
+      {% assign visible_links = visible_links | plus: 1 %}
+      {% assign link_label = public_link.label.en | default: "Public information" | xml_escape %}
+      {% include button.html link=link_url text=link_label style="bare" %}
+    {% endif %}
+  {% endfor %}
+  {% if email == "" and phone == "" and address == "" and visible_links == 0 %}
+    <p>Confirmed contact information will be added here when available.</p>
+  {% endif %}
+{% else %}
+  <p><strong>Unconfirmed contact information — do not use template examples as lab contact details.</strong></p>
+  {% assign placeholder = contact.placeholder.en | default: "Contact information is pending confirmation." %}
+  {{ placeholder | markdownify }}
+{% endif %}

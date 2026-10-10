@@ -227,3 +227,218 @@ content:
             label: Confirmed by lab lead (leave off for placeholders)
             type: boolean
             default: false
+  - name: join_us
+    label: Join Us — public recruitment
+    type: file
+    path: _data/join_us.yaml
+    format: yaml
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: intro
+        label: Page introduction
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for phase 5
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: positions_placeholder
+        label: No confirmed positions — placeholder notice
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for phase 5
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: application_instructions
+        label: How to Apply — public instructions
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for phase 5
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: ai_coming_soon
+        label: AI Coming Soon — possible future features
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for phase 5
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: positions
+        label: Positions — add entries and sort by number
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{id} — {status} (order {order})"
+        fields:
+          - name: id
+            label: Stable unique ID — do not change once published
+            type: string
+            required: true
+          - name: title
+            label: Position title
+            type: object
+            fields:
+              - name: en
+                label: English — displayed now
+                type: text
+              - name: zh
+                label: Chinese — reserved for phase 5
+                type: text
+          - name: description
+            label: Position introduction
+            type: object
+            fields:
+              - name: en
+                label: English — displayed now
+                type: rich-text
+                options:
+                  format: markdown
+                  media: false
+              - name: zh
+                label: Chinese — reserved for phase 5
+                type: rich-text
+                options:
+                  format: markdown
+                  media: false
+          - name: application_instructions
+            label: Position application instructions
+            type: object
+            fields:
+              - name: en
+                label: English — displayed now
+                type: rich-text
+                options:
+                  format: markdown
+                  media: false
+              - name: zh
+                label: Chinese — reserved for phase 5
+                type: rich-text
+                options:
+                  format: markdown
+                  media: false
+          - name: status
+            label: Status — open still requires confirmation
+            type: select
+            required: true
+            default: placeholder
+            options:
+              values: [open, closed, placeholder]
+          - name: order
+            label: Display order — smaller numbers first
+            type: number
+            required: true
+            default: 10
+          - name: deadline
+            label: Optional deadline — enter only a confirmed date
+            type: date
+            default: ""
+            options:
+              time: false
+              format: yyyy-MM-dd
+          - name: confirmed
+            label: Confirmed by lab lead — required for an open announcement
+            type: boolean
+            default: false
+  - name: contact
+    label: Contact — shared public details
+    type: file
+    path: _data/contact.yaml
+    format: yaml
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: email
+        label: Confirmed public email
+        type: string
+      - name: phone
+        label: Confirmed public telephone
+        type: string
+      - name: address
+        label: Public address
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: text
+          - name: zh
+            label: Chinese — reserved for phase 5
+            type: text
+      - name: placeholder
+        label: Unconfirmed contact notice
+        type: object
+        fields:
+          - name: en
+            label: English — displayed now
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: Chinese — reserved for phase 5
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: confirmed
+        label: All populated details verified by lab lead
+        type: boolean
+        default: false
+      - name: links
+        label: Optional verified public links
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Link label
+            type: object
+            fields:
+              - name: en
+                label: English — displayed now
+                type: text
+              - name: zh
+                label: Chinese — reserved for phase 5
+                type: text
+          - name: url
+            label: Full https URL or internal /path/ — no private links
+            type: string
