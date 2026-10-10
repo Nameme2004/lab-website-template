@@ -473,8 +473,8 @@ content:
           format: markdown
           media: false
       - name: image
-        label: Optional authorized display image or existing external image
-        type: image
+        label: Optional image URL or /images/uploads/ path — preserve full query string
+        type: string
       - name: tags
         label: Tags
         type: string
