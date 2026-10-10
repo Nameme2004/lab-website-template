@@ -1,6 +1,14 @@
-confirmed: false
-placeholder:
-  en: "**Placeholder:** No official recruitment email, telephone number, or
-    address has been confirmed for publication here. Contact information will be
-    added once confirmed."
-  zh: CMS 联系方式中文保存测试（临时内容，稍后删除）
+{
+  "email": "",
+  "phone": "",
+  "address": {
+    "en": "",
+    "zh": ""
+  },
+  "links": [],
+  "confirmed": false,
+  "placeholder": {
+    "en": "**Placeholder:** No official recruitment email, telephone number, or address has been confirmed for publication here. Contact information will be added once confirmed.",
+    "zh": ""
+  }
+}

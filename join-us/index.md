@@ -14,7 +14,8 @@ nav:
 
 ## Open Positions
 
-{% assign positions = join_us.positions | sort: "order" %}
+{% assign empty_positions = "" | split: "," %}
+{% assign positions = join_us.positions | default: empty_positions | sort: "order" %}
 {% for position in positions %}
   {% if position.confirmed == true and position.status == "open" %}
     <h3>{{ position.title.en | default: "Position information pending" | xml_escape }}</h3>
