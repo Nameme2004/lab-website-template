@@ -67,3 +67,85 @@ content:
           format: markdown
           media: false
           switcher: true
+  - name: team
+    label: Team members
+    type: collection
+    path: _members
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{fields.name}.md"
+      field: create
+    operations:
+      create: true
+      rename: false
+      delete: false
+    view:
+      primary: name
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Position
+        type: select
+        required: true
+        options:
+          values:
+            - name: principal-investigator
+              label: Principal Investigator
+            - name: postdoc
+              label: Postdoctoral Researcher
+            - name: phd
+              label: PhD Student
+            - name: undergrad
+              label: Undergraduate Student
+            - name: programmer
+              label: Programmer
+            - name: mascot
+              label: Mascot
+      - name: image
+        label: Portrait
+        type: image
+        description: "Keep the existing portrait unless replacing it with an authorized image. Uploads use images/uploads and are rendered with relative_url."
+      - name: description
+        label: Position description
+        type: string
+      - name: affiliation
+        label: Affiliation
+        type: string
+      - name: group
+        label: Group
+        type: string
+        description: "Preserve existing values such as alum; this does not replace the position field."
+      - name: aliases
+        label: Author name aliases
+        type: string
+        list: true
+      - name: links
+        label: Profile links
+        type: object
+        fields:
+          - name: home-page
+            label: Personal website URL
+            type: string
+          - name: orcid
+            label: ORCID identifier
+            type: string
+          - name: github
+            label: GitHub username
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: twitter
+            label: Twitter username
+            type: string
+      - name: body
+        label: Biography
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+          switcher: true
