@@ -1,0 +1,19 @@
+{
+  "intro": {
+    "en": "Recruitment information will be published after confirmation by the lab lead.",
+    "zh": ""
+  },
+  "positions": [],
+  "positions_placeholder": {
+    "en": "**Placeholder — no confirmed open positions are announced on this page.** Recruitment information is pending confirmation.",
+    "zh": ""
+  },
+  "application_instructions": {
+    "en": "**Placeholder:** The application process and required materials are pending confirmation. Submission instructions will be published once confirmed.",
+    "zh": ""
+  },
+  "ai_coming_soon": {
+    "en": "Planned features may include research direction matching, application materials checks, and application status queries.",
+    "zh": ""
+  }
+}
