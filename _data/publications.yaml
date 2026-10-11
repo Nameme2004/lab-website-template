@@ -1,0 +1,21 @@
+{
+  "intro": {
+    "en": "Template example references are shown below to demonstrate the citation system. They are not a verified list of Duan Lab publications. Lab publications will be added only after confirmation.",
+    "zh": ""
+  },
+  "highlighted_heading": {
+    "en": "Highlighted",
+    "zh": ""
+  },
+  "all_heading": {
+    "en": "All",
+    "zh": ""
+  },
+  "empty_highlights": {
+    "en": "No highlighted references are available.",
+    "zh": ""
+  },
+  "highlighted_ids": [
+    "doi:10.1371/journal.pcbi.1007128"
+  ]
+}
