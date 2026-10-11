@@ -1,0 +1,18 @@
+{%- comment -%}
+  Render each Markdown value once. Missing Chinese uses one always-visible
+  English block, avoiding a duplicated fallback DOM. English IDs are preserved;
+  translated HTML has no IDs so it cannot duplicate English anchors.
+{%- endcomment -%}
+{%- assign english_markdown = include.en | default: "" -%}
+{%- assign chinese_markdown = include.zh | default: "" | strip -%}
+{%- assign english_html = english_markdown | markdownify -%}
+{%- if chinese_markdown == "" -%}
+<div class="bilingual-markdown" lang="en">{{ english_html }}</div>
+{%- else -%}
+  {%- capture id_attribute_pattern -%}(?i)\s+id\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+){%- endcapture -%}
+  {%- assign chinese_html = chinese_markdown | markdownify | regex_replace: id_attribute_pattern, "" -%}
+<div class="bilingual-markdown">
+  <div data-i18n-lang="en" lang="en">{{ english_html }}</div>
+  <div data-i18n-lang="zh" lang="zh-CN" hidden>{{ chinese_html }}</div>
+</div>
+{%- endif -%}

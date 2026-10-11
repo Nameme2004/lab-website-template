@@ -17,3 +17,31 @@ navigation:
 language_label:
   en: Choose language
   zh: 选择语言
+home:
+  about_us:
+    en: About Us
+    zh: 关于我们
+  latest_news:
+    en: Latest News
+    zh: 最新动态
+  no_news:
+    en: No news yet. Check back soon for updates!
+    zh: 暂无新闻，欢迎稍后查看更新！
+  view_all_news:
+    en: View All News →
+    zh: 查看全部新闻 →
+  our_research:
+    en: Our Research
+    zh: 我们的研究
+  research_pending:
+    en: Research information will be added once confirmed.
+    zh: 研究信息将在确认后发布。
+  explore_publications:
+    en: Explore publications
+    zh: 查看论文
+  meet_team:
+    en: Meet our team
+    zh: 认识团队
+  join_us:
+    en: Join Us
+    zh: 加入我们

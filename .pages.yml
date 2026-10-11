@@ -160,13 +160,25 @@ content:
       delete: false
     fields:
       - name: about_us
-        label: About Us introduction (Markdown)
+        label: About Us introduction — English (Markdown)
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: about_us_zh
+        label: 关于我们介绍 — 中文（可留空，Markdown）
         type: rich-text
         options:
           format: markdown
           media: false
       - name: research_preview_intro
-        label: Homepage research introduction (Markdown)
+        label: Homepage research introduction — English (Markdown)
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: research_preview_intro_zh
+        label: 首页研究预览介绍 — 中文（可留空，Markdown）
         type: rich-text
         options:
           format: markdown

@@ -5,15 +5,17 @@ nav:
   tooltip: Home
 ---
 
-# About Us
+{% assign home_text = site.data.i18n.home %}
+
+<h1 id="about-us">{% include bilingual-text.html en=home_text.about_us.en zh=home_text.about_us.zh %}</h1>
 
 **{{ site.subtitle }}**
 
-{{ site.data.home.about_us | markdownify }}
+{% include bilingual-markdown.html en=site.data.home.about_us zh=site.data.home.about_us_zh %}
 
 {% include section.html %}
 
-## Latest News
+<h2 id="latest-news">{% include bilingual-text.html en=home_text.latest_news.en zh=home_text.latest_news.zh %}</h2>
 
 {% assign latest_news = site.posts | sort: "date" | reverse %}
 {% for post in latest_news limit:3 %}
@@ -32,31 +34,35 @@ nav:
     image_caption=post.image_caption
   %}
 {% else %}
-No news yet. Check back soon for updates!
+<p>{% include bilingual-text.html en=home_text.no_news.en zh=home_text.no_news.zh %}</p>
 {% endfor %}
 
-{% include button.html link="/blog/" text="View All News →" style="bare" %}
+{% capture news_button_text %}{% include bilingual-text.html en=home_text.view_all_news.en zh=home_text.view_all_news.zh %}{% endcapture %}
+{% include button.html link="/blog/" text=news_button_text style="bare" %}
 
 {% include section.html %}
 
-## Our Research
+<h2 id="our-research">{% include bilingual-text.html en=home_text.our_research.en zh=home_text.our_research.zh %}</h2>
 
-{{ site.data.home.research_preview_intro | markdownify }}
+{% include bilingual-markdown.html en=site.data.home.research_preview_intro zh=site.data.home.research_preview_intro_zh %}
 
 {% assign home_directions = site.data.research.directions | where: "show_on_home", true | sort: "order" %}
 {% capture research_preview %}
 {% for direction in home_directions limit:3 %}
   {% include research-direction.html direction=direction preview=true %}
 {% else %}
-<p>Research information will be added once confirmed.</p>
+<p>{% include bilingual-text.html en=home_text.research_pending.en zh=home_text.research_pending.zh %}</p>
 {% endfor %}
 {% endcapture %}
 {% include grid.html content=research_preview %}
 
 {% include section.html %}
 
-{% include button.html link="/publications/" text="Explore publications" style="bare" %}
+{% capture publications_button_text %}{% include bilingual-text.html en=home_text.explore_publications.en zh=home_text.explore_publications.zh %}{% endcapture %}
+{% include button.html link="/publications/" text=publications_button_text style="bare" %}
 
-{% include button.html link="/team/" text="Meet our team" style="bare" %}
+{% capture team_button_text %}{% include bilingual-text.html en=home_text.meet_team.en zh=home_text.meet_team.zh %}{% endcapture %}
+{% include button.html link="/team/" text=team_button_text style="bare" %}
 
-{% include button.html link="/join-us/" text="Join Us" style="bare" %}
+{% capture join_button_text %}{% include bilingual-text.html en=home_text.join_us.en zh=home_text.join_us.zh %}{% endcapture %}
+{% include button.html link="/join-us/" text=join_button_text style="bare" %}
