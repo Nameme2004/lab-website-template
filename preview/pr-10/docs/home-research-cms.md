@@ -45,8 +45,15 @@ content are not translated by this change.
 once and uses the existing language script and hidden-content CSS. Missing,
 null or whitespace-only Chinese produces a single English block with
 `lang="en"`. With a translation, two blocks are pre-rendered; only one is
-visible. The English block retains original IDs; ID attributes are removed
-from the translated HTML to avoid duplicate anchors. Chinese body-specific
+visible. The English block retains original IDs; the `remove_html_ids` filter
+parses only the translated HTML as a Nokogiri fragment and removes element ID
+attributes to avoid duplicate anchors. Plain `id=note` text and code are not
+matched or removed. The filter preserves other attributes and link targets and
+adds no html/head/body wrapper. Nokogiri is already locked through the existing
+dependencies; no new gem is added. Fragments without IDs are returned unchanged.
+When IDs exist, normal HTML serialization may normalize quoting or entities;
+malformed raw HTML may be repaired by the parser. This is not sanitization.
+Chinese body-specific
 anchors and raw HTML with ID-dependent widgets are not supported. Keep page
 anchors such as `#about-us` for shared navigation. Markdown source line breaks
 follow Jekyll's existing Markdown rules; they do not automatically become
@@ -64,3 +71,44 @@ duplicate IDs, mobile layout and both news/research previews. In Pages CMS,
 save each Home field on the test branch, then compare both English values,
 Chinese values and all unrelated fields. Restore temporary test translations
 before final review. Do not edit Research or News content for this test.
+
+## ID-filter verification in the existing Bundler environment
+
+Run `bundle exec ruby -r ./_plugins/regex.rb -e 'puts Nokogiri::VERSION'` to
+confirm dependency loading. The following Ruby assertions exercise the actual
+filter (run with `bundle exec ruby`); they do not replace the Jekyll build:
+
+```ruby
+require_relative '_plugins/regex'
+filter = Object.new.extend(Jekyll::RegexFilters)
+input = <<~HTML
+  <h2 id="shared" class="heading" lang="zh-CN" aria-label="标题">标题</h2>
+  <p>Example id=note <strong>格式</strong> <code> id=note</code></p>
+  <pre><code>id=note\n&lt;div id="example"&gt;</code></pre>
+  <ul><li><a id="link" href="#shared" title="id=note">链接</a></li></ul>
+HTML
+before = Nokogiri::HTML.fragment(input)
+output = filter.remove_html_ids(input)
+after = Nokogiri::HTML.fragment(output)
+raise 'IDs remain' unless after.css('[id]').empty?
+raise 'Text changed' unless before.text == after.text
+raise 'Code changed' unless before.css('code').map(&:text) == after.css('code').map(&:text)
+raise 'Structure changed' unless before.css('*').map(&:name) == after.css('*').map(&:name)
+before.css('*').zip(after.css('*')).each do |original, cleaned|
+  expected = original.attribute_nodes.reject { |a| a.name == 'id' }.map { |a| [a.name, a.value] }.to_h
+  actual = cleaned.attribute_nodes.map { |a| [a.name, a.value] }.to_h
+  raise 'Other attributes changed' unless expected == actual
+end
+raise 'Document wrapper added' unless after.css('html, head, body').empty?
+no_ids = '<p><code> id=note</code></p>'
+raise 'ID-free HTML changed' unless filter.remove_html_ids(no_ids) == no_ids
+puts 'ID-filter assertions passed'
+```
+
+Then build with `bundle exec jekyll build --baseurl /lab-website-template`.
+In an isolated fixture, test English and Chinese Markdown with the same heading,
+paragraphs, emphasis, lists and links; assert no duplicate DOM IDs and unchanged
+English anchors. Test missing/null/blank/whitespace Chinese separately: each
+must produce one visible English block. Confirm hidden translations remain
+hidden, and remove all fixture content before review. Do not use published
+research data as test fixtures.
