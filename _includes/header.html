@@ -47,13 +47,31 @@
     %}
     {% for page in pages %}
       {% if page.nav %}
+        {% assign navigation_text = site.data.i18n.navigation[page.title] %}
+        {% assign navigation_en = navigation_text.en | default: page.title %}
+        {% assign navigation_zh = navigation_text.zh | default: navigation_en %}
         <a
           href="{{ page.dir | relative_url | uri_escape }}"
           data-tooltip="{{ page.nav.tooltip | xml_escape }}"
+          data-i18n-tooltip-en="{{ page.nav.tooltip | default: navigation_en | xml_escape }}"
+          data-i18n-tooltip-zh="{{ navigation_zh | xml_escape }}"
         >
-          {{ page.title }}
+          {% include bilingual-text.html en=navigation_en zh=navigation_zh %}
         </a>
       {% endif %}
     {% endfor %}
+    <div
+      class="language-control"
+      role="group"
+      aria-label="{{ site.data.i18n.language_label.en | xml_escape }}"
+      data-language-control
+      data-en-label="{{ site.data.i18n.language_label.en | xml_escape }}"
+      data-zh-label="{{ site.data.i18n.language_label.zh | xml_escape }}"
+      data-language-storage-key="duan-lab:{{ site.baseurl | default: '/' | xml_escape }}:language"
+      hidden
+    >
+      <button type="button" data-language-choice="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+      <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
+    </div>
   </nav>
 </header>
