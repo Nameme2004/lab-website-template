@@ -1,0 +1,7 @@
+{%- comment -%}
+  Plain text only: escaping prevents IDs or nested interactive markup.
+  Call with en and zh; blank, missing and null Chinese falls back to English.
+{%- endcomment -%}
+{%- assign english_text = include.en | default: "" -%}
+{%- assign chinese_text = include.zh | default: "" | strip -%}
+<span data-i18n-text><span data-i18n-lang="en" lang="en">{{ english_text | xml_escape }}</span><span data-i18n-lang="zh" lang="{% if chinese_text == '' %}en{% else %}zh-CN{% endif %}" hidden>{% if chinese_text == '' %}{{ english_text | xml_escape }}{% else %}{{ chinese_text | xml_escape }}{% endif %}</span></span>

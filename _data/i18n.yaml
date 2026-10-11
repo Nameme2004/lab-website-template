@@ -1,0 +1,19 @@
+navigation:
+  Home:
+    en: Home
+    zh: 首页
+  Research:
+    en: Research
+    zh: 研究方向
+  Team:
+    en: Team
+    zh: 团队成员
+  Publications:
+    en: Publications
+    zh: 论文发表
+  Join Us:
+    en: Join Us
+    zh: 加入我们
+language_label:
+  en: Choose language
+  zh: 选择语言
