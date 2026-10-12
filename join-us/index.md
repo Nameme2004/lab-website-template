@@ -5,7 +5,8 @@ nav:
   tooltip: Opportunities and how to join
 ---
 
-<h1 id="join-us">{% include icon.html icon="fa-solid fa-user-plus" %}{% include bilingual-text.html en=site.data.i18n.navigation["Join Us"].en zh=site.data.i18n.navigation["Join Us"].zh %}</h1>
+{% assign join_navigation = site.data.i18n.navigation["Join Us"] %}
+<h1 id="join-us">{% include icon.html icon="fa-solid fa-user-plus" %}{% include bilingual-text.html en=join_navigation.en zh=join_navigation.zh %}</h1>
 {% assign join_text = site.data.i18n.join_us %}
 
 {% assign join_us = site.data.join_us %}
