@@ -280,3 +280,85 @@
   image: https://iiif.elifesciences.org/lax:32822%2Felife-32822-fig8-v3.tif/full/863,/0/default.webp
   plugin: sources.py
   file: sources.yaml
+- id: doi:10.1016/j.stem.2023.11.011
+  title: A pancreatic cancer organoid platform identifies an inhibitor specific to
+    mutant KRAS
+  authors:
+  - Xiaohua Duan
+  - Tuo Zhang
+  - Lingling Feng
+  - Neranjan de Silva
+  - Benjamin Greenspun
+  - Xing Wang
+  - Jenna Moyer
+  - M Laura Martin
+  - Rohit Chandwani
+  - Olivier Elemento
+  - Steven D Leach
+  - Todd Evans
+  - Shuibing Chen
+  - Fong Cheng Pan
+  publisher: Cell Stem Cell
+  date: '2024-01-04'
+  link: https://doi.org/10.1016/j.stem.2023.11.011
+  type: paper
+  description: "Prior collaborative work of the lab lead: pancreatic cancer organoids\
+    \ and candidate inhibitor screening. Cell Stem Cell 31(1), 71\u201388.e8. [Verified\
+    \ record](https://pubmed.ncbi.nlm.nih.gov/38151022/)."
+  description_zh: "\u8D1F\u8D23\u4EBA\u65E2\u5F80\u53C2\u4E0E\u6210\u679C\uFF1A\u80F0\
+    \u817A\u764C\u7C7B\u5668\u5B98\u4E0E\u5019\u9009\u6291\u5236\u5242\u7B5B\u9009\
+    \u3002Cell Stem Cell 31(1), 71\u201388.e8\u3002[\u6838\u5B9E\u8BB0\u5F55](https://pubmed.ncbi.nlm.nih.gov/38151022/)\u3002"
+  plugin: sources.py
+  file: sources.yaml
+- id: doi:10.1038/s41586-020-2901-9
+  title: Identification of SARS-CoV-2 inhibitors using lung and colonic organoids
+  authors:
+  - Yuling Han
+  - Xiaohua Duan
+  - Liuliu Yang
+  - Benjamin E. Nilsson-Payant
+  - Pengfei Wang
+  - Fuyu Duan
+  - Xuming Tang
+  - Tomer M. Yaron
+  - Tuo Zhang
+  - Skyler Uhl
+  - Yaron Bram
+  - Chanel Richardson
+  - Jiajun Zhu
+  - Zeping Zhao
+  - David Redmond
+  - Sean Houghton
+  - Duc-Huy T. Nguyen
+  - Dong Xu
+  - Xing Wang
+  - Jose Jessurun
+  - Alain Borczuk
+  - Yaoxing Huang
+  - Jared L. Johnson
+  - Yuru Liu
+  - Jenny Xiang
+  - Hui Wang
+  - Lewis C. Cantley
+  - Benjamin R. tenOever
+  - David D. Ho
+  - Fong Cheng Pan
+  - Todd Evans
+  - Huanhuan Joyce Chen
+  - Robert E. Schwartz
+  - Shuibing Chen
+  publisher: Nature
+  date: '2021-01-14'
+  link: https://doi.org/10.1038/s41586-020-2901-9
+  type: paper
+  description: "Prior collaborative work of the lab lead: lung and colonic organoid\
+    \ antiviral screening. Nature 589, 270\u2013275; online publication 28 October\
+    \ 2020. [Publisher record](https://www.nature.com/articles/s41586-020-2901-9);\
+    \ [2024 author correction](https://doi.org/10.1038/s41586-024-07593-9)."
+  description_zh: "\u8D1F\u8D23\u4EBA\u65E2\u5F80\u53C2\u4E0E\u6210\u679C\uFF1A\u80BA\
+    \u548C\u7ED3\u80A0\u7C7B\u5668\u5B98\u6297\u75C5\u6BD2\u836F\u7269\u7B5B\u9009\
+    \u3002Nature 589, 270\u2013275\uFF1B2020 \u5E74 10 \u6708 28 \u65E5\u5728\u7EBF\
+    \u53D1\u8868\u3002[\u671F\u520A\u8BB0\u5F55](https://www.nature.com/articles/s41586-020-2901-9)\uFF1B\
+    [2024 \u5E74\u4F5C\u8005\u66F4\u6B63](https://doi.org/10.1038/s41586-024-07593-9)\u3002"
+  plugin: sources.py
+  file: sources.yaml
