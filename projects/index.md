@@ -1,24 +1,8 @@
 ---
 title: Projects
+sitemap: false
 ---
 
-# {% include icon.html icon="fa-solid fa-wrench" %}Projects
+<h1 id="projects">{% include bilingual-text.html en="Projects" zh="项目" %}</h1>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-{% include tags.html tags="publication, resource, website" %}
-
-{% include search-info.html %}
-
-{% include section.html %}
-
-## Featured
-
-{% include list.html component="card" data="projects" filter="group == 'featured'" %}
-
-{% include section.html %}
-
-## More
-
-{% include list.html component="card" data="projects" filter="!group" style="small" %}
+{% include bilingual-markdown.html en="Confirmed project information will be added here after review." zh="项目资料经负责人审核确认后将在此发布。" %}

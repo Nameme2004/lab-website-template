@@ -1,4 +1,5 @@
 ---
+published: false
 name: Jane Smith
 image: images/photo.jpg
 role: principal-investigator

@@ -24,8 +24,5 @@ nav:
 
 <h2 id="explore-more">{% include bilingual-text.html en=research_text.explore_more.en zh=research_text.explore_more.zh %}</h2>
 
-{% capture projects_text %}{% include bilingual-text.html en=research_text.browse_projects.en zh=research_text.browse_projects.zh %}{% endcapture %}
-{% include button.html link="/projects/" text=projects_text style="bare" %}
-
 {% capture publications_text %}{% include bilingual-text.html en=research_text.see_publications.en zh=research_text.see_publications.zh %}{% endcapture %}
 {% include button.html link="/publications/" text=publications_text style="bare" %}

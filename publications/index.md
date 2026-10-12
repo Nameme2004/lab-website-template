@@ -13,7 +13,7 @@ nav:
 
 {% include section.html %}
 
-{% assign highlighted_en = publications.highlighted_heading.en | default: "Highlighted" %}
+{% assign highlighted_en = publications.highlighted_heading.en | default: "Selected Publications" %}
 <h2 id="highlighted">{% include bilingual-text.html en=highlighted_en zh=publications.highlighted_heading.zh %}</h2>
 
 {% assign empty_highlights = "" | split: "," %}
@@ -34,14 +34,3 @@ nav:
   {% assign empty_en = publications.empty_highlights.en | default: "No highlighted references are available." %}
   {% include bilingual-markdown.html en=empty_en zh=publications.empty_highlights.zh %}
 {% endif %}
-
-{% include section.html %}
-
-{% assign all_en = publications.all_heading.en | default: "All" %}
-<h2 id="all">{% include bilingual-text.html en=all_en zh=publications.all_heading.zh %}</h2>
-
-{% include search-box.html %}
-
-{% include search-info.html %}
-
-{% include list.html data="citations" component="citation" style="rich" %}

@@ -16,20 +16,17 @@
   -->
 
   <div>
-    {% for link in site.links %}
-      {% assign key = link[0] %}
-      {% assign value = link[1] %}
-      {% include button.html type=key text="" link=value style="bare" %}
-    {% endfor %}
+    {% capture contact_label %}{% include bilingual-text.html en=site.data.i18n.navigation.Contact.en zh=site.data.i18n.navigation.Contact.zh %}{% endcapture %}
+    {% include button.html link="/contact/" text=contact_label style="bare" %}
+    {% capture official_label %}{% include bilingual-text.html en="Official faculty profile" zh="官方教师主页" %}{% endcapture %}
+    {% include button.html link="https://faculty.ecnu.edu.cn/_s49/dxh/main.psp" text=official_label style="bare" %}
   </div>
 
   <div>
     &copy; {{ site.time | date: "%Y" }}
     {{ site.title }}
-    &nbsp; | &nbsp; Built with
-    <a href="https://github.com/greenelab/lab-website-template">
-      Lab Website Template
-    </a>
+    &nbsp; · &nbsp;
+    <a href="{{ '/credits/' | relative_url }}">{% include bilingual-text.html en="Credits and License" zh="版权与许可" %}</a>
   </div>
 
   <input

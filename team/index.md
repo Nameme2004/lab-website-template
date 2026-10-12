@@ -11,21 +11,10 @@ nav:
 
 {% include section.html %}
 
-{% include list.html data="members" component="portrait" filter="role == 'principal-investigator'" %}
-{% include list.html data="members" component="portrait" filter="role != 'principal-investigator'" %}
+{% include list.html data="members" component="portrait" filter="role == 'principal-investigator' and published != false" %}
+{% include list.html data="members" component="portrait" filter="role != 'principal-investigator' and published != false" %}
 
 {% include section.html background="images/background.jpg" dark=true %}
 
 {% include bilingual-markdown.html en=site.data.team.gallery_intro.en zh=site.data.team.gallery_intro.zh %}
 
-{% include section.html %}
-
-{% capture content %}
-
-{% include figure.html image="images/photo.jpg" %}
-{% include figure.html image="images/photo.jpg" %}
-{% include figure.html image="images/photo.jpg" %}
-
-{% endcapture %}
-
-{% include grid.html style="square" content=content %}

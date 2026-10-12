@@ -21,3 +21,24 @@
 
 - id: doi:10.7554/eLife.32822
   image: https://iiif.elifesciences.org/lax:32822%2Felife-32822-fig8-v3.tif/full/863,/0/default.webp
+
+# Verified prior publications of the lab lead.
+- id: "doi:10.1016/j.stem.2023.11.011"
+  type: "paper"
+  title: "A pancreatic cancer organoid platform identifies an inhibitor specific to mutant KRAS"
+  authors: ["Xiaohua Duan","Tuo Zhang","Lingling Feng","Neranjan de Silva","Benjamin Greenspun","Xing Wang","Jenna Moyer","M Laura Martin","Rohit Chandwani","Olivier Elemento","Steven D Leach","Todd Evans","Shuibing Chen","Fong Cheng Pan"]
+  publisher: "Cell Stem Cell"
+  date: "2024-01-04"
+  link: "https://doi.org/10.1016/j.stem.2023.11.011"
+  description: "Prior collaborative work of the lab lead: pancreatic cancer organoids and candidate inhibitor screening. Cell Stem Cell 31(1), 71–88.e8. [Verified record](https://pubmed.ncbi.nlm.nih.gov/38151022/)."
+  description_zh: "负责人既往参与成果：胰腺癌类器官与候选抑制剂筛选。Cell Stem Cell 31(1), 71–88.e8。[核实记录](https://pubmed.ncbi.nlm.nih.gov/38151022/)。"
+
+- id: "doi:10.1038/s41586-020-2901-9"
+  type: "paper"
+  title: "Identification of SARS-CoV-2 inhibitors using lung and colonic organoids"
+  authors: ["Yuling Han","Xiaohua Duan","Liuliu Yang","Benjamin E. Nilsson-Payant","Pengfei Wang","Fuyu Duan","Xuming Tang","Tomer M. Yaron","Tuo Zhang","Skyler Uhl","Yaron Bram","Chanel Richardson","Jiajun Zhu","Zeping Zhao","David Redmond","Sean Houghton","Duc-Huy T. Nguyen","Dong Xu","Xing Wang","Jose Jessurun","Alain Borczuk","Yaoxing Huang","Jared L. Johnson","Yuru Liu","Jenny Xiang","Hui Wang","Lewis C. Cantley","Benjamin R. tenOever","David D. Ho","Fong Cheng Pan","Todd Evans","Huanhuan Joyce Chen","Robert E. Schwartz","Shuibing Chen"]
+  publisher: "Nature"
+  date: "2021-01-14"
+  link: "https://doi.org/10.1038/s41586-020-2901-9"
+  description: "Prior collaborative work of the lab lead: lung and colonic organoid antiviral screening. Nature 589, 270–275; online publication 28 October 2020. [Publisher record](https://www.nature.com/articles/s41586-020-2901-9); [2024 author correction](https://doi.org/10.1038/s41586-024-07593-9)."
+  description_zh: "负责人既往参与成果：肺和结肠类器官抗病毒药物筛选。Nature 589, 270–275；2020 年 10 月 28 日在线发表。[期刊记录](https://www.nature.com/articles/s41586-020-2901-9)；[2024 年作者更正](https://doi.org/10.1038/s41586-024-07593-9)。"

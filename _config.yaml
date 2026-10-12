@@ -1,6 +1,7 @@
 # site properties and page defaults
 title: Duan Lab
 subtitle: Organoid Disease Modeling & Therapeutic Discovery
+subtitle_zh: 类器官疾病建模与治疗策略研究
 description: Exploring human disease mechanisms and therapeutic strategies through organoid-based models.
 header: images/background.jpg
 footer: images/background.jpg

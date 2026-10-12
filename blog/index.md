@@ -2,17 +2,13 @@
 title: News
 ---
 
-# {% include icon.html icon="fa-solid fa-feather-pointed" %}News
+<h1 id="news">{% include bilingual-text.html en="News" zh="实验室动态" %}</h1>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-{% include section.html %}
-
-{% include search-box.html %}
-
-{% include tags.html tags=site.tags %}
-
-{% include search-info.html %}
-
-{% include list.html data="posts" component="post-excerpt" %}
+{% assign public_posts = site.posts | where_exp: "post", "post.published != false" %}
+{% if public_posts.size > 0 %}
+  {% include search-box.html %}
+  {% include search-info.html %}
+  {% include list.html data="posts" component="post-excerpt" filter="published != false" %}
+{% else %}
+  {% include bilingual-markdown.html en="Lab news will be published here after review." zh="实验室动态经审核后将在此发布。" %}
+{% endif %}

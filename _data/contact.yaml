@@ -1,14 +1,14 @@
 {
-  "email": "",
+  "email": "xhduan@pharm.ecnu.edu.cn",
   "phone": "",
   "address": {
-    "en": "",
-    "zh": ""
+    "en": "ECNU Minhang Campus, Zihuan Building, 500 Dongchuan Road, Shanghai 200241, China",
+    "zh": "华东师范大学闵行校区，东川路 500 号资环楼，邮编 200241"
   },
   "links": [],
   "confirmed": false,
   "placeholder": {
-    "en": "**Placeholder:** No official recruitment email, telephone number, or address has been confirmed for publication here. Contact information will be added once confirmed.",
-    "zh": ""
+    "en": "[Official faculty contact source](https://faculty.ecnu.edu.cn/_s49/dxh/main.psp): [xhduan@pharm.ecnu.edu.cn](mailto:xhduan@pharm.ecnu.edu.cn); ECNU Minhang Campus, Zihuan Building, 500 Dongchuan Road, Shanghai 200241. Lab-specific contact arrangements await confirmation.",
+    "zh": "[官方教师主页公开联系方式](https://faculty.ecnu.edu.cn/_s49/dxh/main.psp)：[xhduan@pharm.ecnu.edu.cn](mailto:xhduan@pharm.ecnu.edu.cn)；华东师范大学闵行校区，东川路 500 号资环楼，邮编 200241。实验室具体联系安排尚待确认。"
   }
 }

@@ -26,6 +26,10 @@ content:
       sort: date
       order: desc
     fields:
+      - name: published
+        label: 显示在网站（示例新闻保持关闭）
+        type: boolean
+        default: true
       - name: title
         label: Title
         type: string
@@ -83,6 +87,10 @@ content:
     view:
       primary: name
     fields:
+      - name: published
+        label: 显示在网站（示例成员保持关闭）
+        type: boolean
+        default: true
       - name: name
         label: Name — English
         type: string
@@ -658,7 +666,7 @@ content:
               format: markdown
               media: false
       - name: highlighted_heading
-        label: Highlighted section heading
+        label: Selected Publications — displayed section heading
         type: object
         fields:
           - name: en
@@ -674,7 +682,7 @@ content:
               format: markdown
               media: false
       - name: all_heading
-        label: All references section heading
+        label: Legacy section heading — retained, not displayed
         type: object
         fields:
           - name: en
@@ -706,6 +714,6 @@ content:
               format: markdown
               media: false
       - name: highlighted_ids
-        label: Highlighted IDs — copy exact IDs from citations or sources
+        label: Displayed publication IDs — copy exact IDs from sources
         type: string
         list: true

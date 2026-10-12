@@ -1,4 +1,5 @@
 ---
+published: false
 name: John Doe
 image: images/photo.jpg
 role: phd
