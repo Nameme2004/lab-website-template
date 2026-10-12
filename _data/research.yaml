@@ -1,21 +1,33 @@
-intro: "**Placeholder:** Research directions will be added once the lab's scope
-  and descriptions are confirmed."
-directions:
-  - title: Cancer Organoids
-    description: A proposed theme exploring organoid-based approaches to cancer
-      disease modeling.
-    order: 10
-    show_on_home: true
-    confirmed: false
-  - title: Infection Models
-    description: A proposed theme exploring organoid-based models of infection and
-      host responses.
-    order: 20
-    show_on_home: true
-    confirmed: false
-  - title: Organoid-Based Drug Discovery
-    description: A proposed theme exploring organoid-based approaches to therapeutic
-      discovery.
-    order: 30
-    show_on_home: true
-    confirmed: false
+{
+  "intro": "These proposed themes build on the lab lead’s published work. They do not represent completed projects of the new laboratory.",
+  "intro_zh": "以下拟开展主题基于负责人既往论文，不代表新实验室已完成的课题。",
+  "directions": [
+    {
+      "title": "Cancer Organoids",
+      "title_zh": "肿瘤类器官",
+      "description": "Develop organoid models to study how genetic changes affect tumour biology, informed by prior pancreatic cancer organoid research.",
+      "description_zh": "拟构建类器官模型研究遗传改变与肿瘤生物学，参考既往胰腺癌类器官研究。",
+      "order": 10,
+      "show_on_home": true,
+      "confirmed": false
+    },
+    {
+      "title": "Viral Infection Models",
+      "title_zh": "病毒感染模型",
+      "description": "Use organoids to investigate viral infection and host responses, building on published lung and colonic organoid studies.",
+      "description_zh": "拟利用类器官研究病毒感染与宿主反应，参考已发表的肺和结肠类器官研究。",
+      "order": 20,
+      "show_on_home": true,
+      "confirmed": false
+    },
+    {
+      "title": "Organoid-Based Drug Screening",
+      "title_zh": "基于类器官的药物筛选",
+      "description": "Establish organoid-based screening approaches to identify candidate compounds and examine their mechanisms of action.",
+      "description_zh": "拟建立类器官药物筛选方法，寻找候选化合物并研究作用机制。",
+      "order": 30,
+      "show_on_home": true,
+      "confirmed": false
+    }
+  ]
+}

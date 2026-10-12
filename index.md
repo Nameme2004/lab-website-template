@@ -17,7 +17,7 @@ nav:
 
 <h2 id="latest-news">{% include bilingual-text.html en=home_text.latest_news.en zh=home_text.latest_news.zh %}</h2>
 
-{% assign latest_news = site.posts | sort: "date" | reverse %}
+{% assign latest_news = site.posts | where_exp: "post", "post.slug != 'example-post-1' and post.slug != 'example-post-2' and post.slug != 'example-post-3'" | sort: "date" | reverse %}
 {% for post in latest_news limit:3 %}
   {%
     include post-excerpt.html

@@ -44,4 +44,9 @@ nav:
 
 {% include search-info.html %}
 
-{% include list.html data="citations" component="citation" style="rich" %}
+{% assign verified_citations = citations | sort: "date" | reverse %}
+{% for citation in verified_citations %}
+  {% if highlighted_ids contains citation.id %}
+    {% include citation.html lookup_id=citation.id style="rich" %}
+  {% endif %}
+{% endfor %}

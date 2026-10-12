@@ -1,11 +1,18 @@
-intro:
-  en: Recruitment information will be published after confirmation by the lab lead.
-positions_placeholder:
-  en: "**Placeholder — no confirmed open positions are announced on this page.**
-    Recruitment information is pending confirmation."
-application_instructions:
-  en: "**Placeholder:** The application process and required materials are pending
-    confirmation. Submission instructions will be published once confirmed."
-ai_coming_soon:
-  en: Planned features may include research direction matching, application
-    materials checks, and application status queries.
+{
+  "intro": {
+    "en": "The lab lead’s official profile welcomes CV enquiries at several career stages. Please enquire directly about current arrangements.",
+    "zh": "负责人官方主页欢迎不同学习与职业阶段的简历咨询，当前具体安排请直接询问。"
+  },
+  "positions_placeholder": {
+    "en": "No specific vacancy count, deadline or offer is announced here.",
+    "zh": "本页不宣布具体空缺名额、截止日期或录取承诺。"
+  },
+  "application_instructions": {
+    "en": "[Official profile](https://faculty.ecnu.edu.cn/_s49/dxh/main.psp) · [Public work email](mailto:xhduan@pharm.ecnu.edu.cn). Enquiries do not constitute an admission or employment offer.",
+    "zh": "[官方主页](https://faculty.ecnu.edu.cn/_s49/dxh/main.psp) · [公开工作邮箱](mailto:xhduan@pharm.ecnu.edu.cn)。咨询不构成录取或聘用承诺。"
+  },
+  "ai_coming_soon": {
+    "en": "A possible future feature; unavailable for applications.",
+    "zh": "可能的未来功能，尚不可用于申请。"
+  }
+}
