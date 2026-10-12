@@ -1,5 +1,31 @@
 # Home and Research CMS guide
 
+## Research bilingual editing (5B-2B)
+
+Research keeps the original English fields and adds optional `intro_zh`,
+`title_zh`, `description_zh` and `home_summary_zh`. New Chinese fields start
+empty. Use the same directions list for the homepage and Research page; do not
+create a second translated list. Images, order, show_on_home and confirmed are
+shared and unchanged. The three existing themes remain unconfirmed examples.
+
+Chinese previews use Chinese summary, then Chinese full description, then the
+English preview (English summary or full description). Titles independently
+fall back to English. Missing/null/whitespace Chinese is treated as empty.
+Interface labels and unconfirmed warnings are translated through i18n, even
+when the content falls back to English. The existing bilingual Markdown filter
+removes translated IDs while preserving English HTML. No new dependency or
+language state mechanism is introduced. Image cards retain the existing feature
+classes and a single image; their already-rendered text is not markdownified
+again. Image alternative text continues to use the canonical English title.
+
+On the test branch, save a temporary Chinese introduction and one direction's
+translations, reopen the CMS, and compare every list item and all shared fields.
+Verify both pages, ordering, the first-three limit, blank/null fallbacks and a
+nonempty authorized image. Check desktop/mobile, language persistence, no-JS,
+Markdown headings/code, unique IDs and `/lab-website-template/` preview links.
+Restore temporary translations before merge. CMS round-trip preservation must
+be confirmed manually; global merge settings do not guarantee array preservation.
+
 ## Editing
 
 Select the intended branch at app.pagescms.org before editing. Home — About Us edits the homepage introduction and research section introduction; Markdown is supported. Brand, subtitle and site metadata remain in `_config.yaml` and are not exposed here.
