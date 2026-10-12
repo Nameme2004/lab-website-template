@@ -5,14 +5,16 @@ nav:
   tooltip: Published works
 ---
 
-# {% include icon.html icon="fa-solid fa-book-open" %}Publications
+<h1 id="publications">{% include icon.html icon="fa-solid fa-book-open" %}{% include bilingual-text.html en=site.data.i18n.navigation.Publications.en zh=site.data.i18n.navigation.Publications.zh %}</h1>
 
 {% assign publications = site.data.publications %}
-{{ publications.intro.en | default: "Publication information is pending verification. Template references are not confirmed lab publications." | markdownify }}
+{% assign intro_en = publications.intro.en | default: "Publication information is pending verification. Template references are not confirmed lab publications." %}
+{% include bilingual-markdown.html en=intro_en zh=publications.intro.zh %}
 
 {% include section.html %}
 
-## {{ publications.highlighted_heading.en | default: "Highlighted" | xml_escape }}
+{% assign highlighted_en = publications.highlighted_heading.en | default: "Highlighted" %}
+<h2 id="highlighted">{% include bilingual-text.html en=highlighted_en zh=publications.highlighted_heading.zh %}</h2>
 
 {% assign empty_highlights = "" | split: "," %}
 {% assign highlighted_ids = publications.highlighted_ids | default: empty_highlights | uniq %}
@@ -29,12 +31,14 @@ nav:
   {% endif %}
 {% endfor %}
 {% if visible_highlights == 0 %}
-  {{ publications.empty_highlights.en | default: "No highlighted references are available." | markdownify }}
+  {% assign empty_en = publications.empty_highlights.en | default: "No highlighted references are available." %}
+  {% include bilingual-markdown.html en=empty_en zh=publications.empty_highlights.zh %}
 {% endif %}
 
 {% include section.html %}
 
-## {{ publications.all_heading.en | default: "All" | xml_escape }}
+{% assign all_en = publications.all_heading.en | default: "All" %}
+<h2 id="all">{% include bilingual-text.html en=all_en zh=publications.all_heading.zh %}</h2>
 
 {% include search-box.html %}
 

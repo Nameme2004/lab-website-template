@@ -134,13 +134,15 @@
       // show all info boxes
       boxes.forEach((info) => (info.style.display = ""));
 
-      // info template
-      let info = "";
-      info += `Showing ${x.toLocaleString()} of ${n.toLocaleString()} results<br>`;
-      info += "<a href='./'>Clear search</a>";
-
-      // set info HTML string
-      boxes.forEach((el) => (el.innerHTML = info));
+      const language = document.documentElement.lang.startsWith("zh") ? "Zh" : "En";
+      boxes.forEach((el) => {
+        const message = (el.dataset["results" + language] || "Showing {x} of {n} results")
+          .replace("{x}", x.toLocaleString()).replace("{n}", n.toLocaleString());
+        const clear = document.createElement("a");
+        clear.href = "./";
+        clear.textContent = el.dataset["clear" + language] || "Clear search";
+        el.replaceChildren(document.createTextNode(message), document.createElement("br"), clear);
+      });
     }
     // if nothing searched
     else {
@@ -181,6 +183,17 @@
 
   // search based on url param
   const searchFromUrl = () => {
+    const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
+    document.querySelectorAll(searchBoxSelector).forEach((box) => {
+      const input = box.querySelector("input");
+      const button = box.querySelector("button");
+      input.placeholder = input.dataset[language === "zh" ? "placeholderZh" : "placeholderEn"] || "Search items on this page";
+      input.setAttribute("aria-label", input.placeholder);
+      const label = button.dataset[language === "zh" ? "labelZh" : "labelEn"] || "Clear search";
+      button.setAttribute("aria-label", label);
+      button.setAttribute("data-tooltip", label);
+      if (button._tippy) button._tippy.setContent(label);
+    });
     const query =
       new URLSearchParams(window.location.search).get("search") || "";
     runSearch(query);
@@ -212,4 +225,5 @@
   window.addEventListener("load", searchFromUrl);
   // after tags load
   window.addEventListener("tagsfetched", searchFromUrl);
+  window.addEventListener("languagechange", searchFromUrl);
 }

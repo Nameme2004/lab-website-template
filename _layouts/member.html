@@ -18,7 +18,12 @@ layout: default
 
 {% include float.html content=floatcontent %}
 
-{{ content }}
+{% include bilingual-markdown.html en_html=content zh=page.body_zh %}
+
+{% if page.research_interests or page.research_interests_zh %}
+  <h2>{% include bilingual-text.html en=site.data.i18n.team.interests.en zh=site.data.i18n.team.interests.zh %}</h2>
+  {% include bilingual-markdown.html en=page.research_interests zh=page.research_interests_zh %}
+{% endif %}
 
 {% assign aliases = page.aliases
   | default: page.name
@@ -34,7 +39,9 @@ layout: default
 
 <p class="center">
   <a href="{{ search | relative_url | uri_escape }}">
-    Search for {{ page.name | default: page.title }}'s papers on the Publications page
+    {% capture papers_en %}Search for {{ page.name | default: page.title }}'s papers on the Publications page{% endcapture %}
+    {% capture papers_zh %}在论文发表页面查找 {{ page.name_zh | default: page.name | default: page.title }} 的论文{% endcapture %}
+    {% include bilingual-text.html en=papers_en zh=papers_zh %}
   </a>
 </p>
 

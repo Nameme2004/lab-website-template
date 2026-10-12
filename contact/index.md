@@ -2,8 +2,9 @@
 title: Contact
 ---
 
-# {% include icon.html icon="fa-regular fa-envelope" %}Contact
+<h1 id="contact">{% include icon.html icon="fa-regular fa-envelope" %}{% include bilingual-text.html en=site.data.i18n.contact.title.en zh=site.data.i18n.contact.title.zh %}</h1>
 
 {% include contact-details.html %}
 
-{% include button.html link="/join-us/" text="Join Us — application and contact information" style="bare" %}
+{% capture join_button %}{% include bilingual-text.html en=site.data.i18n.contact.join_button.en zh=site.data.i18n.contact.join_button.zh %}{% endcapture %}
+{% include button.html link="/join-us/" text=join_button style="bare" %}

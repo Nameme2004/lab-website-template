@@ -5,7 +5,11 @@
 {%- endcomment -%}
 {%- assign english_markdown = include.en | default: "" -%}
 {%- assign chinese_markdown = include.zh | default: "" | strip -%}
-{%- assign english_html = english_markdown | markdownify -%}
+{%- if include.en_html -%}
+  {%- assign english_html = include.en_html -%}
+{%- else -%}
+  {%- assign english_html = english_markdown | markdownify -%}
+{%- endif -%}
 {%- if chinese_markdown == "" -%}
 <div class="bilingual-markdown" lang="en">{{ english_html }}</div>
 {%- else -%}

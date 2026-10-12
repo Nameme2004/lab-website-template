@@ -5,11 +5,9 @@ nav:
   tooltip: About our team
 ---
 
-# {% include icon.html icon="fa-solid fa-users" %}Team
+<h1 id="team">{% include icon.html icon="fa-solid fa-users" %}{% include bilingual-text.html en=site.data.i18n.navigation.Team.en zh=site.data.i18n.navigation.Team.zh %}</h1>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+{% include bilingual-markdown.html en=site.data.team.intro.en zh=site.data.team.intro.zh %}
 
 {% include section.html %}
 
@@ -18,9 +16,7 @@ nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 {% include section.html background="images/background.jpg" dark=true %}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+{% include bilingual-markdown.html en=site.data.team.gallery_intro.en zh=site.data.team.gallery_intro.zh %}
 
 {% include section.html %}
 
