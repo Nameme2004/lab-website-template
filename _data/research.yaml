@@ -2,7 +2,6 @@ intro: "**Placeholder:** Research directions will be added once the lab's scope
   and descriptions are confirmed."
 directions:
   - title: Cancer Organoids
-    title_zh: 仅供测试
     description: A proposed theme exploring organoid-based approaches to cancer
       disease modeling.
     description_zh: 仅供测试
