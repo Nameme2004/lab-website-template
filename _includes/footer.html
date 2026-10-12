@@ -25,10 +25,8 @@
   <div>
     &copy; {{ site.time | date: "%Y" }}
     {{ site.title }}
-    &nbsp; | &nbsp; Built with
-    <a href="https://github.com/greenelab/lab-website-template">
-      Lab Website Template
-    </a>
+    &nbsp; · &nbsp;
+    <a href="{{ '/credits/' | relative_url }}">{% include bilingual-text.html en="Credits and License" zh="版权与许可" %}</a>
   </div>
 
   <input

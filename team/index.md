@@ -11,8 +11,8 @@ nav:
 
 {% include section.html %}
 
-{% include list.html data="members" component="portrait" filter="role == 'principal-investigator' and name != 'Jane Smith'" %}
-{% include list.html data="members" component="portrait" filter="role != 'principal-investigator' and name != 'John Doe' and name != 'Sarah Johnson'" %}
+{% include list.html data="members" component="portrait" filter="role == 'principal-investigator' and published != false" %}
+{% include list.html data="members" component="portrait" filter="role != 'principal-investigator' and published != false" %}
 
 {% include section.html background="images/background.jpg" dark=true %}
 

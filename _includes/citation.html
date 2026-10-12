@@ -12,7 +12,7 @@
 
 <div class="citation-container">
   <div class="citation" data-search="{{ citation.description | append: ' ' | append: citation.description_zh | strip_html | xml_escape }}">
-    {% if include.style == "rich" %}
+    {% if include.style == "rich" and citation.image and citation.image != "" %}
       <a
         {% if citation.link %}
           href="{{ citation.link | relative_url | uri_escape }}"

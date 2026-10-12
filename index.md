@@ -9,7 +9,7 @@ nav:
 
 <h1 id="about-us">{% include bilingual-text.html en=home_text.about_us.en zh=home_text.about_us.zh %}</h1>
 
-**{{ site.subtitle }}**
+<p><strong>{% include bilingual-text.html en=site.subtitle zh=site.subtitle_zh %}</strong></p>
 
 {% include bilingual-markdown.html en=site.data.home.about_us zh=site.data.home.about_us_zh %}
 
@@ -55,14 +55,3 @@ nav:
 {% endfor %}
 {% endcapture %}
 {% include grid.html content=research_preview %}
-
-{% include section.html %}
-
-{% capture publications_button_text %}{% include bilingual-text.html en=home_text.explore_publications.en zh=home_text.explore_publications.zh %}{% endcapture %}
-{% include button.html link="/publications/" text=publications_button_text style="bare" %}
-
-{% capture team_button_text %}{% include bilingual-text.html en=home_text.meet_team.en zh=home_text.meet_team.zh %}{% endcapture %}
-{% include button.html link="/team/" text=team_button_text style="bare" %}
-
-{% capture join_button_text %}{% include bilingual-text.html en=home_text.join_us.en zh=home_text.join_us.zh %}{% endcapture %}
-{% include button.html link="/join-us/" text=join_button_text style="bare" %}
