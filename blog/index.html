@@ -560,13 +560,13 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 -->
 
 <div class="search-box">
-  <input type="text" class="search-input" oninput="onSearchInput(this)" placeholder="Search items on this page">
-  <button disabled data-tooltip="Clear search" aria-label="clear search" onclick="onSearchClear()">
+  <input type="text" class="search-input" oninput="onSearchInput(this)" placeholder="Search items on this page" data-placeholder-en="Search items on this page" data-placeholder-zh="搜索本页内容" aria-label="Search items on this page">
+  <button disabled data-tooltip="Clear search" aria-label="clear search" data-label-en="Clear search" data-label-zh="清除搜索" onclick="onSearchClear()">
     <i class="icon fa-solid fa-magnifying-glass"></i>
   </button>
 </div>
 
-<div class="tags">
+<div class="tags" data-link="/lab-website-template/blog/">
     
       <a href="/lab-website-template/blog/?search=%22tag:%20biology%22" class="tag" data-tooltip='Show items with the tag "biology"'>
         biology
@@ -582,7 +582,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
     
   </div>
 
-<div class="search-info"></div>
+<div class="search-info" data-results-en="Showing {x} of {n} results" data-results-zh="共 {n} 条结果，显示 {x} 条" data-clear-en="Clear search" data-clear-zh="清除搜索"></div>
 
 <h3 id="2023">2023</h3>
 
@@ -621,13 +621,18 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
     
       <span class="portrait-name">
-        John Doe
+        <span data-i18n-text=""><span data-i18n-lang="en" lang="en">John Doe</span><span data-i18n-lang="zh" lang="en" hidden="">John Doe</span></span>
+
       </span>
     
 
     
       <span class="portrait-description">
-        PhD Student
+        
+        
+        
+        <span data-i18n-text=""><span data-i18n-lang="en" lang="en">PhD Student</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">博士研究生</span></span>
+
       </span>
     
 
@@ -661,7 +666,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
   
 
 
-  <div class="tags">
+  <div class="tags" data-link="/lab-website-template/blog">
     
       <a href="/lab-website-template/blog?search=%22tag:%20biology%22" class="tag" data-tooltip='Show items with the tag "biology"'>
         biology
@@ -721,19 +726,25 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
     
       <span class="portrait-name">
-        Jane Smith
+        <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Jane Smith</span><span data-i18n-lang="zh" lang="en" hidden="">Jane Smith</span></span>
+
       </span>
     
 
     
       <span class="portrait-description">
-        Principal Investigator
+        
+        
+        
+        <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Principal Investigator</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">课题组负责人</span></span>
+
       </span>
     
 
     
       <span class="portrait-affiliation">
-        University of Colorado
+        <span data-i18n-text=""><span data-i18n-lang="en" lang="en">University of Colorado</span><span data-i18n-lang="zh" lang="en" hidden="">University of Colorado</span></span>
+
       </span>
     
   </a>
@@ -813,13 +824,18 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
     
       <span class="portrait-name">
-        Sarah Johnson
+        <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Sarah Johnson</span><span data-i18n-lang="zh" lang="en" hidden="">Sarah Johnson</span></span>
+
       </span>
     
 
     
       <span class="portrait-description">
-        Lead Programmer
+        
+        
+        
+        <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Lead Programmer</span><span data-i18n-lang="zh" lang="en" hidden="">Lead Programmer</span></span>
+
       </span>
     
 
@@ -853,7 +869,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
   
 
 
-  <div class="tags">
+  <div class="tags" data-link="/lab-website-template/blog">
     
       <a href="/lab-website-template/blog?search=%22tag:%20biology%22" class="tag" data-tooltip='Show items with the tag "biology"'>
         biology
