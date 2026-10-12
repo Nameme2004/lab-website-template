@@ -1,4 +1,5 @@
 require 'liquid'
+require 'nokogiri'
 
 module Jekyll
   module RegexFilters
@@ -16,6 +17,17 @@ module Jekyll
     # find regex capture group in string and replace 
     def regex_replace(string, search, replace)
       return string.gsub(/#{search}/m, replace)
+    end
+
+    # Remove element IDs from translated HTML, never from text or code.
+    def remove_html_ids(string)
+      html = string.to_s
+      fragment = Nokogiri::HTML.fragment(html)
+      elements = fragment.css('[id]')
+      return html if elements.empty?
+
+      elements.each { |element| element.remove_attribute('id') }
+      fragment.to_html
     end
 
     # strip all non-letter and non-number characters from string
