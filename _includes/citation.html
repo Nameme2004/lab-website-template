@@ -11,7 +11,7 @@
 {% endif %}
 
 <div class="citation-container">
-  <div class="citation">
+  <div class="citation" data-search="{{ citation.description | append: ' ' | append: citation.description_zh | strip_html | xml_escape }}">
     {% if include.style == "rich" %}
       <a
         {% if citation.link %}
@@ -76,14 +76,9 @@
       </div>
 
       {% if include.style == "rich" %}
-        {% if citation.description %}
+        {% if citation.description or citation.description_zh %}
           <div class="citation-description">
-            {{
-              citation.description
-              | markdownify
-              | remove: "<p>"
-              | remove: "</p>"
-            }}
+            {% include bilingual-markdown.html en=citation.description zh=citation.description_zh %}
           </div>
         {% endif %}
 
@@ -95,6 +90,7 @@
                 type=button.type
                 icon=button.icon
                 text=button.text
+                text_zh=button.text_zh
                 link=button.link
                 style="bare"
               %}

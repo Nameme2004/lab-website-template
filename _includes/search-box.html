@@ -4,11 +4,16 @@
     class="search-input"
     oninput="onSearchInput(this)"
     placeholder="Search items on this page"
+    data-placeholder-en="{{ site.data.i18n.search.placeholder.en | xml_escape }}"
+    data-placeholder-zh="{{ site.data.i18n.search.placeholder.zh | xml_escape }}"
+    aria-label="{{ site.data.i18n.search.placeholder.en | xml_escape }}"
   />
   <button
     disabled
     data-tooltip="Clear search"
     aria-label="clear search"
+    data-label-en="{{ site.data.i18n.search.clear.en | xml_escape }}"
+    data-label-zh="{{ site.data.i18n.search.clear.zh | xml_escape }}"
     onclick="onSearchClear()"
   >
     {% include icon.html icon="fa-solid fa-magnifying-glass" %}

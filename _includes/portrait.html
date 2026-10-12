@@ -32,19 +32,24 @@
 
     {% if member.name %}
       <span class="portrait-name">
-        {{ member.name }}
+        {% include bilingual-text.html en=member.name zh=member.name_zh %}
       </span>
     {% endif %}
 
     {% if member.description or type %}
       <span class="portrait-description">
-        {{ member.description | default: type.description }}
+        {% assign role_en = member.description | default: type.description %}
+        {% assign role_zh = member.description_zh %}
+        {% unless member.description and member.description != "" %}
+          {% assign role_zh = role_zh | default: site.data.i18n.roles[member.role] %}
+        {% endunless %}
+        {% include bilingual-text.html en=role_en zh=role_zh %}
       </span>
     {% endif %}
 
-    {% if member.affiliation %}
+    {% if member.affiliation or member.affiliation_zh %}
       <span class="portrait-affiliation">
-        {{ member.affiliation }}
+        {% include bilingual-text.html en=member.affiliation zh=member.affiliation_zh %}
       </span>
     {% endif %}
   </a>

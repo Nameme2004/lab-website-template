@@ -84,7 +84,7 @@ content:
       primary: name
     fields:
       - name: name
-        label: Name
+        label: Name — English
         type: string
         required: true
       - name: role
@@ -110,10 +110,10 @@ content:
         type: image
         description: "Keep the existing portrait unless replacing it with an authorized image. Uploads use images/uploads and are rendered with relative_url."
       - name: description
-        label: Position description
+        label: Position description — English
         type: string
       - name: affiliation
-        label: Affiliation
+        label: Affiliation — English
         type: string
       - name: group
         label: Group
@@ -142,13 +142,82 @@ content:
           - name: twitter
             label: Twitter username
             type: string
+      - name: name_zh
+        label: 中文显示名（可选）
+        type: string
+      - name: description_zh
+        label: 职位说明 — 中文内容（可选）
+        type: string
+      - name: affiliation_zh
+        label: 所属单位 — 中文内容（可选）
+        type: string
+      - name: research_interests
+        label: Research interests — English
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: research_interests_zh
+        label: 研究兴趣 — 中文内容（可选）
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: body_zh
+        label: 个人简介 — 中文内容（可选）
+        type: rich-text
+        options:
+          format: markdown
+          media: false
       - name: body
-        label: Biography
+        label: Biography — English
         type: rich-text
         options:
           format: markdown
           media: false
           switcher: true
+  - name: team_page
+    label: Team Page — 团队页面
+    type: file
+    path: _data/team.yaml
+    format: yaml
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: intro
+        label: Page introduction
+        type: object
+        fields:
+          - name: en
+            label: English — 英文内容
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: 中文内容（可选）
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+      - name: gallery_intro
+        label: Photo section introduction
+        type: object
+        fields:
+          - name: en
+            label: English — 英文内容
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: zh
+            label: 中文内容（可选）
+            type: rich-text
+            options:
+              format: markdown
+              media: false
   - name: home
     label: Home — About Us
     type: file
@@ -275,13 +344,13 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for phase 5
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown
@@ -291,13 +360,13 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for phase 5
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown
@@ -307,13 +376,13 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for phase 5
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown
@@ -323,13 +392,13 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for phase 5
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown
@@ -351,23 +420,23 @@ content:
             type: object
             fields:
               - name: en
-                label: English — displayed now
+                label: English — 英文内容
                 type: text
               - name: zh
-                label: Chinese — reserved for phase 5
+                label: 中文内容（可选）
                 type: text
           - name: description
             label: Position introduction
             type: object
             fields:
               - name: en
-                label: English — displayed now
+                label: English — 英文内容
                 type: rich-text
                 options:
                   format: markdown
                   media: false
               - name: zh
-                label: Chinese — reserved for phase 5
+                label: 中文内容（可选）
                 type: rich-text
                 options:
                   format: markdown
@@ -377,13 +446,13 @@ content:
             type: object
             fields:
               - name: en
-                label: English — displayed now
+                label: English — 英文内容
                 type: rich-text
                 options:
                   format: markdown
                   media: false
               - name: zh
-                label: Chinese — reserved for phase 5
+                label: 中文内容（可选）
                 type: rich-text
                 options:
                   format: markdown
@@ -432,23 +501,23 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: text
           - name: zh
-            label: Chinese — reserved for phase 5
+            label: 中文内容（可选）
             type: text
       - name: placeholder
         label: Unconfirmed contact notice
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for phase 5
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown
@@ -467,10 +536,10 @@ content:
             type: object
             fields:
               - name: en
-                label: English — displayed now
+                label: English — 英文内容
                 type: text
               - name: zh
-                label: Chinese — reserved for phase 5
+                label: 中文内容（可选）
                 type: text
           - name: url
             label: Full https URL or internal /path/ — no private links
@@ -500,7 +569,7 @@ content:
           format: markdown
           media: false
       - name: description_zh
-        label: Chinese lab commentary — reserved for later
+        label: 论文说明 — 中文内容（可选）
         type: rich-text
         options:
           format: markdown
@@ -550,6 +619,9 @@ content:
           - name: text
             label: Optional label
             type: string
+          - name: text_zh
+            label: 按钮文字 — 中文内容（可选）
+            type: string
           - name: link
             label: Destination URL
             type: string
@@ -574,13 +646,13 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for later
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown
@@ -590,13 +662,13 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for later
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown
@@ -606,13 +678,13 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for later
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown
@@ -622,13 +694,13 @@ content:
         type: object
         fields:
           - name: en
-            label: English — displayed now
+            label: English — 英文内容
             type: rich-text
             options:
               format: markdown
               media: false
           - name: zh
-            label: Chinese — reserved for later
+            label: 中文内容（可选）
             type: rich-text
             options:
               format: markdown

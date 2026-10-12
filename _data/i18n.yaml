@@ -64,3 +64,86 @@ research:
   unconfirmed:
     en: Unconfirmed placeholder — not a formally confirmed lab research direction.
     zh: 未确认的占位内容——并非实验室已正式确认的研究方向。
+team:
+  interests:
+    en: Research interests
+    zh: 研究兴趣
+roles:
+  principal-investigator: 课题组负责人
+  postdoc: 博士后研究人员
+  phd: 博士研究生
+  undergrad: 本科生
+  programmer: 程序开发人员
+  mascot: 吉祥物
+button_types:
+  website: 网站
+  home-page: 个人主页
+  source: 源代码
+  manubot: Manubot
+  link: 链接
+  external: 外部链接
+  email: 邮箱
+  phone: 电话
+  address: 地址
+  paper: 论文
+  book: 书籍
+  article: 文章
+  journal: 期刊
+  preprint: 预印本
+join_us:
+  positions:
+    en: Open Positions
+    zh: 招生与招聘
+  apply:
+    en: How to Apply
+    zh: 如何申请
+  ai_title:
+    en: AI Application Self-Assessment — Coming Soon
+    zh: AI 申请自评——尚未开放
+  contact:
+    en: Contact
+    zh: 联系方式
+  contact_button:
+    en: Contact information
+    zh: 查看联系方式
+  open:
+    en: Open position — confirmed by the lab lead.
+    zh: 正在招聘——已由实验室负责人确认。
+  closed:
+    en: Closed — applications are not currently open.
+    zh: 已关闭——目前不接受申请。
+  unconfirmed:
+    en: Unconfirmed placeholder — this entry does not announce an open position.
+    zh: 未确认的占位内容——此条目不代表正式开放的招聘岗位。
+  deadline:
+    en: "Application deadline:"
+    zh: "申请截止日期："
+  ai_notice:
+    en: This system is not yet available. AI assessments will not constitute an admission promise or an automatic rejection. Final decisions will be made by people.
+    zh: 系统尚未开放。AI 评估不代表录取承诺或自动拒绝，最终决定由人工负责。
+  privacy:
+    en: There is currently no application form or resume upload facility on this page, and no personal information is collected here.
+    zh: 本页面目前没有申请表或简历上传功能，也不收集个人信息。
+contact:
+  title:
+    en: Contact
+    zh: 联系我们
+  join_button:
+    en: Join Us — application and contact information
+    zh: 加入我们——申请与联系信息
+  unconfirmed:
+    en: Unconfirmed contact information — do not use template examples as lab contact details.
+    zh: 联系方式尚未确认——请勿将模板示例当作实验室真实联系方式。
+  pending:
+    en: Confirmed contact information will be added here when available.
+    zh: 确认后的联系方式将在此发布。
+search:
+  placeholder:
+    en: Search items on this page
+    zh: 搜索本页内容
+  clear:
+    en: Clear search
+    zh: 清除搜索
+  results:
+    en: Showing {x} of {n} results
+    zh: 共 {n} 条结果，显示 {x} 条

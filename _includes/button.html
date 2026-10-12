@@ -17,7 +17,15 @@
     >
       {% include icon.html icon=button.icon %}
       {% if button.text and button.text != "" %}
-        <span>{{ button.text }}</span>
+        {% assign button_zh = include.text_zh %}
+        {% unless include.text %}
+          {% assign button_zh = button_zh | default: site.data.i18n.button_types[include.type] %}
+        {% endunless %}
+        {% if button_zh and button_zh != "" %}
+          <span>{% include bilingual-text.html en=button.text zh=button_zh %}</span>
+        {% else %}
+          <span>{{ button.text }}</span>
+        {% endif %}
       {% endif %}
     </a>
   </div>
