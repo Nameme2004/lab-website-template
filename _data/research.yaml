@@ -5,6 +5,7 @@ directions:
     title_zh: 仅供测试
     description: A proposed theme exploring organoid-based approaches to cancer
       disease modeling.
+    description_zh: 仅供测试
     order: 10
     show_on_home: true
     confirmed: false
