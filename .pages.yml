@@ -194,7 +194,13 @@ content:
       delete: false
     fields:
       - name: intro
-        label: Research page introduction (Markdown)
+        label: Research page introduction — English (Markdown)
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: intro_zh
+        label: 研究页面介绍 — 中文（可留空，Markdown）
         type: rich-text
         options:
           format: markdown
@@ -208,11 +214,20 @@ content:
             summary: "{title} (order {order})"
         fields:
           - name: title
-            label: Direction title
+            label: Direction title — English
             type: string
             required: true
+          - name: title_zh
+            label: 研究方向标题 — 中文（可留空）
+            type: string
           - name: description
-            label: Full introduction (Markdown)
+            label: Full introduction — English (Markdown)
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: description_zh
+            label: 完整介绍 — 中文（可留空，Markdown）
             type: rich-text
             options:
               format: markdown
@@ -230,7 +245,13 @@ content:
             type: boolean
             default: false
           - name: home_summary
-            label: Homepage summary (Markdown; blank uses full introduction)
+            label: Homepage summary — English (Markdown; blank uses full introduction)
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: home_summary_zh
+            label: 首页摘要 — 中文（可留空；优先回退中文完整介绍）
             type: rich-text
             options:
               format: markdown

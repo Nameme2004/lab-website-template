@@ -1,28 +1,39 @@
 {% assign direction = include.direction %}
+{% assign description_zh = direction.description_zh | default: "" | strip %}
 {% if include.preview %}
   {% assign description = direction.home_summary | default: direction.description %}
+  {% assign summary_zh = direction.home_summary_zh | default: "" | strip %}
+  {% assign description_zh = summary_zh | default: description_zh %}
 {% else %}
   {% assign description = direction.description %}
 {% endif %}
+{% capture title_text %}{% include bilingual-text.html en=direction.title zh=direction.title_zh %}{% endcapture %}
 {% capture direction_text %}
 {% unless direction.confirmed == true %}
-**Unconfirmed placeholder — not a formally confirmed lab research direction.**
+<p><strong>{% include bilingual-text.html en=site.data.i18n.research.unconfirmed.en zh=site.data.i18n.research.unconfirmed.zh %}</strong></p>
 {% endunless %}
-
-{{ description }}
+{% include bilingual-markdown.html en=description zh=description_zh %}
 {% endcapture %}
 <article>
   <h3>
     {% if include.preview %}
-      <a href="{{ '/research/' | relative_url }}">{{ direction.title | xml_escape }}</a>
+      <a href="{{ '/research/' | relative_url }}">{{ title_text }}</a>
     {% else %}
-      {{ direction.title | xml_escape }}
+      {{ title_text }}
     {% endif %}
   </h3>
   {% assign direction_image = direction.image | default: "" | strip %}
   {% if direction_image != "" %}
-    {% include feature.html image=direction_image title=direction.title text=direction_text %}
+    <div class="feature">
+      <a class="feature-image" aria-label="{{ direction.title | default: 'feature link' | regex_strip }}">
+        <img src="{{ direction_image | relative_url | uri_escape }}" loading="lazy" alt="{{ direction.title | default: 'feature image' | regex_strip }}" {% include fallback.html %}>
+      </a>
+      <div class="feature-text">
+        <p class="feature-title">{{ title_text }}</p>
+        {{ direction_text }}
+      </div>
+    </div>
   {% else %}
-    {{ direction_text | markdownify }}
+    {{ direction_text }}
   {% endif %}
 </article>

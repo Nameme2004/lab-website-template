@@ -45,3 +45,22 @@ home:
   join_us:
     en: Join Us
     zh: 加入我们
+research:
+  title:
+    en: Research
+    zh: 研究方向
+  explore_more:
+    en: Explore More
+    zh: 了解更多
+  browse_projects:
+    en: Browse our projects
+    zh: 查看项目
+  see_publications:
+    en: See our publications
+    zh: 查看论文
+  pending:
+    en: Research information will be added once confirmed.
+    zh: 研究信息将在确认后发布。
+  unconfirmed:
+    en: Unconfirmed placeholder — not a formally confirmed lab research direction.
+    zh: 未确认的占位内容——并非实验室已正式确认的研究方向。
