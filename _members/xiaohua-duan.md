@@ -6,7 +6,7 @@ description: Researcher; Doctoral Supervisor
 description_zh: 研究员、博士生导师
 affiliation: School of Pharmacy, East China Normal University
 affiliation_zh: 华东师范大学药学院
-image: /images/uploads/test/1f71e855e5d7200bc289fb9cbaa5d73e.jpg
+image: /images/uploads/test/ed050e9f17a2c180be200995aa3a1968.jpg
 aliases:
   - Xiaohua Duan
   - X. Duan
