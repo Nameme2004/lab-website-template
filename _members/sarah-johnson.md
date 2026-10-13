@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 name: Sarah Johnson
 image: images/photo.jpg
 description: Lead Programmer
