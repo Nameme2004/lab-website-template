@@ -7,15 +7,6 @@ nav:
 
 {% assign home_text = site.data.i18n.home %}
 
-<h2 id="latest-news">{% include bilingual-text.html en=home_text.latest_news.en zh=home_text.latest_news.zh %}</h2>
-
-{% include news-carousel.html %}
-
-{% capture news_button_text %}{% include bilingual-text.html en=home_text.view_all_news.en zh=home_text.view_all_news.zh %}{% endcapture %}
-{% include button.html link="/blog/" text=news_button_text style="bare" %}
-
-{% include section.html %}
-
 <h1 id="about-us">{% include bilingual-text.html en=home_text.about_us.en zh=home_text.about_us.zh %}</h1>
 
 <p><strong>{% include bilingual-text.html en=site.subtitle zh=site.subtitle_zh %}</strong></p>

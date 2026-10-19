@@ -20,3 +20,11 @@ keyboard and actual Chromium touch input, real clipboard content plus denied
 and unavailable clipboard cases, bilingual controls, no-JavaScript fallback,
 desktop/mobile dimensions, and production/preview base URLs. Document visibility
 is simulated in the browser to check the event-driven pause/resume logic.
+
+Hero checks also assert that news occurs once inside the homepage header, that
+About Us is the first main section, and that zero news leaves no empty box or
+controls. All four counts are checked at 1440/375px in both languages. Long
+translated titles, image aspect ratios, news/image HTTP responses under both
+base URLs, and the original sticky headers on six other pages are covered.
+The first Hero image is loaded eagerly; later slides remain lazy. Screenshot
+artifacts contain both real-site views and clearly named isolated fixture views.

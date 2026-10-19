@@ -70,13 +70,32 @@ const server = http.createServer((request, response) => {
       assert.ok(links.every((href) => href.startsWith(`${fixturePrefix}${count}/`) && href.endsWith(".html")));
       assert.ok(links.every((href) => !/hidden-news|example-post|future-news|blank-news/.test(href)));
       if (count) assert.ok((await page.locator("[data-news-slide]").first().textContent()).includes(`Fixture News ${count}`));
-      else assert.equal(await page.locator(".home-news-empty").count(), 1);
+      else assert.equal(await page.locator(".home-news-empty").count(), 0);
+      assert.equal(await page.locator("header[data-home-hero] [data-news-carousel]").count(), count ? 1 : 0);
+      assert.equal(await page.locator("main [data-news-carousel], #latest-news").count(), 0);
+      assert.equal(await page.locator("main > section").first().locator("h1").first().getAttribute("id"), "about-us");
+      for (const href of links) assert.equal((await page.request.get(origin + href)).status(), 200);
+      // Every count must fit both viewports, including all five dots and long translated titles.
+      for (const width of [1440, 375]) {
+        await page.setViewportSize({ width, height: 1000 });
+        for (const code of ["en", "zh"]) {
+          await language(page, code);
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+          assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h).position), "relative");
+          if (!count) assert.equal(await page.locator(".home-hero__all-news, [data-news-controls]").count(), 0);
+          if (count === 1) {
+            await page.clock.fastForward(12000);
+            assert.equal(await active(), 0);
+          }
+          checks += 2;
+        }
+      }
       if (count) {
         await page.locator("[data-news-slide]").first().scrollIntoViewIfNeeded();
         await until(() => page.locator("[data-news-slide]").first().locator(".news-carousel__media").evaluateAll((media) => media.every((m) => m.hidden)));
         assert.equal(await page.locator("[data-news-slide]").first().locator(".news-carousel__media:visible").count(), 0);
       }
-      checks += 6;
+      checks += 9;
     }
 
     await page.goto(url(2));
@@ -119,6 +138,13 @@ const server = http.createServer((request, response) => {
       await page.setViewportSize({ width, height: 1000 });
       for (const code of ["en", "zh"]) {
         await language(page, code);
+        await page.locator('[data-news-dot="1"]').click();
+        const image = page.locator('[data-news-slide]:not([hidden]) [data-news-image]');
+        await until(() => image.evaluate((img) => img.complete && img.naturalWidth > 0));
+        assert.ok(await image.evaluate((img) => {
+          const r = img.getBoundingClientRect();
+          return Math.abs(r.width / r.height - 16 / 9) < 0.02;
+        }));
         const boxes = await page.locator(".home-research-card").evaluateAll((cards) => cards.map((card) => {
           const r = card.getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, bottom: r.bottom };
         }));
@@ -202,8 +228,33 @@ const server = http.createServer((request, response) => {
       assert.equal((await page.goto(origin + prefix)).status(), 200);
       assert.equal(await page.locator(".home-research-card").count(), 2);
       assert.equal(await page.locator("a.home-research-card__link").first().getAttribute("href"), prefix + "research/");
+      assert.equal(await page.locator("main [data-news-carousel]").count(), 0);
+      assert.equal(await page.locator("[data-news-carousel]").count(), await page.locator("header [data-news-carousel]").count());
+      const newsLinks = await page.locator("[data-news-link]").evaluateAll((a) => a.map((n) => n.pathname));
+      for (const link of newsLinks) {
+        assert.ok(link.startsWith(prefix));
+        assert.equal((await page.request.get(origin + link)).status(), 200);
+      }
+      const images = await page.locator("[data-news-image]").evaluateAll((a) => a.map((n) => n.getAttribute("src")));
+      for (const image of images) {
+        assert.ok(image.startsWith(prefix));
+        const response = await page.request.get(origin + image);
+        assert.equal(response.status(), 200);
+        console.log(JSON.stringify({ image, bytes: (await response.body()).length }));
+      }
+      for (const route of ["research/", "team/", "publications/", "join-us/", "contact/", "blog/"]) {
+        assert.equal((await page.goto(origin + prefix + route)).status(), 200);
+        assert.equal(await page.locator("header[data-home-hero], header [data-news-carousel]").count(), 0);
+        for (const width of [1440, 375]) {
+          await page.setViewportSize({ width, height: 1000 });
+          assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h).position), "sticky");
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+        }
+        checks += 3;
+      }
       checks += 3;
     }
+    await page.goto(origin + previewPrefix);
     for (const width of [1440, 375]) {
       await page.setViewportSize({ width, height: 1000 });
       for (const code of ["en", "zh"]) {

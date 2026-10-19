@@ -29,6 +29,14 @@ Dir.mktmpdir("duan-home-fixtures") do |temporary|
       data["image"] = "/images/photo.jpg" if index == 1 && count > 1
       write_document.call(File.join(posts, "2020-01-0#{index}-fixture-news-#{index}.md"), data, "Temporary fixture; not repository news.")
     end
+    # A long bilingual title exercises natural height without changing real CMS news.
+    if count > 1
+      first = File.join(posts, "2020-01-01-fixture-news-1.md")
+      document = File.read(first)
+      document.sub!("title: Fixture News 1", "title: Fixture News 1 — Exploring collaborative disease modeling and new approaches to organoid research")
+      document.sub!("title_zh: 测试新闻 1", "title_zh: 测试新闻 1：探索协作疾病建模与类器官研究新方法的临时长标题布局测试")
+      File.write(first, document)
+    end
     # Newer hidden, template, future and blank-title posts must not become slides.
     [
       ["2020-02-01-hidden-news.md", { "title" => "Hidden fixture", "published" => false }],
