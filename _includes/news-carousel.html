@@ -1,0 +1,54 @@
+{% assign news_items = "" | split: "," %}
+{% assign candidates = site.posts | where_exp: "post", "post.published != false and post.date <= site.time" | sort: "date" | reverse %}
+{% for post in candidates %}
+  {% assign news_title = post.title | default: "" | strip %}
+  {% assign news_url = post.url | default: "" | strip %}
+  {% assign first_character = news_url | slice: 0, 1 %}
+  {% assign first_two = news_url | slice: 0, 2 %}
+  {% unless post.slug == "example-post-1" or post.slug == "example-post-2" or post.slug == "example-post-3" %}
+    {% if news_title != "" and first_character == "/" and first_two != "//" %}
+      {% assign news_items = news_items | push: post %}
+      {% if news_items.size == 5 %}{% break %}{% endif %}
+    {% endif %}
+  {% endunless %}
+{% endfor %}
+{% assign news_text = site.data.i18n.news_carousel %}
+{% if news_items.size > 0 %}
+  <div class="news-carousel" data-news-carousel role="region" aria-roledescription="carousel" aria-label="{{ news_text.region.en | xml_escape }}"
+    {% for message in news_text %}data-{{ message[0] }}-en="{{ message[1].en | xml_escape }}" data-{{ message[0] }}-zh="{{ message[1].zh | xml_escape }}" {% endfor %}>
+    <div class="news-carousel__slides">
+      {% for post in news_items %}
+        {% assign summary_en = post.summary | default: post.excerpt | strip_html | truncate: 260 %}
+        {% assign summary_zh = post.summary_zh | default: "" | strip_html | truncate: 160 %}
+        {% assign news_image = post.image | default: "" | strip %}
+        <article class="news-carousel__slide" data-news-slide role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} / {{ news_items.size }}">
+          <a class="news-carousel__card{% if news_image != '' %} news-carousel__card--image{% endif %}" href="{{ post.url | relative_url | xml_escape }}" data-news-link>
+            {% if news_image != "" %}
+              <div class="news-carousel__media"><img src="{{ news_image | relative_url | xml_escape }}" alt="{{ post.image_caption | default: '' | xml_escape }}" loading="lazy" data-news-image></div>
+            {% endif %}
+            <div class="news-carousel__copy">
+              <div class="news-carousel__meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>{% if post.category %}<span>{% include bilingual-text.html en=post.category zh=post.category_zh %}</span>{% endif %}</div>
+              <h3>{% include bilingual-text.html en=post.title zh=post.title_zh %}</h3>
+              {% if summary_en != "" or summary_zh != "" %}<p>{% include bilingual-text.html en=summary_en zh=summary_zh %}</p>{% endif %}
+              <span class="news-carousel__read">{% include bilingual-text.html en=news_text.read.en zh=news_text.read.zh %} <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+    {% if news_items.size > 1 %}
+      <div class="news-carousel__controls" data-news-controls hidden>
+        <button class="button" type="button" data-news-previous aria-label="{{ news_text.previous.en | xml_escape }}"><span aria-hidden="true">←</span></button>
+        <div class="news-carousel__dots">
+          {% for post in news_items %}<button type="button" data-news-dot="{{ forloop.index0 }}" aria-label="{{ news_text.region.en | xml_escape }} {{ forloop.index }} / {{ news_items.size }}">{{ forloop.index }}</button>{% endfor %}
+        </div>
+        <button class="button" type="button" data-news-next aria-label="{{ news_text.next.en | xml_escape }}"><span aria-hidden="true">→</span></button>
+        <button class="button" type="button" data-news-playback>{{ news_text.pause.en | xml_escape }}</button>
+        <span class="news-carousel__counter" data-news-counter aria-live="off"></span>
+      </div>
+      <span class="news-carousel__announcement" role="status" aria-live="polite" aria-atomic="true" data-news-announcement></span>
+    {% endif %}
+  </div>
+{% else %}
+  <p class="home-news-empty">{% include bilingual-text.html en=news_text.empty.en zh=news_text.empty.zh %}</p>
+{% endif %}

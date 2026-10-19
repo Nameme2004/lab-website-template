@@ -7,6 +7,15 @@ nav:
 
 {% assign home_text = site.data.i18n.home %}
 
+<h2 id="latest-news">{% include bilingual-text.html en=home_text.latest_news.en zh=home_text.latest_news.zh %}</h2>
+
+{% include news-carousel.html %}
+
+{% capture news_button_text %}{% include bilingual-text.html en=home_text.view_all_news.en zh=home_text.view_all_news.zh %}{% endcapture %}
+{% include button.html link="/blog/" text=news_button_text style="bare" %}
+
+{% include section.html %}
+
 <h1 id="about-us">{% include bilingual-text.html en=home_text.about_us.en zh=home_text.about_us.zh %}</h1>
 
 <p><strong>{% include bilingual-text.html en=site.subtitle zh=site.subtitle_zh %}</strong></p>
@@ -15,43 +24,15 @@ nav:
 
 {% include section.html %}
 
-<h2 id="latest-news">{% include bilingual-text.html en=home_text.latest_news.en zh=home_text.latest_news.zh %}</h2>
-
-{% assign latest_news = site.posts | where_exp: "post", "post.slug != 'example-post-1' and post.slug != 'example-post-2' and post.slug != 'example-post-3'" | sort: "date" | reverse %}
-{% for post in latest_news limit:3 %}
-  {%
-    include post-excerpt.html
-    title=post.title
-    url=post.url
-    image=post.image
-    author=post.author
-    date=post.date
-    last_modified_at=post.last_modified_at
-    tags=post.tags
-    content=post.content
-    excerpt=post.excerpt
-    summary=post.summary
-    image_caption=post.image_caption
-  %}
-{% else %}
-<p>{% include bilingual-text.html en=home_text.no_news.en zh=home_text.no_news.zh %}</p>
-{% endfor %}
-
-{% capture news_button_text %}{% include bilingual-text.html en=home_text.view_all_news.en zh=home_text.view_all_news.zh %}{% endcapture %}
-{% include button.html link="/blog/" text=news_button_text style="bare" %}
-
-{% include section.html %}
-
 <h2 id="our-research">{% include bilingual-text.html en=home_text.our_research.en zh=home_text.our_research.zh %}</h2>
 
 {% include bilingual-markdown.html en=site.data.home.research_preview_intro zh=site.data.home.research_preview_intro_zh %}
 
 {% assign home_directions = site.data.research.directions | where: "show_on_home", true | sort: "order" %}
-{% capture research_preview %}
+<div class="home-research-cards">
 {% for direction in home_directions limit:3 %}
-  {% include research-direction.html direction=direction preview=true %}
+  {% include home-research-card.html direction=direction number=forloop.index %}
 {% else %}
 <p>{% include bilingual-text.html en=home_text.research_pending.en zh=home_text.research_pending.zh %}</p>
 {% endfor %}
-{% endcapture %}
-{% include grid.html content=research_preview %}
+</div>

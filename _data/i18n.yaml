@@ -17,6 +17,44 @@ navigation:
 language_label:
   en: Choose language
   zh: 选择语言
+member_email:
+  label:
+    en: Email
+    zh: 电子邮箱
+  copy:
+    en: Copy Email
+    zh: 复制邮箱
+  success:
+    en: Copied!
+    zh: 已复制
+  failure:
+    en: Copy unavailable. Select the email address and copy it manually.
+    zh: 无法自动复制，请选中邮箱地址后手动复制。
+news_carousel:
+  region:
+    en: Lab news
+    zh: 实验室动态
+  previous:
+    en: Previous news
+    zh: 上一条新闻
+  next:
+    en: Next news
+    zh: 下一条新闻
+  pause:
+    en: Pause autoplay
+    zh: 暂停自动播放
+  play:
+    en: Start autoplay
+    zh: 开始自动播放
+  slide:
+    en: "News {x} of {n}"
+    zh: "第 {x} 条，共 {n} 条新闻"
+  read:
+    en: Read more
+    zh: 查看详情
+  empty:
+    en: Lab news will be added here as updates become available.
+    zh: 实验室动态将陆续更新。
 home:
   about_us:
     en: About Us

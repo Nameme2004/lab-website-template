@@ -1,0 +1,16 @@
+{% assign direction = include.direction %}
+{% assign summary_en = direction.home_summary | default: direction.description %}
+{% assign summary_zh = direction.home_summary_zh | default: "" | strip | default: direction.description_zh %}
+<article class="home-research-card">
+  <div class="home-research-card__heading">
+    <span class="home-research-card__number" aria-hidden="true">{{ include.number | prepend: "0" }}</span>
+    <h3>{% include bilingual-text.html en=direction.title zh=direction.title_zh %}</h3>
+  </div>
+  {% unless direction.confirmed == true %}
+    <p><strong>{% include bilingual-text.html en=site.data.i18n.research.unconfirmed.en zh=site.data.i18n.research.unconfirmed.zh %}</strong></p>
+  {% endunless %}
+  <div class="home-research-card__summary">{% include bilingual-markdown.html en=summary_en zh=summary_zh %}</div>
+  <a class="home-research-card__link" href="{{ '/research/' | relative_url }}">
+    {% include bilingual-text.html en=site.data.i18n.research.explore_more.en zh=site.data.i18n.research.explore_more.zh %} <span aria-hidden="true">→</span>
+  </a>
+</article>

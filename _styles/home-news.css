@@ -1,0 +1,22 @@
+.news-carousel { min-width: 0; text-align: left; }
+.news-carousel [hidden] { display: none !important; }
+.news-carousel__slides { display: grid; gap: 20px; touch-action: pan-y; }
+.news-carousel__slide { min-width: 0; }
+.news-carousel__card { display: grid; min-width: 0; border: 1px solid var(--light-gray); border-radius: 12px; overflow: hidden; color: var(--text); background: var(--background-alt); text-decoration: none; }
+.news-carousel__card--image { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+.news-carousel__media { min-width: 0; aspect-ratio: 16 / 9; align-self: center; }
+.news-carousel__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.news-carousel__copy { min-width: 0; padding: clamp(20px, 4vw, 28px); overflow-wrap: anywhere; }
+.news-carousel__meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.85em; }
+.news-carousel h3 { margin: 12px 0; font-size: 1.3rem; line-height: 1.5; }
+.news-carousel p { margin: 12px 0; text-align: left; }
+.news-carousel__read { color: var(--primary); font-weight: 600; }
+.news-carousel__controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; }
+.news-carousel__controls .button { margin: 0; }
+.news-carousel__dots { display: flex; flex-wrap: wrap; gap: 6px; }
+.news-carousel__dots button { width: 32px; min-height: 32px; border: 1px solid currentColor; border-radius: 50%; background: var(--background); color: var(--text); font: inherit; }
+.news-carousel__dots button[aria-current="true"] { background: var(--primary); color: var(--background); font-weight: 600; }
+.news-carousel__counter { font-size: 0.85em; }
+.news-carousel a:focus-visible, .news-carousel button:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.news-carousel__announcement { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 650px) { .news-carousel__card--image { grid-template-columns: minmax(0, 1fr); } .news-carousel__media { max-height: 230px; } }

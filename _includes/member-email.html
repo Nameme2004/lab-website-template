@@ -1,0 +1,19 @@
+{% assign email_address = include.email | default: "" | strip %}
+{% assign email_prefix = email_address | slice: 0, 7 | downcase %}
+{% if email_prefix == "mailto:" %}
+  {% assign email_address = email_address | slice: 7, email_address.size | strip %}
+{% endif %}
+{% if email_address != "" %}
+  {% assign email_text = site.data.i18n.member_email %}
+  <div class="member-email" data-member-email
+    data-success-en="{{ email_text.success.en | xml_escape }}" data-success-zh="{{ email_text.success.zh | xml_escape }}"
+    data-failure-en="{{ email_text.failure.en | xml_escape }}" data-failure-zh="{{ email_text.failure.zh | xml_escape }}">
+    <span class="member-email__label">{% include bilingual-text.html en=email_text.label.en zh=email_text.label.zh %}</span>
+    <span class="member-email__address" data-email-address>{{ email_address | xml_escape }}</span>
+    <button type="button" class="button" data-copy-email>
+      {% include bilingual-text.html en=email_text.copy.en zh=email_text.copy.zh %}
+    </button>
+    <span class="member-email__status" role="status" aria-live="polite" aria-atomic="true" data-copy-status></span>
+    <noscript><p>{% include bilingual-text.html en=email_text.failure.en zh=email_text.failure.zh %}</p></noscript>
+  </div>
+{% endif %}

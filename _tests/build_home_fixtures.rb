@@ -1,0 +1,56 @@
+# Creates isolated Jekyll sites; never changes repository members or posts.
+require "jekyll"
+require "fileutils"
+require "tmpdir"
+require "yaml"
+
+root = File.expand_path("..", __dir__)
+output = File.expand_path(ARGV.fetch(0))
+FileUtils.mkdir_p(output)
+
+Dir.mktmpdir("duan-home-fixtures") do |temporary|
+  [0, 1, 2, 5].each do |count|
+    source = File.join(temporary, count.to_s)
+    FileUtils.mkdir_p(source)
+    %w[_includes _layouts _styles _scripts _plugins _data images _config.yaml index.md research].each do |name|
+      FileUtils.cp_r(File.join(root, name), source)
+    end
+    posts = File.join(source, "_posts")
+    members = File.join(source, "_members")
+    FileUtils.mkdir_p([posts, members])
+    write_document = lambda do |path, data, body|
+      File.write(path, data.to_yaml + "---\n\n" + body + "\n")
+    end
+    (1..count).each do |index|
+      data = { "title" => "Fixture News #{index}", "published" => true,
+               "category" => "Fixture", "summary" => "Temporary test summary #{index}.",
+               "summary_zh" => "临时测试摘要 #{index}。", "title_zh" => "测试新闻 #{index}" }
+      data["image"] = "/images/missing-fixture.jpg" if index == count
+      data["image"] = "/images/photo.jpg" if index == 1 && count > 1
+      write_document.call(File.join(posts, "2020-01-0#{index}-fixture-news-#{index}.md"), data, "Temporary fixture; not repository news.")
+    end
+    # Newer hidden, template, future and blank-title posts must not become slides.
+    [
+      ["2020-02-01-hidden-news.md", { "title" => "Hidden fixture", "published" => false }],
+      ["2020-02-02-example-post-1.md", { "title" => "Example fixture", "published" => true }],
+      ["2099-01-01-future-news.md", { "title" => "Future fixture", "published" => true }],
+      ["2020-02-03-blank-news.md", { "title" => " ", "published" => true }]
+    ].each { |name, data| write_document.call(File.join(posts, name), data, "Excluded fixture.") }
+    write_document.call(File.join(members, "fixture-member.md"), {
+      "name" => "Fixture Member", "role" => "phd", "image" => "images/fallback.svg",
+      "links" => { "email" => "fixture@university.edu", "github" => "fixture-lab", "orcid" => "0000-0001-2345-6789" }
+    }, "Temporary member, not a real person.")
+    write_document.call(File.join(members, "no-email.md"), {
+      "name" => "No Email Fixture", "role" => "phd", "image" => "images/fallback.svg",
+      "links" => { "email" => "  ", "github" => "fixture-lab" }
+    }, "No-email fixture.")
+    config = Jekyll.configuration({
+      "source" => source, "config" => File.join(source, "_config.yaml"),
+      "destination" => File.join(output, count.to_s), "quiet" => true,
+      "baseurl" => "/lab-website-template/preview/fixture/#{count}",
+      "future" => true, "disable_disk_cache" => true
+    })
+    Jekyll::Site.new(config).process
+  end
+end
+puts "Built isolated 0/1/2/5-news Jekyll fixtures with excluded-post cases."
