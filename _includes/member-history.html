@@ -1,0 +1,27 @@
+{% assign history_entries = '' | split: ',' %}
+{% for entry in include.entries %}
+  {% assign institution = entry.institution | default: '' | strip %}
+  {% assign institution_zh = entry.institution_zh | default: '' | strip %}
+  {% if institution != '' or institution_zh != '' %}{% assign history_entries = history_entries | push: entry %}{% endif %}
+{% endfor %}
+{% if history_entries.size > 0 %}
+  {% assign heading = site.data.i18n.team[include.kind] %}
+  <div class="member-history" data-member-history="{{ include.kind }}">
+    <h2>{% include bilingual-text.html en=heading.en zh=heading.zh %}</h2>
+    <ol>
+      {% for entry in history_entries %}
+        <li>
+          <div class="member-history__dates">
+            {% if entry.start and entry.start != '' %}
+              <time datetime="{{ entry.start | replace: '.', '-' | xml_escape }}">{{ entry.start | xml_escape }}</time>–{% if entry.end and entry.end != '' %}<time datetime="{{ entry.end | replace: '.', '-' | xml_escape }}">{{ entry.end | xml_escape }}</time>{% else %}{% include bilingual-text.html en=site.data.i18n.team.present.en zh=site.data.i18n.team.present.zh %}{% endif %}
+            {% endif %}
+          </div>
+          <div>
+            <strong>{% include bilingual-text.html en=entry.institution zh=entry.institution_zh %}</strong>
+            <div>{% include bilingual-text.html en=entry.qualification zh=entry.qualification_zh %}</div>
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+{% endif %}

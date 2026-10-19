@@ -116,6 +116,43 @@ research:
     en: Unconfirmed placeholder — not a formally confirmed lab research direction.
     zh: 未确认的占位内容——并非实验室已正式确认的研究方向。
 team:
+  biography:
+    en: Biography
+    zh: 个人简介
+  work_experience:
+    en: Work Experience
+    zh: 工作经历
+  education:
+    en: Education
+    zh: 教育经历
+  publications:
+    en: Publications
+    zh: 论文检索
+  present:
+    en: Present
+    zh: 至今
+  groups:
+    principal-investigator:
+      en: Principal Investigator
+      zh: 课题组负责人
+    postdoc:
+      en: Postdoctoral Researchers
+      zh: 博士后
+    phd:
+      en: PhD Students
+      zh: 博士研究生
+    masters:
+      en: Master's Students
+      zh: 硕士研究生
+    undergrad:
+      en: Undergraduate Students
+      zh: 本科生
+    programmer:
+      en: Research & Technical Staff
+      zh: 研究与技术人员
+    other:
+      en: Other Members
+      zh: 其他成员
   interests:
     en: Research interests
     zh: 研究兴趣
@@ -189,6 +226,16 @@ contact:
   pending:
     en: Confirmed contact information will be added here when available.
     zh: 确认后的联系方式将在此发布。
+publications_search:
+  placeholder:
+    en: Search authors, titles, keywords, year, journal or DOI
+    zh: 搜索作者、标题、关键词、年份、期刊或 DOI
+  hint:
+    en: Search the publications displayed below. Use double quotes for an exact phrase.
+    zh: 搜索下方已收录的论文；词组可用英文双引号括起。
+  empty:
+    en: No matching publications.
+    zh: 未找到匹配的论文。
 search:
   placeholder:
     en: Search items on this page

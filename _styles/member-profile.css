@@ -1,0 +1,16 @@
+.member-overview { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 32px; align-items: start; }
+.member-overview .portrait { margin: 0 0 24px; }
+.member-biography h2 { margin-top: 0; }
+.member-biography p { text-align: left; }
+.member-history ol { list-style: none; padding: 0; }
+.member-history li { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--brand-border); text-align: left; }
+.member-history__dates { font-variant-numeric: tabular-nums; }
+.member-links { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 28px; }
+@media (min-width: 701px) and (max-width: 1000px) {
+  .member-header .home { flex-basis: 100%; flex-grow: 0; }
+  .member-header nav { justify-content: flex-start; }
+}
+@media (max-width: 700px) {
+  .member-overview, .member-history li { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .member-overview > :first-child { text-align: center; }
+}

@@ -2,7 +2,7 @@
 {% assign dark = page.header-dark | is_nil: site.header-dark | is_nil: true %}
 
 <header
-  class="background"
+  class="background{% if page.layout == 'member' %} member-header{% endif %}"
   style="--image: url('{{ image | relative_url | uri_escape }}')"
   {% if dark == true or dark == false %}
     data-dark="{{ dark }}"

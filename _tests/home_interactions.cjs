@@ -238,6 +238,26 @@ const server = http.createServer((request, response) => {
     assert.equal(await page.locator("[data-member-email]").count(), 0);
     checks += 10;
 
+    // Isolated members cover every role, fallback roles, empty groups and publication privacy.
+    for (const count of [0, 5]) {
+      await page.goto(url(count, "team/"));
+      const roles = await page.locator("[data-team-role]").evaluateAll((groups) => groups.map((g) => g.dataset.teamRole));
+      assert.deepEqual(roles, count === 5 ? ["principal-investigator", "postdoc", "phd", "masters", "undergrad", "programmer", "other"] : ["phd"]);
+      assert.equal(await page.locator('[aria-label="Hidden Member Fixture"]').count(), 0);
+      if (count === 5) assert.equal(await page.locator('[data-team-role="other"] .portrait').count(), 2);
+      assert.equal((await page.request.get(url(count, "members/hidden-member.html"))).status(), 404);
+      checks += 4;
+    }
+    await page.goto(url(2, "members/fixture-member.html"));
+    assert.equal(await page.locator("[data-member-history]").count(), 0);
+    const encoded = await page.locator("[data-member-papers]").getAttribute("href");
+    assert.equal(new URL(encoded, origin).searchParams.get("search"), '"Fixture & 姓名 + O\'Neil"');
+    await page.locator("[data-member-papers]").click();
+    assert.equal(await page.locator(".search-input").inputValue(), '"Fixture & 姓名 + O\'Neil"');
+    assert.equal(await page.locator(".citation:visible").count(), 0);
+    assert.ok(!(await page.content()).includes("Never expose hidden aliases"));
+    checks += 5;
+
     const reduced = await browser.newContext({ reducedMotion: "reduce", viewport: { width: 1200, height: 1000 } });
     const quiet = await prepare(reduced);
     await quiet.clock.install({ time: 0 });
@@ -310,8 +330,15 @@ const server = http.createServer((request, response) => {
               assert.equal(await page.locator("main > section").count(), 1);
               assert.ok(await page.locator("main > section").evaluateAll((items) => items.every((s) => getComputedStyle(s, "::before").backgroundImage === "none")));
               assert.ok((await page.locator("main").innerText()).includes(expectedContent.team.gallery_intro[code]));
+              const members = expectedContent.members.filter((m) => m.data.published !== false);
+              const order = ["principal-investigator", "postdoc", "phd", "masters", "undergrad", "programmer"];
+              const shown = order.filter((role) => members.some((m) => m.data.role === role));
+              if (members.some((m) => !order.includes(m.data.role))) shown.push("other");
+              assert.deepEqual(await page.locator("[data-team-role]").evaluateAll((g) => g.map((e) => e.dataset.teamRole)), shown);
+              assert.equal(await page.locator("[data-team-role] .portrait").count(), members.length);
+              checks += 2;
             }
-            if (prefix === previewPrefix && width !== 768 && ["research/", "join-us/", "team/"].includes(route)) await page.screenshot({ path: path.join(screenshots, `${route.slice(0,-1)}-${width}-${code}.png`), fullPage: true });
+            if (prefix === previewPrefix && ["research/", "join-us/", "team/"].includes(route)) await page.screenshot({ path: path.join(screenshots, `${route.slice(0,-1)}-${width}-${code}.png`), fullPage: true });
           }
           if (route === "join-us/") {
             assert.deepEqual(await page.locator("main > section").evaluateAll((s) => s.slice(0,3).map((x) => getComputedStyle(x).backgroundColor)), ["rgb(255, 255, 255)", "rgb(240, 244, 248)", "rgb(255, 255, 255)"]);
@@ -324,6 +351,73 @@ const server = http.createServer((request, response) => {
           }
         }
         checks += 3;
+      }
+      // Real member profiles: optional histories, verified dates, native links and author search.
+      await page.goto(origin + prefix + "team/");
+      const piHref = await page.locator('a.portrait[aria-label="Xiaohua Duan"]').getAttribute("href");
+      const studentHref = await page.locator('a.portrait[aria-label="Yan Wang"]').getAttribute("href");
+      for (const [kind, memberHref] of [["pi", piHref], ["student", studentHref]]) {
+        await page.goto(origin + memberHref);
+        for (const width of [1440, 768, 375]) {
+          await page.setViewportSize({ width, height: 1000 });
+          for (const code of ["en", "zh"]) {
+            await language(page, code);
+            assert.equal(await page.locator("h1").count(), 1);
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+            if (width === 768) assert.ok(await page.locator("header .home").evaluate((home) => home.getBoundingClientRect().width >= 700));
+            if (kind === "pi") {
+              assert.equal(await page.locator('[data-member-history="work_experience"] li').count(), 2);
+              assert.equal(await page.locator('[data-member-history="education"] li').count(), 2);
+              const work = await page.locator('[data-member-history="work_experience"]').innerText();
+              assert.ok(work.includes("2026.01") && work.includes("2020.11") && work.includes("2025.11") && work.includes("Weill Cornell Medicine"));
+              const education = await page.locator('[data-member-history="education"]').innerText();
+              for (const date of ["2014.09", "2021.01", "2009.09", "2014.07"]) assert.ok(education.includes(date));
+              assert.ok(!(await page.locator(".member-biography").innerText()).includes("2020.11"));
+              assert.ok(!(await page.locator('[data-member-history="education"]').innerText()).includes("Weill Cornell"));
+              assert.ok(!/Academic Appointments|Postdoctoral Training/.test(await page.locator("h2").allTextContents()));
+            } else {
+              assert.equal(await page.locator("[data-member-history]").count(), 0);
+              assert.ok((await page.locator("main").innerText()).includes(code === "zh" ? "人工智能虚拟细胞" : "AI Virtual Cell"));
+            }
+            if (prefix === previewPrefix) await page.screenshot({ path: path.join(screenshots, `member-${kind}-${width}-${code}.png`), fullPage: true });
+            checks += 6;
+          }
+        }
+        await page.locator("[data-member-papers]").click();
+        assert.equal(new URL(page.url()).pathname, prefix + "publications/");
+        // The destination search initializes on window.load, after navigation commits.
+        await until(async () => (await page.locator(".search-input").inputValue()).includes(kind === "pi" ? "Xiaohua Duan" : "Yan Wang"));
+        assert.ok((await page.locator(".search-input").inputValue()).includes(kind === "pi" ? "Xiaohua Duan" : "Yan Wang"));
+        assert.equal(await page.locator(".citation:visible").count(), kind === "pi" ? 2 : 0);
+        checks += 3;
+      }
+      await page.goto(origin + prefix + "publications/");
+      const searchCases = [["DUAN",2], ["X. Duan",2], ["段晓华",2], ["Duan X",2], ["Alain Borczuk",1], ['"pancreatic cancer organoid platform"',1], ["胰腺癌",1], ["肺和结肠",1], ["2024",1], ["2021",1], ["Cell Stem Cell",1], ["Nature",1], ["10.1016/j.stem.2023.11.011",1], ["organoid",2], ["Scalable data harmonization",0]];
+      for (const code of ["en", "zh"]) {
+        await language(page, code);
+        for (const [query, count] of searchCases) {
+          await page.locator(".search-input").fill(query);
+          assert.equal(await page.locator(".citation:visible").count(), count, query);
+          assert.equal(new URL(page.url()).searchParams.get("search"), query);
+          if (!count) assert.ok((await page.locator(".search-info").innerText()).includes(code === "zh" ? "未找到匹配的论文" : "No matching publications"));
+          checks += 2;
+        }
+        await page.locator(".search-box button").click();
+        assert.equal(await page.locator(".citation:visible").count(), 2);
+        assert.equal(await page.locator(".search-input").inputValue(), "");
+        assert.ok((await page.locator(".search-info").innerText()).includes("2"));
+        checks += 3;
+      }
+      for (const width of [1440, 768, 375]) {
+        await page.setViewportSize({ width, height: 1000 });
+        for (const code of ["en", "zh"]) {
+          await language(page, code);
+          await page.locator(".search-input").fill("2024");
+          assert.equal(await page.locator(".citation:visible").count(), 1);
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+          if (prefix === previewPrefix) await page.screenshot({ path: path.join(screenshots, `publications-search-${width}-${code}.png`), fullPage: true });
+          checks += 2;
+        }
       }
       for (const [index, detailPath] of detailPaths.entries()) {
         assert.equal((await page.goto(origin + prefix + detailPath)).status(), 200);

@@ -30,7 +30,7 @@
       {% include fallback.html %}
     >
 
-    {% if member.name %}
+    {% if member.name and include.show_name != false %}
       <span class="portrait-name">
         {% include bilingual-text.html en=member.name zh=member.name_zh %}
       </span>

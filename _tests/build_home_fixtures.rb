@@ -12,20 +12,35 @@ research = YAML.safe_load(File.read(File.join(root, "_data/research.yaml")))
 cms = YAML.safe_load(File.read(File.join(root, ".pages.yml")))
 research_fields = cms.fetch("content").find { |entry| entry["name"] == "research" }.fetch("fields")
 direction_fields = research_fields.find { |field| field["name"] == "directions" }.fetch("fields").map { |field| field["name"] }
+member_fields = cms.fetch("content").find { |entry| entry["name"] == "team" }.fetch("fields")
+members_data = Dir.glob(File.join(root, "_members", "*.md")).map do |path|
+  raw = File.read(path)
+  frontmatter = raw.match(/\A---\s*\n(.*?)\n---\s*\n/m).captures.first
+  data = YAML.safe_load(frontmatter)
+  raise "Member YAML round-trip loses data" unless YAML.safe_load(data.to_yaml) == data
+  %w[education work_experience].each do |kind|
+    schema = member_fields.find { |field| field["name"] == kind }.fetch("fields").map { |field| field["name"] }
+    Array(data[kind]).each { |entry| raise "CMS is missing history fields" unless (entry.keys - schema).empty? }
+  end
+  { "filename" => File.basename(path), "data" => data }
+end
+publication_ids = YAML.safe_load(File.read(File.join(root, "_data/publications.yaml"))).fetch("highlighted_ids")
+publications_data = YAML.safe_load(File.read(File.join(root, "_data/citations.yaml"))).select { |citation| publication_ids.include?(citation["id"]) }
 ids = research.fetch("directions").map { |direction| direction.fetch("id") }
 raise "Research IDs must be unique" unless ids.uniq == ids && ids.none?(&:empty?)
 research.fetch("directions").each do |direction|
   raise "CMS is missing nonempty direction fields" unless (direction.keys - direction_fields).empty?
 end
 File.write(File.join(output, "content-data.json"), JSON.generate({
-  "research" => research, "team" => YAML.safe_load(File.read(File.join(root, "_data/team.yaml")))
+  "research" => research, "team" => YAML.safe_load(File.read(File.join(root, "_data/team.yaml"))),
+  "members" => members_data, "publications" => publications_data
 }))
 
 Dir.mktmpdir("duan-home-fixtures") do |temporary|
   [0, 1, 2, 5].each do |count|
     source = File.join(temporary, count.to_s)
     FileUtils.mkdir_p(source)
-    %w[_includes _layouts _styles _scripts _plugins _data images _config.yaml index.md research].each do |name|
+    %w[_includes _layouts _styles _scripts _plugins _data images _config.yaml index.md research team publications].each do |name|
       FileUtils.cp_r(File.join(root, name), source)
     end
     posts = File.join(source, "_posts")
@@ -58,13 +73,24 @@ Dir.mktmpdir("duan-home-fixtures") do |temporary|
       ["2020-02-03-blank-news.md", { "title" => " ", "published" => true }]
     ].each { |name, data| write_document.call(File.join(posts, name), data, "Excluded fixture.") }
     write_document.call(File.join(members, "fixture-member.md"), {
-      "name" => "Fixture Member", "role" => "phd", "image" => "images/fallback.svg",
+      "name" => "Fixture & 姓名 + O'Neil", "role" => "phd", "image" => "images/fallback.svg",
       "links" => { "email" => "fixture@university.edu", "github" => "fixture-lab", "orcid" => "0000-0001-2345-6789" }
     }, "Temporary member, not a real person.")
     write_document.call(File.join(members, "no-email.md"), {
       "name" => "No Email Fixture", "role" => "phd", "image" => "images/fallback.svg",
       "links" => { "email" => "  ", "github" => "fixture-lab" }
     }, "No-email fixture.")
+    if count == 5
+      %w[principal-investigator postdoc masters undergrad programmer mascot unknown-role].each do |role|
+        write_document.call(File.join(members, "role-#{role}.md"), {
+          "name" => "Role fixture #{role}", "role" => role, "image" => "images/fallback.svg"
+        }, "Temporary member for grouping checks.")
+      end
+    end
+    write_document.call(File.join(members, "hidden-member.md"), {
+      "name" => "Hidden Member Fixture", "role" => "postdoc", "published" => false,
+      "aliases" => ["Never expose hidden aliases"], "image" => "images/fallback.svg"
+    }, "Unpublished member.")
     config = Jekyll.configuration({
       "source" => source, "config" => File.join(source, "_config.yaml"),
       "destination" => File.join(output, count.to_s), "quiet" => true,

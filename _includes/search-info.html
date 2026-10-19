@@ -1,4 +1,9 @@
 <div class="search-info"
+  {% if include.context == 'publications' %}
+    role="status" aria-live="polite" aria-atomic="true" data-show-count
+    data-empty-en="{{ site.data.i18n.publications_search.empty.en | xml_escape }}"
+    data-empty-zh="{{ site.data.i18n.publications_search.empty.zh | xml_escape }}"
+  {% endif %}
   data-results-en="{{ site.data.i18n.search.results.en | xml_escape }}"
   data-results-zh="{{ site.data.i18n.search.results.zh | xml_escape }}"
   data-clear-en="{{ site.data.i18n.search.clear.en | xml_escape }}"

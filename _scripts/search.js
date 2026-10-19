@@ -52,14 +52,17 @@
     const tagElements = [...element.querySelectorAll(".tag")];
 
     // check if text content exists in element
-    const hasText = (string) =>
-      (
-        element.innerText +
+    const normalizeText = (value) => String(value ?? "").normalize("NFKC").toLowerCase().replace(/\s+/g, " ");
+    const hasText = (string) => {
+      // A standalone year on a citation means its publication year, not a correction mentioned in its description.
+      if (/^\d{4}$/.test(string) && element.dataset.publicationYear)
+        return element.dataset.publicationYear === string;
+      return normalizeText(
+        element.textContent +
         getAttr(element, "tooltip") +
         getAttr(element, "search")
-      )
-        .toLowerCase()
-        .includes(string);
+      ).includes(normalizeText(string));
+    };
     // check if text matches a tag in element
     const hasTag = (string) =>
       tagElements.some((tag) => normalizeTag(tag.innerText) === string);
@@ -118,7 +121,7 @@
       const input = box.querySelector("input");
       const button = box.querySelector("button");
       const icon = box.querySelector("button i");
-      input.value = query;
+      if (input.value !== query) input.value = query;
       icon.className = input.value.length
         ? "icon fa-solid fa-xmark"
         : "icon fa-solid fa-magnifying-glass";
@@ -130,7 +133,7 @@
   const updateInfoBox = (query, x, n) => {
     const boxes = document.querySelectorAll(infoBoxSelector);
 
-    if (query.trim()) {
+    if (query.trim() || [...boxes].some((el) => el.hasAttribute("data-show-count"))) {
       // show all info boxes
       boxes.forEach((info) => (info.style.display = ""));
 
@@ -138,10 +141,14 @@
       boxes.forEach((el) => {
         const message = (el.dataset["results" + language] || "Showing {x} of {n} results")
           .replace("{x}", x.toLocaleString()).replace("{n}", n.toLocaleString());
+        el.replaceChildren(document.createTextNode(message));
+        const empty = el.dataset["empty" + language];
+        if (!x && empty) el.append(document.createElement("br"), document.createTextNode(empty));
+        if (!query.trim()) return;
         const clear = document.createElement("a");
         clear.href = "./";
         clear.textContent = el.dataset["clear" + language] || "Clear search";
-        el.replaceChildren(document.createTextNode(message), document.createElement("br"), clear);
+        el.append(document.createElement("br"), clear);
       });
     }
     // if nothing searched
@@ -211,7 +218,8 @@
   // when user types into search box
   const debouncedRunSearch = debounce(runSearch, 1000);
   window.onSearchInput = (target) => {
-    debouncedRunSearch(target.value);
+    if (target.closest("[data-search-live]")) runSearch(target.value);
+    else debouncedRunSearch(target.value);
     updateUrl(target.value);
   };
 

@@ -10,8 +10,21 @@
   {% assign citation = include %}
 {% endif %}
 
+{% capture citation_search %}
+  {{ citation.title }} {{ citation.authors | join: ' ' }} {{ citation.publisher }} {{ citation.date }} {{ citation.id }} {{ citation.link }} {{ citation.tags | join: ' ' }} {{ citation.keywords | join: ' ' }} {{ citation.description | strip_html }} {{ citation.description_zh | strip_html }}
+  {% assign author_names = citation.authors | join: '|' | downcase | prepend: '|' | append: '|' %}
+  {% assign public_members = site.members | where_exp: 'member', 'member.published != false' %}
+  {% assign empty_aliases = '' | split: ',' %}
+  {% for member in public_members %}
+    {% assign member_names = member.aliases | default: empty_aliases | push: member.name | push: member.name_zh | compact | uniq %}
+    {% for name in member_names %}
+      {% assign author_key = name | strip | downcase | prepend: '|' | append: '|' %}
+      {% if author_key != '||' and author_names contains author_key %}{{ member_names | join: ' ' }}{% break %}{% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endcapture %}
 <div class="citation-container">
-  <div class="citation" data-search="{{ citation.description | append: ' ' | append: citation.description_zh | strip_html | xml_escape }}">
+  <div class="citation" data-publication-year="{{ citation.date | date: '%Y' | xml_escape }}" data-search="{{ citation_search | strip_html | xml_escape }}">
     {% if include.style == "rich" and citation.image and citation.image != "" %}
       <a
         {% if citation.link %}

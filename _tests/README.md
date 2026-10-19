@@ -43,3 +43,13 @@ data in both languages, and return links/current navigation are checked.
 CMS YAML and coverage of nonempty research fields are checked before building;
 research IDs must be unique. Real Team, both research details and news-detail
 desktop/mobile screenshots are included with the existing Home screenshots.
+
+Member/search checks add all role groups and unknown-role fallback in isolated
+fixtures, empty groups, unpublished member URLs, special-character author query
+encoding, optional histories, the PI's four official periods, unchanged student
+content, and actual-profile-to-publications links. Search cases cover published
+author aliases (including Chinese), authors beyond the visible truncation,
+phrases, Chinese descriptions, publication years, journals, DOI, clear/no results,
+and 1440/768/375px layouts. CMS member YAML is parsed and round-tripped without
+losing values, and every history key must be represented in the CMS schema.
+This is not an actual Pages CMS Save test. No fictional publications are added.
