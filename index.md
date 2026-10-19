@@ -47,11 +47,10 @@ nav:
 {% include bilingual-markdown.html en=site.data.home.research_preview_intro zh=site.data.home.research_preview_intro_zh %}
 
 {% assign home_directions = site.data.research.directions | where: "show_on_home", true | sort: "order" %}
-{% capture research_preview %}
+<div class="home-research-cards">
 {% for direction in home_directions limit:3 %}
-  {% include research-direction.html direction=direction preview=true %}
+  {% include home-research-card.html direction=direction number=forloop.index %}
 {% else %}
 <p>{% include bilingual-text.html en=home_text.research_pending.en zh=home_text.research_pending.zh %}</p>
 {% endfor %}
-{% endcapture %}
-{% include grid.html content=research_preview %}
+</div>
