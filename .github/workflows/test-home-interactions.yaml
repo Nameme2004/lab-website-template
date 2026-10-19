@@ -1,0 +1,48 @@
+name: Test homepage and member interactions
+on:
+  pull_request:
+    paths:
+      - "index.md"
+      - "_includes/**"
+      - "_layouts/**"
+      - "_scripts/**"
+      - "_styles/**"
+      - "_data/home.yaml"
+      - "_data/i18n.yaml"
+      - "_tests/**"
+      - ".github/workflows/test-home-interactions.yaml"
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+          bundler-cache: true
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Build production and preview URLs without deploying
+        run: |
+          bundle exec jekyll build --baseurl /lab-website-template --destination "$RUNNER_TEMP/duan-production"
+          bundle exec jekyll build --baseurl /lab-website-template/preview/pr-check --destination "$RUNNER_TEMP/duan-preview"
+          bundle exec ruby _tests/build_home_fixtures.rb "$RUNNER_TEMP/duan-fixtures"
+      - name: Install isolated browser test tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/duan-browser-deps" --no-save --ignore-scripts playwright@1.62.1
+          "$RUNNER_TEMP/duan-browser-deps/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Check interactions and responsive layout
+        env:
+          NODE_PATH: ${{ runner.temp }}/duan-browser-deps/node_modules
+        run: node _tests/home_interactions.cjs "$RUNNER_TEMP/duan-fixtures" "$RUNNER_TEMP/duan-production" "$RUNNER_TEMP/duan-preview"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: homepage-check-screenshots
+          path: ${{ runner.temp }}/duan-fixtures/screenshots/
+          if-no-files-found: ignore
+          retention-days: 3
