@@ -107,6 +107,8 @@ content:
               label: Postdoctoral Researcher
             - name: phd
               label: PhD Student
+            - name: masters
+              label: Master's Student
             - name: undergrad
               label: Undergraduate Student
             - name: programmer
