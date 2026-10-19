@@ -344,7 +344,13 @@
 <!-- include all css in styles folder -->
 
 
+  <link href="/lab-website-template/_styles/home-news.css" rel="stylesheet">
+
+  <link href="/lab-website-template/_styles/home-research.css" rel="stylesheet">
+
   <link href="/lab-website-template/_styles/language.css" rel="stylesheet">
+
+  <link href="/lab-website-template/_styles/member-email.css" rel="stylesheet">
 
 
   <!-- third party scripts -->
@@ -357,11 +363,15 @@
 
   <script src="/lab-website-template/_scripts/anchors.js"></script>
 
+  <script src="/lab-website-template/_scripts/copy-email.js"></script>
+
   <script src="/lab-website-template/_scripts/dark-mode.js"></script>
 
   <script src="/lab-website-template/_scripts/fetch-tags.js"></script>
 
   <script src="/lab-website-template/_scripts/language.js"></script>
+
+  <script src="/lab-website-template/_scripts/news-carousel.js"></script>
 
   <script src="/lab-website-template/_scripts/search.js"></script>
 
@@ -473,39 +483,11 @@
   
 
   <section class="background" data-size="page">
-    <h1 id="about-us">
-<span data-i18n-text=""><span data-i18n-lang="en" lang="en">About Us</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">关于我们</span></span>
-</h1>
-
-<p><strong><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Organoid Disease Modeling &amp; Therapeutic Discovery</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">类器官疾病建模与治疗策略研究</span></span>
-</strong></p>
-
-<div class="bilingual-markdown">
-  <div data-i18n-lang="en" lang="en">
-<p>Duan Lab is a new organoid research laboratory. We aim to develop disease models to investigate mechanisms and evaluate therapeutic strategies.</p>
-</div>
-  <div data-i18n-lang="zh" lang="zh-CN" hidden="">
-<p>Duan Lab 是一个新成立的类器官研究实验室，拟通过疾病模型研究发病机制并评估治疗策略。</p>
-</div>
-</div>
-  </section>
-
-  
-  
-  
-
-  <section class="background" data-size="page">
-    <!--
-  <background></background>
-  <dark></dark>
-  <size></size>
--->
-
-<h2 id="latest-news">
+    <h2 id="latest-news">
 <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Latest News</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">最新动态</span></span>
 </h2>
 
-<p><span data-i18n-text=""><span data-i18n-lang="en" lang="en">No news yet. Check back soon for updates!</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">暂无新闻，欢迎稍后查看更新！</span></span>
+<p class="home-news-empty"><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Lab news will be added here as updates become available.</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">实验室动态将陆续更新。</span></span>
 </p>
 
 <div class="button-wrapper">
@@ -534,65 +516,98 @@
   <size></size>
 -->
 
+<h1 id="about-us">
+<span data-i18n-text=""><span data-i18n-lang="en" lang="en">About Us</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">关于我们</span></span>
+</h1>
+
+<p><strong><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Organoid Disease Modeling &amp; Therapeutic Discovery</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">类器官疾病建模与治疗策略研究</span></span>
+</strong></p>
+
+<div class="bilingual-markdown">
+  <div data-i18n-lang="en" lang="en">
+<p>Duan Lab is a new organoid research laboratory. We aim to develop disease models to investigate mechanisms and evaluate therapeutic strategies.</p>
+</div>
+  <div data-i18n-lang="zh" lang="zh-CN" hidden="">
+<p>Duan Lab 是一个新成立的类器官研究实验室，拟通过疾病模型研究发病机制并评估治疗策略。</p>
+</div>
+</div>
+  </section>
+
+  
+  
+  
+
+  <section class="background" data-size="page">
+    <!--
+  <background></background>
+  <dark></dark>
+  <size></size>
+-->
+
 <h2 id="our-research">
 <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Our Research</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">我们的研究</span></span>
 </h2>
 
 <div class="bilingual-markdown">
   <div data-i18n-lang="en" lang="en">
-<p>Our proposed themes build on the lab lead’s prior research. Specific projects remain subject to confirmation.</p>
+<p>The lab is building its research framework around two core areas: the development of novel disease models and microphysiological systems integrated with AI-enabled drug discovery. Specific models, methods, and projects will continue to evolve as the research progresses.</p>
 </div>
   <div data-i18n-lang="zh" lang="zh-CN" hidden="">
-<p>拟开展的主题基于负责人既往研究积累，具体课题尚待确认。</p>
+<p>实验室围绕新型疾病模型开发、微生理系统与智能药物研发两大方向逐步建立研究体系。具体模型、方法与课题将随着研究推进持续完善。</p>
 </div>
 </div>
 
-<div class="grid" data-style="">
-  
-<article>
-  <h3>
-    
-      <a href="/lab-website-template/research/"><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Development of Novel Disease Models</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">新型疾病模型开发</span></span>
-</a>
-    
-  </h3>
-  
-  
-    
+<div class="home-research-cards">
 
-<div class="bilingual-markdown">
+  
+
+
+<article class="home-research-card">
+  <div class="home-research-card__heading">
+    <span class="home-research-card__number" aria-hidden="true">01</span>
+    <h3>
+<span data-i18n-text=""><span data-i18n-lang="en" lang="en">Development of Novel Disease Models</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">新型疾病模型开发</span></span>
+</h3>
+  </div>
+  
+  <div class="home-research-card__summary"><div class="bilingual-markdown">
   <div data-i18n-lang="en" lang="en">
 <p>The lab aims to develop complementary disease-modeling approaches using complex organoids and tissue–immune humanized animal models to investigate immune dysfunction in infectious and tumor diseases. A longer-term goal is to establish a stepwise, human tissue-specific immune research platform spanning in vitro and in vivo models.</p>
 </div>
   <div data-i18n-lang="zh" lang="zh-CN" hidden="">
 <p>围绕复杂类器官与组织—免疫双人源化动物的互补模型，探索感染性疾病与肿瘤疾病中的免疫失效问题，并逐步建立从体外到体内的阶梯式人类组织特异性免疫研究平台。</p>
 </div>
-</div>
-
-  
+</div></div>
+  <a class="home-research-card__link" href="/lab-website-template/research/">
+    <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Explore More</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">了解更多</span></span>
+ <span aria-hidden="true">→</span>
+  </a>
 </article>
 
-<article>
-  <h3>
-    
-      <a href="/lab-website-template/research/"><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Microphysiological Systems and AI-Enabled Drug Discovery</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">微生理系统与智能药物研发</span></span>
-</a>
-    
-  </h3>
-  
-  
-    
 
-<div class="bilingual-markdown">
+  
+
+
+<article class="home-research-card">
+  <div class="home-research-card__heading">
+    <span class="home-research-card__number" aria-hidden="true">02</span>
+    <h3>
+<span data-i18n-text=""><span data-i18n-lang="en" lang="en">Microphysiological Systems and AI-Enabled Drug Discovery</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">微生理系统与智能药物研发</span></span>
+</h3>
+  </div>
+  
+  <div class="home-research-card__summary"><div class="bilingual-markdown">
   <div data-i18n-lang="en" lang="en">
 <p>The lab aims to integrate microphysiological systems with artificial intelligence to explore more standardized, automated, and scalable approaches to drug research. Key areas include early biomarker identification and the integration of wet-lab experiments with computational analysis in a closed-loop workflow.</p>
 </div>
   <div data-i18n-lang="zh" lang="zh-CN" hidden="">
 <p>探索微生理系统与人工智能深度融合的研究体系，围绕方法学标准化、自动化与规模化、早期生物标志物识别，以及湿实验与计算分析闭环等方向开展研究。</p>
 </div>
-</div>
-
-  
+</div></div>
+  <a class="home-research-card__link" href="/lab-website-template/research/">
+    <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Explore More</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">了解更多</span></span>
+ <span aria-hidden="true">→</span>
+  </a>
 </article>
 
 

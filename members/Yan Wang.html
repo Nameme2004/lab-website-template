@@ -290,7 +290,13 @@
 <!-- include all css in styles folder -->
 
 
+  <link href="/lab-website-template/_styles/home-news.css" rel="stylesheet">
+
+  <link href="/lab-website-template/_styles/home-research.css" rel="stylesheet">
+
   <link href="/lab-website-template/_styles/language.css" rel="stylesheet">
+
+  <link href="/lab-website-template/_styles/member-email.css" rel="stylesheet">
 
 
   <!-- third party scripts -->
@@ -303,11 +309,15 @@
 
   <script src="/lab-website-template/_scripts/anchors.js"></script>
 
+  <script src="/lab-website-template/_scripts/copy-email.js"></script>
+
   <script src="/lab-website-template/_scripts/dark-mode.js"></script>
 
   <script src="/lab-website-template/_scripts/fetch-tags.js"></script>
 
   <script src="/lab-website-template/_scripts/language.js"></script>
+
+  <script src="/lab-website-template/_scripts/news-carousel.js"></script>
 
   <script src="/lab-website-template/_scripts/search.js"></script>
 
@@ -460,28 +470,26 @@
     
     
     
-
-
-
-
-
-
-
-
-  <div class="button-wrapper">
-    <a class="button" href="mailto:ccillia.cc@gmail.com" data-tooltip="Email" data-style="bare" aria-label="Email">
-      <i class="icon fa-solid fa-envelope"></i>
       
-        
-        
-        
-          <span>Email</span>
-        
-      
-    </a>
+
+
+
+  
+  <div class="member-email" data-member-email="" data-success-en="Copied!" data-success-zh="已复制" data-failure-en="Copy unavailable. Select the email address and copy it manually." data-failure-zh="无法自动复制，请选中邮箱地址后手动复制。">
+    <span class="member-email__label"><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Email</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">电子邮箱</span></span>
+</span>
+    <span class="member-email__address" data-email-address="">ccillia.cc@gmail.com</span>
+    <button type="button" class="button" data-copy-email="">
+      <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Copy Email</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">复制邮箱</span></span>
+
+    </button>
+    <span class="member-email__status" role="status" aria-live="polite" aria-atomic="true" data-copy-status=""></span>
+    <noscript><p><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Copy unavailable. Select the email address and copy it manually.</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">无法自动复制，请选中邮箱地址后手动复制。</span></span>
+</p></noscript>
   </div>
 
-<br>
+
+    
   
 </div>
 
