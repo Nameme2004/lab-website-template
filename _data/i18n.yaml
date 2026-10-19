@@ -63,8 +63,8 @@ news_carousel:
     en: "News {x} of {n}"
     zh: "第 {x} 条，共 {n} 条新闻"
   read:
-    en: Read more
-    zh: 查看详情
+    en: Learn more
+    zh: 了解更多
   empty:
     en: Lab news will be added here as updates become available.
     zh: 实验室动态将陆续更新。
