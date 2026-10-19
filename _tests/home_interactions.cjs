@@ -143,10 +143,15 @@ const server = http.createServer((request, response) => {
         await page.locator('[data-news-dot="1"]').click();
         const image = page.locator('[data-news-slide]:not([hidden]) [data-news-image]');
         await until(() => image.evaluate((img) => img.complete && img.naturalWidth > 0));
-        assert.ok(await image.evaluate((img) => {
+        const coversHero = await image.evaluate((img) => {
           const r = img.getBoundingClientRect(), hero = img.closest("header").getBoundingClientRect();
           return Math.abs(r.width - hero.width) < 1 && Math.abs(r.height - hero.height) < 1 && getComputedStyle(img).objectFit === "cover";
-        }));
+        });
+        if (!coversHero) {
+          console.log(await image.evaluate((img) => ({ image: img.getBoundingClientRect().toJSON(), header: img.closest("header").getBoundingClientRect().toJSON(), containingBlock: img.parentElement.offsetParent?.tagName })));
+          await page.screenshot({ path: path.join(screenshots, "hero-geometry-failure.png"), fullPage: true });
+        }
+        assert.ok(coversHero);
         assert.ok(await page.locator("header nav a, [data-language-choice], [data-news-next], [data-news-playback]").evaluateAll((items) => items.filter((e) => e.getBoundingClientRect().width).every((e) => {
           const r = e.getBoundingClientRect(), hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
           return hit && e.contains(hit);
