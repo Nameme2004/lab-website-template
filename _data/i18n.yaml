@@ -116,6 +116,28 @@ research:
     en: Unconfirmed placeholder — not a formally confirmed lab research direction.
     zh: 未确认的占位内容——并非实验室已正式确认的研究方向。
 team:
+  groups:
+    principal-investigator:
+      en: Principal Investigator
+      zh: 课题组负责人
+    postdoc:
+      en: Postdoctoral Researchers
+      zh: 博士后
+    phd:
+      en: PhD Students
+      zh: 博士研究生
+    masters:
+      en: Master's Students
+      zh: 硕士研究生
+    undergrad:
+      en: Undergraduate Students
+      zh: 本科生
+    programmer:
+      en: Research & Technical Staff
+      zh: 研究与技术人员
+    other:
+      en: Other Members
+      zh: 其他成员
   interests:
     en: Research interests
     zh: 研究兴趣

@@ -1,0 +1,10 @@
+{% if include.members.size > 0 %}
+  {% assign role_type = site.data.types[include.role] %}
+  {% assign group_text = site.data.i18n.team.groups[include.role] %}
+  <div class="team-group" data-team-role="{{ include.role | xml_escape }}">
+    <h2 id="team-{{ include.role | slugify }}">{% include icon.html icon=role_type.icon %}{% include bilingual-text.html en=group_text.en zh=group_text.zh %}</h2>
+    <div class="team-group__members">
+      {% for member in include.members %}{% include portrait.html lookup=member.slug %}{% endfor %}
+    </div>
+  </div>
+{% endif %}

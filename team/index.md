@@ -12,8 +12,17 @@ nav:
 
 {% include section.html %}
 
-{% include list.html data="members" component="portrait" filter="role == 'principal-investigator' and published != false" %}
-{% include list.html data="members" component="portrait" filter="role != 'principal-investigator' and published != false" %}
+{% assign published_members = site.members | where_exp: 'member', 'member.published != false' %}
+{% assign role_order = 'principal-investigator,postdoc,phd,masters,undergrad,programmer' | split: ',' %}
+{% for role in role_order %}
+  {% assign role_members = published_members | where: 'role', role %}
+  {% include team-group.html role=role members=role_members %}
+{% endfor %}
+{% assign other_members = '' | split: ',' %}
+{% for member in published_members %}
+  {% unless role_order contains member.role %}{% assign other_members = other_members | push: member %}{% endunless %}
+{% endfor %}
+{% include team-group.html role='other' members=other_members %}
 
 {% include bilingual-markdown.html en=site.data.team.gallery_intro.en zh=site.data.team.gallery_intro.zh %}
 
