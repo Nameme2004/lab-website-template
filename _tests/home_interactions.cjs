@@ -54,8 +54,10 @@ const server = http.createServer((request, response) => {
   const expectActive = async (index) => { assert.equal(await active(), index); checks++; };
   const language = async (target, code) => {
     const button = target.locator(`[data-language-choice="${code}"]`);
-    if (!await button.isVisible()) await target.locator(".nav-toggle").check();
+    const openedMenu = !await button.isVisible();
+    if (openedMenu) await target.locator(".nav-toggle").check();
     await button.click();
+    if (openedMenu) await target.locator(".nav-toggle").uncheck();
   };
   const idle = async () => {
     await page.mouse.move(-10, -10);
