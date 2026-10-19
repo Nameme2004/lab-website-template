@@ -40,7 +40,7 @@
       <div class="news-carousel__controls" data-news-controls hidden>
         <button class="button" type="button" data-news-previous aria-label="{{ news_text.previous.en | xml_escape }}"><span aria-hidden="true">←</span></button>
         <div class="news-carousel__dots">
-          {% for post in news_items %}<button type="button" data-news-dot="{{ forloop.index0 }}" aria-label="{{ news_text.slide.en | replace: '{x}', forloop.index | replace: '{n}', news_items.size | xml_escape }}">{{ forloop.index }}</button>{% endfor %}
+          {% for post in news_items %}<button type="button" data-news-dot="{{ forloop.index0 }}" aria-label="{{ news_text.region.en | xml_escape }} {{ forloop.index }} / {{ news_items.size }}">{{ forloop.index }}</button>{% endfor %}
         </div>
         <button class="button" type="button" data-news-next aria-label="{{ news_text.next.en | xml_escape }}"><span aria-hidden="true">→</span></button>
         <button class="button" type="button" data-news-playback>{{ news_text.pause.en | xml_escape }}</button>
