@@ -2,61 +2,43 @@
 layout: default
 ---
 
-{% capture floatcontent %}
-
-{% include portrait.html lookup=page.slug %}
-
-<div>
-  {% for link in page.links %}
-    {% assign key = link[0] %}
-    {% assign value = link[1] %}
-    {% if key == "email" %}
-      {% include member-email.html email=value %}
-    {% else %}
-      {% include button.html type=key link=value style="bare" %}<br>
+<h1>{% include bilingual-text.html en=page.name zh=page.name_zh %}</h1>
+<div class="member-overview">
+  <div>{% include portrait.html lookup=page.slug show_name=false %}</div>
+  <div class="member-biography">
+    {% assign biography_en = content | strip %}
+    {% assign biography_zh = page.body_zh | default: '' | strip %}
+    {% if biography_en != '' or biography_zh != '' %}
+      <h2>{% include bilingual-text.html en=site.data.i18n.team.biography.en zh=site.data.i18n.team.biography.zh %}</h2>
+      {% include bilingual-markdown.html en_html=content zh=page.body_zh %}
     {% endif %}
-  {% endfor %}
+  </div>
 </div>
 
-{% endcapture %}
+{% include member-history.html entries=page.work_experience kind='work_experience' %}
+{% include member-history.html entries=page.education kind='education' %}
 
-{% include float.html content=floatcontent %}
-
-{% include bilingual-markdown.html en_html=content zh=page.body_zh %}
-
-{% if page.research_interests or page.research_interests_zh %}
+{% assign interests_en = page.research_interests | default: '' | strip %}
+{% assign interests_zh = page.research_interests_zh | default: '' | strip %}
+{% if interests_en != '' or interests_zh != '' %}
   <h2>{% include bilingual-text.html en=site.data.i18n.team.interests.en zh=site.data.i18n.team.interests.zh %}</h2>
   {% include bilingual-markdown.html en=page.research_interests zh=page.research_interests_zh %}
 {% endif %}
 
-{% assign aliases = page.aliases
-  | default: page.name
-  | default: page.title
-  | join: ","
-  | split: ","
-  | array_filter
-%}
+<h2>{% include bilingual-text.html en=site.data.i18n.team.publications.en zh=site.data.i18n.team.publications.zh %}</h2>
+{% capture author_query %}"{{ page.name | default: page.title | replace: '"', '' }}"{% endcapture %}
+{% assign author_query = author_query | strip | url_encode %}
+<p><a data-member-papers href="{{ '/publications/' | relative_url }}?search={{ author_query | xml_escape }}">
+  {% capture papers_en %}Search for {{ page.name | default: page.title }}'s papers on the Publications page{% endcapture %}
+  {% capture papers_zh %}在论文发表页面查找 {{ page.name_zh | default: page.name | default: page.title }} 的论文{% endcapture %}
+  {% include bilingual-text.html en=papers_en zh=papers_zh %}
+</a></p>
 
-{% capture search -%}
-  publications/?search={% for alias in aliases %}"{{ alias }}" {% endfor %}
-{%- endcapture %}
-
-<p class="center">
-  <a href="{{ search | relative_url | uri_escape }}">
-    {% capture papers_en %}Search for {{ page.name | default: page.title }}'s papers on the Publications page{% endcapture %}
-    {% capture papers_zh %}在论文发表页面查找 {{ page.name_zh | default: page.name | default: page.title }} 的论文{% endcapture %}
-    {% include bilingual-text.html en=papers_en zh=papers_zh %}
-  </a>
-</p>
-
-{% capture search -%}
-  blog/?search={{ page.name }}
-{%- endcapture %}
-
-<!--
-<p class="center">
-  <a href="{{ search | relative_url | uri_escape }}">
-    See {{ page.name | default: page.title }}'s posts on the Blog page
-  </a>
-</p>
--->
+<div class="member-links">
+  {% for link in page.links %}
+    {% assign key = link[0] %}
+    {% assign value = link[1] %}
+    {% if key == 'email' %}{% include member-email.html email=value %}
+    {% else %}{% include button.html type=key link=value style='bare' %}{% endif %}
+  {% endfor %}
+</div>

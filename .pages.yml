@@ -173,6 +173,60 @@ content:
         options:
           format: markdown
           media: false
+      - name: work_experience
+        label: Work Experience / 工作经历
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{start} — {institution}"
+        fields:
+          - name: start
+            label: Start month (YYYY.MM)
+            type: string
+          - name: end
+            label: End month (YYYY.MM; blank means Present)
+            type: string
+          - name: institution
+            label: Institution — English
+            type: string
+            required: true
+          - name: institution_zh
+            label: Institution — Chinese (optional)
+            type: string
+          - name: qualification
+            label: Position or role — English
+            type: text
+          - name: qualification_zh
+            label: Position or role — Chinese (optional)
+            type: text
+      - name: education
+        label: Education / 教育经历
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{start} — {institution}"
+        fields:
+          - name: start
+            label: Start month (YYYY.MM)
+            type: string
+          - name: end
+            label: End month (YYYY.MM; blank means Present)
+            type: string
+          - name: institution
+            label: Institution — English
+            type: string
+            required: true
+          - name: institution_zh
+            label: Institution — Chinese (optional)
+            type: string
+          - name: qualification
+            label: Degree, subject and joint-training details — English
+            type: text
+          - name: qualification_zh
+            label: Degree, subject and joint-training details — Chinese (optional)
+            type: text
       - name: body_zh
         label: 个人简介 — 中文内容（可选）
         type: rich-text

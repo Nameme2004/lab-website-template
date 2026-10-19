@@ -116,6 +116,21 @@ research:
     en: Unconfirmed placeholder — not a formally confirmed lab research direction.
     zh: 未确认的占位内容——并非实验室已正式确认的研究方向。
 team:
+  biography:
+    en: Biography
+    zh: 个人简介
+  work_experience:
+    en: Work Experience
+    zh: 工作经历
+  education:
+    en: Education
+    zh: 教育经历
+  publications:
+    en: Publications
+    zh: 论文检索
+  present:
+    en: Present
+    zh: 至今
   groups:
     principal-investigator:
       en: Principal Investigator
