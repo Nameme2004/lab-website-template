@@ -1,15 +1,27 @@
+{% assign supplied_link = include.link | default: "" | strip %}
 {% assign button = include %}
 {% assign button = button | hash_default: site.data.types[include.type] %}
+
+{%- comment -%}Defaults expand bare identifiers; explicit schemes must remain intact.{%- endcomment -%}
+{% assign button_link = button.link | default: "" | strip %}
+{% assign supplied_scheme = supplied_link | regex_scan: "^[A-Za-z][A-Za-z0-9+.-]*:|^//|^#" | default: "" %}
+{% if supplied_scheme != "" %}
+  {% assign button_link = supplied_link %}
+{% endif %}
+{% assign link_scheme = button_link | regex_scan: "^[A-Za-z][A-Za-z0-9+.-]*:|^//|^#" | default: "" %}
+{% if button_link != "" and link_scheme == "" %}
+  {% assign button_link = button_link | relative_url %}
+{% endif %}
 
 {% if button.link or button.icon or button.text %}
   <div class="button-wrapper">
     <a
       class="button"
-      href="{{ button.link | replace: "$LINK", button.link | relative_url }}"
+      href="{{ button_link | xml_escape }}"
       {% if button.tooltip %}
         data-tooltip="{{ button.tooltip | xml_escape }}"
       {% endif %}
-      data-style="{{ include.style }}"
+      data-style="{{ include.style | xml_escape }}"
       {% if include.flip %}
         data-flip
       {% endif %}
