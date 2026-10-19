@@ -1,6 +1,0 @@
-.member-email { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 16px 0; min-width: 0; text-align: left; }
-.member-email__label { font-weight: 600; }
-.member-email__address { max-width: 100%; overflow-wrap: anywhere; user-select: all; }
-.member-email .button { margin: 0; }
-.member-email .button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
-.member-email__status { display: block; max-width: 100%; font-size: 0.9em; overflow-wrap: anywhere; }
