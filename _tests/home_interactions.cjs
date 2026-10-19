@@ -364,6 +364,7 @@ const server = http.createServer((request, response) => {
             await language(page, code);
             assert.equal(await page.locator("h1").count(), 1);
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+            if (width === 768) assert.ok(await page.locator("header .home").evaluate((home) => home.getBoundingClientRect().width >= 700));
             if (kind === "pi") {
               assert.equal(await page.locator('[data-member-history="work_experience"] li').count(), 2);
               assert.equal(await page.locator('[data-member-history="education"] li').count(), 2);
