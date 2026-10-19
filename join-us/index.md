@@ -1,5 +1,6 @@
 ---
 title: Join Us
+hero: true
 nav:
   order: 5
   tooltip: Opportunities and how to join

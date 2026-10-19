@@ -10,6 +10,7 @@
 {% assign sections = content | split: "<!-- section break -->" | array_filter %}
 
 {% for section in sections %}
+  {% if include.skip_first and forloop.first %}{% continue %}{% endif %}
   {% assign dark = section
     | regex_scan: "<dark>(.*?)</dark>"
     | default: ""

@@ -7,7 +7,7 @@ nav:
 
 {% assign home_text = site.data.i18n.home %}
 
-<h1 id="about-us">{% include bilingual-text.html en=home_text.about_us.en zh=home_text.about_us.zh %}</h1>
+<h2 id="about-us">{% include bilingual-text.html en=home_text.about_us.en zh=home_text.about_us.zh %}</h2>
 
 <p><strong>{% include bilingual-text.html en=site.subtitle zh=site.subtitle_zh %}</strong></p>
 

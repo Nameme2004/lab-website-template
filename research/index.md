@@ -1,5 +1,6 @@
 ---
 title: Research
+hero: true
 nav:
   order: 2
   tooltip: Research directions and projects
