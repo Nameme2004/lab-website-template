@@ -13,7 +13,12 @@
   {% endif %}
 {% if include.hero_content != '' %}data-page-hero{% endif %}
 >
+  <div class="site-header__bar">
   <a href="{{ "/" | relative_url }}" class="home">
+    <span class="brand-mark" aria-hidden="true">
+      <span>DL</span>
+      {% if site.logo %}<img src="{{ site.logo | relative_url | xml_escape }}" alt="" width="40" height="40" onload="this.previousElementSibling.hidden = true" onerror="this.hidden = true; this.previousElementSibling.hidden = false">{% endif %}
+    </span>
     {% if site.logo-text != false %}
       <span class="title-text" data-tooltip="Home">
         {% if site.title and site.show-title != false %}
@@ -26,9 +31,22 @@
     {% endif %}
   </a>
 
-  <input class="nav-toggle" type="checkbox" aria-label="show/hide nav">
+    <div
+      class="language-control"
+      role="group"
+      aria-label="{{ site.data.i18n.language_label.en | xml_escape }}"
+      data-language-control
+      data-en-label="{{ site.data.i18n.language_label.en | xml_escape }}"
+      data-zh-label="{{ site.data.i18n.language_label.zh | xml_escape }}"
+      data-language-storage-key="duan-lab:{{ site.baseurl | default: '/' | xml_escape }}:language"
+      hidden
+    >
+      <button type="button" data-language-choice="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+      <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
+    </div>
+  <input class="nav-toggle" type="checkbox" aria-controls="primary-navigation" aria-label="Open or close navigation" data-i18n-tooltip-en="Open or close navigation" data-i18n-tooltip-zh="展开或收起导航">
 
-  <nav>
+  <nav id="primary-navigation" aria-label="Primary navigation">
     {% assign pages = site.pages
       | where_exp: "page", "page.nav"
       | sort: "nav.order"
@@ -53,20 +71,8 @@
         </a>
       {% endif %}
     {% endfor %}
-    <div
-      class="language-control"
-      role="group"
-      aria-label="{{ site.data.i18n.language_label.en | xml_escape }}"
-      data-language-control
-      data-en-label="{{ site.data.i18n.language_label.en | xml_escape }}"
-      data-zh-label="{{ site.data.i18n.language_label.zh | xml_escape }}"
-      data-language-storage-key="duan-lab:{{ site.baseurl | default: '/' | xml_escape }}:language"
-      hidden
-    >
-      <button type="button" data-language-choice="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
-      <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
-    </div>
   </nav>
+  </div>
   {% if include.hero_content != '' %}<div class="page-hero__intro">{{ include.hero_content }}</div>{% endif %}
   {% if page.url == "/" %}
     {% include news-carousel.html hero=true %}
