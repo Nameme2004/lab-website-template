@@ -477,13 +477,91 @@
 <span data-i18n-text=""><span data-i18n-lang="en" lang="en">News</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">实验室动态</span></span>
 </h1>
 
-<div class="bilingual-markdown">
-  <div data-i18n-lang="en" lang="en">
-<p>Lab news will be published here after review.</p>
+<div class="search-box">
+  <input type="text" class="search-input" oninput="onSearchInput(this)" placeholder="Search items on this page" data-placeholder-en="Search items on this page" data-placeholder-zh="搜索本页内容" aria-label="Search items on this page">
+  <button disabled data-tooltip="Clear search" aria-label="clear search" data-label-en="Clear search" data-label-zh="清除搜索" onclick="onSearchClear()">
+    <i class="icon fa-solid fa-magnifying-glass"></i>
+  </button>
 </div>
-  <div data-i18n-lang="zh" lang="zh-CN" hidden="">
-<p>实验室动态经审核后将在此发布。</p>
+
+<div class="search-info" data-results-en="Showing {x} of {n} results" data-results-zh="共 {n} 条结果，显示 {x} 条" data-clear-en="Clear search" data-clear-zh="清除搜索"></div>
+
+<div class="post-excerpt-container">
+  <div class="post-excerpt">
+    
+    
+    
+
+    
+      <a href="/lab-website-template/event/2026/10/02/example-post-3.html" class="post-excerpt-image" aria-label="AAAAA">
+        <img src="/lab-website-template/images/uploads/test/83dd97ce0d1996e6f8ba7716d41f4cb5.jpg" alt="AAAAA" loading="lazy" onerror="this.src = '/lab-website-template/images/fallback.svg'; this.onerror = null;">
+      </a>
+    
+
+    <div class="post-excerpt-text">
+      <a href="/lab-website-template/event/2026/10/02/example-post-3.html">AAAAA</a>
+
+      <div class="post-info">
+  
+    
+    
+      
+      
+        <span data-tooltip="Author">
+          <i class="icon fa-solid fa-feather-pointed"></i>
+          <span>ccc</span>
+        </span>
+      
+    
+  
+
+  
+  
+
+  
+    <span data-tooltip="Originally published on">
+      <i class="icon fa-regular fa-calendar"></i>
+      <span>October 02, 2026</span>
+    </span>
+  
+
+  
+    <span data-tooltip="Last updated on">
+      <i class="icon fa-solid fa-clock-rotate-left"></i>
+      <span>October 19, 2026</span>
+    </span>
+  
 </div>
+
+
+  
+
+
+  <div class="tags" data-link="/lab-website-template/blog">
+    
+      <a href="/lab-website-template/blog?search=%22tag:%20biology%22" class="tag" data-tooltip='Show items with the tag "biology"'>
+        biology
+      </a>
+    
+      <a href="/lab-website-template/blog?search=%22tag:%20medicine%22" class="tag" data-tooltip='Show items with the tag "medicine"'>
+        medicine
+      </a>
+    
+  </div>
+
+
+
+
+
+      
+      
+      
+      <p data-search="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+      </p>
+    </div>
+  </div>
 </div>
   </section>
 
