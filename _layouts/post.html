@@ -2,9 +2,7 @@
 layout: default
 ---
 
-{% include section.html background=page.image %}
-
-<h1 class="center">{{ page.title }}</h1>
+<h1>{% include bilingual-text.html en=page.title zh=page.title_zh %}</h1>
 
 {%
   include post-info.html
@@ -17,6 +15,9 @@ layout: default
 
 {% include section.html %}
 
+{% if page.image %}
+<img class="post-cover" src="{{ page.image | relative_url | xml_escape }}" alt="{{ page.image_caption | default: '' | xml_escape }}" loading="lazy">
+{% endif %}
 {% if page.image and page.image_caption %}
 <p class="center">{{ page.image_caption | xml_escape }}</p>
 {% endif %}

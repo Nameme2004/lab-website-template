@@ -11,12 +11,13 @@
     data-big
     data-home-hero
   {% endif %}
+{% if include.hero_content != '' %}data-page-hero{% endif %}
 >
   <a href="{{ "/" | relative_url }}" class="home">
     {% if site.logo-text != false %}
       <span class="title-text" data-tooltip="Home">
         {% if site.title and site.show-title != false %}
-          <span class="title">{{ site.title }}</span>
+          {% if page.url == '/' %}<h1 class="title">{{ site.title }}</h1>{% else %}<span class="title">{{ site.title }}</span>{% endif %}
         {% endif %}
         {% if site.subtitle and site.show-subtitle != false %}
           <span class="subtitle">{% include bilingual-text.html en=site.subtitle zh=site.subtitle_zh %}</span>
@@ -61,6 +62,7 @@
       <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
     </div>
   </nav>
+  {% if include.hero_content != '' %}<div class="page-hero__intro">{{ include.hero_content }}</div>{% endif %}
   {% if page.url == "/" %}
     {% include news-carousel.html hero=true %}
   {% endif %}

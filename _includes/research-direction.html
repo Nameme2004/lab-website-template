@@ -14,14 +14,14 @@
 {% endunless %}
 {% include bilingual-markdown.html en=description zh=description_zh %}
 {% endcapture %}
-<article>
-  <h3>
+<article class="research-direction">
+  <h2>
     {% if include.preview %}
       <a href="{{ '/research/' | relative_url }}">{{ title_text }}</a>
     {% else %}
       {{ title_text }}
     {% endif %}
-  </h3>
+  </h2>
   {% assign direction_image = direction.image | default: "" | strip %}
   {% if direction_image != "" %}
     <div class="feature">

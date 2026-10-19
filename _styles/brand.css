@@ -1,0 +1,36 @@
+:root {
+  --brand-navy: #0b2239;
+  --brand-blue: #1677c8;
+  --brand-surface: #ffffff;
+  --brand-muted-surface: #f0f4f8;
+  --brand-ink: #172b40;
+  --brand-muted: #62758a;
+  --brand-on-dark: #f6f9fc;
+  --brand-border: #dce5ed;
+  --brand-radius: 12px;
+  --brand-space: clamp(28px, 4vw, 56px);
+}
+html[data-dark="false"] { --text: var(--brand-ink); --primary: var(--brand-blue); }
+header.background, footer.background { background: var(--brand-navy); color: var(--brand-on-dark); }
+header.background::before, footer.background::before { background-image: none; }
+header[data-page-hero] { position: relative !important; row-gap: 28px; padding-inline: max(24px, calc((100% - 1120px) / 2)); }
+.page-hero__intro { flex-basis: 100%; width: 100%; padding: 32px 0 24px; max-width: 900px; }
+.page-hero__intro h1 { margin: 0 0 20px; text-align: left; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.25; text-transform: none; }
+.page-hero__intro p { margin: 16px 0 0; text-align: left; line-height: 1.8; }
+.page-hero__intro a { color: #b9e2ff; }
+.page-hero__intro .post-info { justify-content: flex-start; }
+body[data-page-hero] main > section:first-child { padding-top: var(--brand-space); }
+body[data-research-page] main > section:first-child { display: grid; gap: 24px; }
+.research-direction { padding: var(--brand-space); border: 1px solid var(--brand-border); border-radius: var(--brand-radius); background: var(--brand-surface); }
+.research-direction h2 { margin-top: 0; border: 0; line-height: 1.4; font-size: clamp(1.3rem, 2.4vw, 1.65rem); }
+.research-direction p:last-child { margin-bottom: 0; }
+body[data-join-page] main > section { background: var(--brand-surface); padding-block: var(--brand-space); }
+body[data-join-page] main > section:nth-child(even) { background: var(--brand-muted-surface); }
+body[data-join-page] main > section h2 { margin-top: 0; padding-bottom: 18px; border-color: var(--brand-border); }
+.post-cover { display: block; width: 100%; height: auto; border-radius: var(--brand-radius); }
+header a:focus-visible { outline: 2px solid var(--brand-on-dark); outline-offset: 5px; }
+header .nav-toggle { z-index: 2; }
+@media (max-width: 700px) {
+  header[data-page-hero] { padding-inline: 24px; }
+  .page-hero__intro { padding: 16px 0; }
+}

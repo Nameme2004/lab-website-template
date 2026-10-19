@@ -28,7 +28,7 @@
             {% endif %}
             <div class="news-carousel__copy">
               <div class="news-carousel__meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>{% if post.category %}<span>{% include bilingual-text.html en=post.category zh=post.category_zh %}</span>{% endif %}</div>
-              <h3>{% include bilingual-text.html en=post.title zh=post.title_zh %}</h3>
+              {% if include.hero %}<h2>{% else %}<h3>{% endif %}{% include bilingual-text.html en=post.title zh=post.title_zh %}{% if include.hero %}</h2>{% else %}</h3>{% endif %}
               {% if summary_en != "" or summary_zh != "" %}<p>{% include bilingual-text.html en=summary_en zh=summary_zh %}</p>{% endif %}
               <span class="news-carousel__read">{% include bilingual-text.html en=news_text.read.en zh=news_text.read.zh %} <span aria-hidden="true">→</span></span>
             </div>

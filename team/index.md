@@ -1,5 +1,6 @@
 ---
 title: Team
+hero: true
 nav:
   order: 3
   tooltip: About our team

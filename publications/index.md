@@ -1,5 +1,6 @@
 ---
 title: Publications
+hero: true
 nav:
   order: 4
   tooltip: Published works

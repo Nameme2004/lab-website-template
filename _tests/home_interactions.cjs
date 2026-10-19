@@ -73,7 +73,9 @@ const server = http.createServer((request, response) => {
       else assert.equal(await page.locator(".home-news-empty").count(), 0);
       assert.equal(await page.locator("header[data-home-hero] [data-news-carousel]").count(), count ? 1 : 0);
       assert.equal(await page.locator("main [data-news-carousel], #latest-news").count(), 0);
-      assert.equal(await page.locator("main > section").first().locator("h1").first().getAttribute("id"), "about-us");
+      assert.equal(await page.locator("main > section").first().locator("h2").first().getAttribute("id"), "about-us");
+      assert.equal(await page.locator("h1").count(), 1);
+      assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h, "::before").backgroundImage), "none");
       for (const href of links) assert.equal((await page.request.get(origin + href)).status(), 200);
       // Every count must fit both viewports, including all five dots and long translated titles.
       for (const width of [1440, 375]) {
@@ -142,9 +144,13 @@ const server = http.createServer((request, response) => {
         const image = page.locator('[data-news-slide]:not([hidden]) [data-news-image]');
         await until(() => image.evaluate((img) => img.complete && img.naturalWidth > 0));
         assert.ok(await image.evaluate((img) => {
-          const r = img.getBoundingClientRect();
-          return Math.abs(r.width / r.height - 16 / 9) < 0.02;
+          const r = img.getBoundingClientRect(), hero = img.closest("header").getBoundingClientRect();
+          return Math.abs(r.width - hero.width) < 1 && Math.abs(r.height - hero.height) < 1 && getComputedStyle(img).objectFit === "cover";
         }));
+        assert.ok(await page.locator("header nav a, [data-language-choice], [data-news-next], [data-news-playback]").evaluateAll((items) => items.filter((e) => e.getBoundingClientRect().width).every((e) => {
+          const r = e.getBoundingClientRect(), hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+          return hit && e.contains(hit);
+        })));
         const boxes = await page.locator(".home-research-card").evaluateAll((cards) => cards.map((card) => {
           const r = card.getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, bottom: r.bottom };
         }));
@@ -161,7 +167,18 @@ const server = http.createServer((request, response) => {
       }
     }
 
+    // The background detail link must work without covering brand/nav/controls.
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto(url(2));
+    const heroBox = await page.locator("header").boundingBox();
+    await page.mouse.click(heroBox.width * .85, heroBox.y + heroBox.height * .5);
+    await page.waitForURL(/fixture-news-2\.html$/);
+    assert.equal(await page.locator("header .page-hero__intro h1").count(), 1);
+    assert.equal(await page.locator("h1").count(), 1);
+    checks += 2;
+
     await page.goto(url(2, "members/fixture-member.html"));
+    await page.setViewportSize({ width: 375, height: 1000 });
     await language(page, "en");
     assert.equal(await page.locator("[data-email-address]").textContent(), "fixture@university.edu");
     assert.equal(await page.locator('a[href^="mailto:"]').count(), 0);
@@ -247,8 +264,18 @@ const server = http.createServer((request, response) => {
         assert.equal(await page.locator("header[data-home-hero], header [data-news-carousel]").count(), 0);
         for (const width of [1440, 375]) {
           await page.setViewportSize({ width, height: 1000 });
-          assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h).position), "sticky");
+          assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h).position), "relative");
+          assert.equal(await page.locator("header .page-hero__intro h1").count(), 1);
+          assert.equal(await page.locator("h1").count(), 1);
+          assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h, "::before").backgroundImage), "none");
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+          for (const code of ["en", "zh"]) {
+            await language(page, code);
+            if (prefix === previewPrefix && ["research/", "join-us/"].includes(route)) await page.screenshot({ path: path.join(screenshots, `${route.slice(0,-1)}-${width}-${code}.png`), fullPage: true });
+          }
+          if (route === "join-us/") {
+            assert.deepEqual(await page.locator("main > section").evaluateAll((s) => s.slice(0,3).map((x) => getComputedStyle(x).backgroundColor)), ["rgb(255, 255, 255)", "rgb(240, 244, 248)", "rgb(255, 255, 255)"]);
+          }
         }
         checks += 3;
       }

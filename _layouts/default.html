@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" data-dark="false">
   {% include head.html %}
-  <body>
-    {% include header.html %}
+  <body{% if page.hero or page.layout == "post" %} data-page-hero{% endif %}{% if page.url == "/research/" %} data-research-page{% endif %}{% if page.url == "/join-us/" %} data-join-page{% endif %}>
+    {% assign has_page_hero = false %}
+    {% if page.hero or page.layout == 'post' %}{% assign has_page_hero = true %}{% endif %}
+    {% assign hero_content = '' %}
+    {% if has_page_hero %}{% assign hero_content = content | split: '<!-- section break -->' | first %}{% endif %}
+    {% include header.html hero_content=hero_content %}
     <main>
-      {% include content.html content=content %}
+      {% include content.html content=content skip_first=has_page_hero %}
     </main>
     {% include footer.html %}
   </body>
