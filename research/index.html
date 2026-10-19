@@ -41,6 +41,7 @@
 
 
 
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Research | Duan Lab</title>
@@ -344,6 +345,10 @@
 <!-- include all css in styles folder -->
 
 
+  <link href="/lab-website-template/_styles/brand.css" rel="stylesheet">
+
+  <link href="/lab-website-template/_styles/home-hero.css" rel="stylesheet">
+
   <link href="/lab-website-template/_styles/home-news.css" rel="stylesheet">
 
   <link href="/lab-website-template/_styles/home-research.css" rel="stylesheet">
@@ -384,11 +389,15 @@
 
 </head>
 
-  <body>
+  <body data-page-hero data-research-page>
+    
+    
+    
+    
     
 
 
-<header class="background" style="--image: url('/lab-website-template/images/background.jpg')" data-dark="true">
+<header class="background" style="--image: url('/lab-website-template/images/background.jpg')" data-dark="true" data-page-hero>
   <a href="/lab-website-template/" class="home">
     
       <span class="title-text" data-tooltip="Home">
@@ -412,6 +421,8 @@
         
         
         
+        
+        
         <a href="/lab-website-template/" data-tooltip="Home" data-i18n-tooltip-en="Home" data-i18n-tooltip-zh="首页">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Home</span><span data-i18n-lang="zh" lang="zh-CN" hidden>首页</span></span>
 
@@ -422,13 +433,17 @@
         
         
         
-        <a href="/lab-website-template/research/" data-tooltip="Research directions and projects" data-i18n-tooltip-en="Research directions and projects" data-i18n-tooltip-zh="研究方向">
+        
+        
+        <a href="/lab-website-template/research/" aria-current="page" data-tooltip="Research directions and projects" data-i18n-tooltip-en="Research directions and projects" data-i18n-tooltip-zh="研究方向">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Research</span><span data-i18n-lang="zh" lang="zh-CN" hidden>研究方向</span></span>
 
         </a>
       
     
       
+        
+        
         
         
         
@@ -442,6 +457,8 @@
         
         
         
+        
+        
         <a href="/lab-website-template/publications/" data-tooltip="Published works" data-i18n-tooltip-en="Published works" data-i18n-tooltip-zh="论文发表">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Publications</span><span data-i18n-lang="zh" lang="zh-CN" hidden>论文发表</span></span>
 
@@ -452,8 +469,22 @@
         
         
         
+        
+        
         <a href="/lab-website-template/join-us/" data-tooltip="Opportunities and how to join" data-i18n-tooltip-en="Opportunities and how to join" data-i18n-tooltip-zh="加入我们">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Join Us</span><span data-i18n-lang="zh" lang="zh-CN" hidden>加入我们</span></span>
+
+        </a>
+      
+    
+      
+        
+        
+        
+        
+        
+        <a href="/lab-website-template/blog/" data-tooltip="Lab news and updates" data-i18n-tooltip-en="Lab news and updates" data-i18n-tooltip-zh="新闻动态">
+          <span data-i18n-text><span data-i18n-lang="en" lang="en">News</span><span data-i18n-lang="zh" lang="zh-CN" hidden>新闻动态</span></span>
 
         </a>
       
@@ -463,6 +494,26 @@
       <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
     </div>
   </nav>
+  <div class="page-hero__intro">
+<h1 id="research">
+<i class="icon fa-solid fa-microscope"></i><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Research</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">研究方向</span></span>
+</h1>
+
+<div class="bilingual-markdown">
+  <div data-i18n-lang="en" lang="en">
+<p>The lab is establishing its research framework around the two directions below, guided by the group’s research strategy. Methods and model systems will be developed step by step; confirmation of a direction does not mean that its models, platforms or results have already been established.</p>
+
+<p>Relevant background includes prior collaborative work on cancer organoids, viral infection models and organoid-based drug screening, including antiviral screening and KRAS-mutant pancreatic cancer organoid studies. These examples inform the directions below and are not presented as completed projects of the new laboratory.</p>
+</div>
+  <div data-i18n-lang="zh" lang="zh-CN" hidden="">
+<p>实验室正依据课题组研究策略，围绕以下两个核心方向建立研究体系，逐步推进方法学与模型建设。研究方向经过确认，不代表相关模型、平台或研究成果已经建成。</p>
+
+<p>相关背景包括负责人既往参与的肿瘤类器官、病毒感染模型及类器官药物筛选研究，如抗病毒药物筛选与 KRAS 突变相关胰腺癌类器官研究。这些示例为以下方向提供背景，不作为新实验室已完成的项目。</p>
+</div>
+</div>
+
+</div>
+  
 </header>
 
     <main>
@@ -481,27 +532,6 @@
   
   
   
-
-  <section class="background" data-size="page">
-    <h1 id="research">
-<i class="icon fa-solid fa-microscope"></i><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Research</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">研究方向</span></span>
-</h1>
-
-<div class="bilingual-markdown">
-  <div data-i18n-lang="en" lang="en">
-<p>The lab is establishing its research framework around the two directions below, guided by the group’s research strategy. Methods and model systems will be developed step by step; confirmation of a direction does not mean that its models, platforms or results have already been established.</p>
-
-<p>Relevant background includes prior collaborative work on cancer organoids, viral infection models and organoid-based drug screening, including antiviral screening and KRAS-mutant pancreatic cancer organoid studies. These examples inform the directions below and are not presented as completed projects of the new laboratory.</p>
-</div>
-  <div data-i18n-lang="zh" lang="zh-CN" hidden="">
-<p>实验室正依据课题组研究策略，围绕以下两个核心方向建立研究体系，逐步推进方法学与模型建设。研究方向经过确认，不代表相关模型、平台或研究成果已经建成。</p>
-
-<p>相关背景包括负责人既往参与的肿瘤类器官、病毒感染模型及类器官药物筛选研究，如抗病毒药物筛选与 KRAS 突变相关胰腺癌类器官研究。这些示例为以下方向提供背景，不作为新实验室已完成的项目。</p>
-</div>
-</div>
-  </section>
-
-  
   
   
 
@@ -512,13 +542,13 @@
   <size></size>
 -->
 
-<article>
-  <h3>
+<article class="research-direction">
+  <h2>
     
       <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Development of Novel Disease Models</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">新型疾病模型开发</span></span>
 
     
-  </h3>
+  </h2>
   
   
     
@@ -533,15 +563,19 @@
 </div>
 
   
+  
+  
+  <a href="/lab-website-template/research/novel-disease-models/"><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Explore More</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">了解更多</span></span>
+ <span aria-hidden="true">→</span></a>
 </article>
 
-<article>
-  <h3>
+<article class="research-direction">
+  <h2>
     
       <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Microphysiological Systems and AI-Enabled Drug Discovery</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">微生理系统与智能药物研发</span></span>
 
     
-  </h3>
+  </h2>
   
   
     
@@ -556,9 +590,14 @@
 </div>
 
   
+  
+  
+  <a href="/lab-website-template/research/microphysiological-ai-drug-discovery/"><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Explore More</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">了解更多</span></span>
+ <span aria-hidden="true">→</span></a>
 </article>
   </section>
 
+  
   
   
   

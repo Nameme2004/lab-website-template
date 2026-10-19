@@ -9,7 +9,9 @@
     const target = document.getElementById(id);
 
     if (!target) return;
-    const offset = document.querySelector("header").clientHeight || 0;
+    const header = document.querySelector("header");
+    const pinned = header && ["sticky", "fixed"].includes(getComputedStyle(header).position);
+    const offset = pinned ? header.clientHeight : 0;
     window.scrollTo({
       top: target.getBoundingClientRect().top + window.scrollY - offset,
       behavior: "smooth",

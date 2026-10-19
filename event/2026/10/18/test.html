@@ -41,6 +41,7 @@
 
 
 
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>test2 | Duan Lab</title>
@@ -290,6 +291,10 @@
 <!-- include all css in styles folder -->
 
 
+  <link href="/lab-website-template/_styles/brand.css" rel="stylesheet">
+
+  <link href="/lab-website-template/_styles/home-hero.css" rel="stylesheet">
+
   <link href="/lab-website-template/_styles/home-news.css" rel="stylesheet">
 
   <link href="/lab-website-template/_styles/home-research.css" rel="stylesheet">
@@ -330,11 +335,15 @@
 
 </head>
 
-  <body>
+  <body data-page-hero data-news-detail>
+    
+    
+    
+    
     
 
 
-<header class="background" style="--image: url('/lab-website-template/images/background.jpg')" data-dark="true">
+<header class="background" style="--image: url('/lab-website-template/images/background.jpg')" data-dark="true" data-page-hero>
   <a href="/lab-website-template/" class="home">
     
       <span class="title-text" data-tooltip="Home">
@@ -358,6 +367,8 @@
         
         
         
+        
+        
         <a href="/lab-website-template/" data-tooltip="Home" data-i18n-tooltip-en="Home" data-i18n-tooltip-zh="首页">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Home</span><span data-i18n-lang="zh" lang="zh-CN" hidden>首页</span></span>
 
@@ -365,6 +376,8 @@
       
     
       
+        
+        
         
         
         
@@ -378,6 +391,8 @@
         
         
         
+        
+        
         <a href="/lab-website-template/team/" data-tooltip="About our team" data-i18n-tooltip-en="About our team" data-i18n-tooltip-zh="团队成员">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Team</span><span data-i18n-lang="zh" lang="zh-CN" hidden>团队成员</span></span>
 
@@ -385,6 +400,8 @@
       
     
       
+        
+        
         
         
         
@@ -398,8 +415,22 @@
         
         
         
+        
+        
         <a href="/lab-website-template/join-us/" data-tooltip="Opportunities and how to join" data-i18n-tooltip-en="Opportunities and how to join" data-i18n-tooltip-zh="加入我们">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Join Us</span><span data-i18n-lang="zh" lang="zh-CN" hidden>加入我们</span></span>
+
+        </a>
+      
+    
+      
+        
+        
+        
+        
+        
+        <a href="/lab-website-template/blog/" aria-current="location" data-tooltip="Lab news and updates" data-i18n-tooltip-en="Lab news and updates" data-i18n-tooltip-zh="新闻动态">
+          <span data-i18n-text><span data-i18n-lang="en" lang="en">News</span><span data-i18n-lang="zh" lang="zh-CN" hidden>新闻动态</span></span>
 
         </a>
       
@@ -409,34 +440,10 @@
       <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
     </div>
   </nav>
-</header>
-
-    <main>
-      <!--
-  modify main content of page:
-  - add section breaks
-  - attach section properties
-  - filter out blank sections
--->
-
-
-
-
-
-
-  
-  
-  
-
-  <section class="background" data-size="1" style="--image: url('/lab-website-template/images/uploads/test/83dd97ce0d1996e6f8ba7716d41f4cb5.jpg')">
-    <!--
-  <background>/images/uploads/test/83dd97ce0d1996e6f8ba7716d41f4cb5.jpg</background>
-  <dark></dark>
-  <size>1</size>
--->
-
-
-<h1 class="center">test2</h1>
+  <div class="page-hero__intro">
+<h1>
+<span data-i18n-text><span data-i18n-lang="en" lang="en">test2</span><span data-i18n-lang="zh" lang="en" hidden>test2</span></span>
+</h1>
 
 <div class="post-info">
   
@@ -458,8 +465,39 @@
     </span>
   
 </div>
-  </section>
 
+
+  
+
+
+
+
+
+
+<p class="post-category"><span data-i18n-text><span data-i18n-lang="en" lang="en">Event</span><span data-i18n-lang="zh" lang="en" hidden>Event</span></span>
+</p>
+
+
+
+</div>
+  
+</header>
+
+    <main>
+      <!--
+  modify main content of page:
+  - add section breaks
+  - attach section properties
+  - filter out blank sections
+-->
+
+
+
+
+
+
+  
+  
   
   
   
@@ -470,8 +508,13 @@
   <dark></dark>
   <size></size>
 -->
+
+
+
+<img class="post-cover" src="/lab-website-template/images/uploads/test/83dd97ce0d1996e6f8ba7716d41f4cb5.jpg" alt="" loading="lazy">
   </section>
 
+  
   
   
   
