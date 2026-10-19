@@ -58,7 +58,7 @@ const server = http.createServer((request, response) => {
     await button.click();
   };
   const idle = async () => {
-    await page.mouse.move(0, 0);
+    await page.mouse.move(-10, -10);
     await page.evaluate(() => document.activeElement.blur());
   };
   try {
@@ -107,7 +107,7 @@ const server = http.createServer((request, response) => {
     await page.clock.fastForward(6000); await expectActive(0);
     await page.locator("[data-news-carousel]").hover();
     await page.clock.fastForward(12000); await expectActive(0);
-    await page.mouse.move(0, 0);
+    await page.mouse.move(-10, -10);
     await page.clock.fastForward(6000); await expectActive(1);
     await page.locator("[data-news-next]").focus();
     await page.clock.fastForward(12000); await expectActive(1);
@@ -275,6 +275,9 @@ const server = http.createServer((request, response) => {
           }
           if (route === "join-us/") {
             assert.deepEqual(await page.locator("main > section").evaluateAll((s) => s.slice(0,3).map((x) => getComputedStyle(x).backgroundColor)), ["rgb(255, 255, 255)", "rgb(240, 244, 248)", "rgb(255, 255, 255)"]);
+            await page.locator(".dark-toggle").check();
+            assert.equal(await page.locator("main > section").nth(1).evaluate((s) => getComputedStyle(s).backgroundColor), "rgb(23, 52, 77)");
+            await page.locator(".dark-toggle").uncheck();
           }
         }
         checks += 3;
