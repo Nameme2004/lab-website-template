@@ -9,6 +9,7 @@
   {% endif %}
   {% if page.url == "/" %}
     data-big
+    data-home-hero
   {% endif %}
 >
   <a href="{{ "/" | relative_url }}" class="home">
@@ -60,4 +61,7 @@
       <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
     </div>
   </nav>
+  {% if page.url == "/" %}
+    {% include news-carousel.html hero=true %}
+  {% endif %}
 </header>
