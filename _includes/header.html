@@ -11,12 +11,13 @@
     data-big
     data-home-hero
   {% endif %}
+{% if include.hero_content != '' %}data-page-hero{% endif %}
 >
   <a href="{{ "/" | relative_url }}" class="home">
     {% if site.logo-text != false %}
       <span class="title-text" data-tooltip="Home">
         {% if site.title and site.show-title != false %}
-          <span class="title">{{ site.title }}</span>
+          {% if page.url == '/' %}<h1 class="title">{{ site.title }}</h1>{% else %}<span class="title">{{ site.title }}</span>{% endif %}
         {% endif %}
         {% if site.subtitle and site.show-subtitle != false %}
           <span class="subtitle">{% include bilingual-text.html en=site.subtitle zh=site.subtitle_zh %}</span>
@@ -32,15 +33,20 @@
       | where_exp: "page", "page.nav"
       | sort: "nav.order"
     %}
-    {% for page in pages %}
-      {% if page.nav %}
-        {% assign navigation_text = site.data.i18n.navigation[page.title] %}
-        {% assign navigation_en = navigation_text.en | default: page.title %}
+    {% for nav_page in pages %}
+      {% if nav_page.nav %}
+        {% assign navigation_text = site.data.i18n.navigation[nav_page.title] %}
+        {% assign navigation_en = navigation_text.en | default: nav_page.title %}
         {% assign navigation_zh = navigation_text.zh | default: navigation_en %}
+        {% assign nav_current = '' %}
+        {% if page.url == nav_page.url %}{% assign nav_current = 'page' %}
+        {% elsif page.direction_id and nav_page.dir == '/research/' %}{% assign nav_current = 'location' %}
+        {% elsif page.layout == 'post' and nav_page.dir == '/blog/' %}{% assign nav_current = 'location' %}{% endif %}
         <a
-          href="{{ page.dir | relative_url | uri_escape }}"
-          data-tooltip="{{ page.nav.tooltip | xml_escape }}"
-          data-i18n-tooltip-en="{{ page.nav.tooltip | default: navigation_en | xml_escape }}"
+          href="{{ nav_page.dir | relative_url | uri_escape }}"
+          {% if nav_current != '' %}aria-current="{{ nav_current }}"{% endif %}
+          data-tooltip="{{ nav_page.nav.tooltip | xml_escape }}"
+          data-i18n-tooltip-en="{{ nav_page.nav.tooltip | default: navigation_en | xml_escape }}"
           data-i18n-tooltip-zh="{{ navigation_zh | xml_escape }}"
         >
           {% include bilingual-text.html en=navigation_en zh=navigation_zh %}
@@ -61,6 +67,7 @@
       <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
     </div>
   </nav>
+  {% if include.hero_content != '' %}<div class="page-hero__intro">{{ include.hero_content }}</div>{% endif %}
   {% if page.url == "/" %}
     {% include news-carousel.html hero=true %}
   {% endif %}

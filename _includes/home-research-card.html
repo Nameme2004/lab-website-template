@@ -10,7 +10,10 @@
     <p><strong>{% include bilingual-text.html en=site.data.i18n.research.unconfirmed.en zh=site.data.i18n.research.unconfirmed.zh %}</strong></p>
   {% endunless %}
   <div class="home-research-card__summary">{% include bilingual-markdown.html en=summary_en zh=summary_zh %}</div>
-  <a class="home-research-card__link" href="{{ '/research/' | relative_url }}">
+  {% assign detail_page = nil %}
+  {% if direction.id and direction.id != '' %}{% assign detail_page = site.pages | where: 'direction_id', direction.id | first %}{% endif %}
+  {% assign direction_url = detail_page.url | default: '/research/' %}
+  <a class="home-research-card__link" href="{{ direction_url | relative_url }}">
     {% include bilingual-text.html en=site.data.i18n.research.explore_more.en zh=site.data.i18n.research.explore_more.zh %} <span aria-hidden="true">→</span>
   </a>
 </article>
