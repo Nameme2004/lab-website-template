@@ -385,6 +385,8 @@ const server = http.createServer((request, response) => {
         }
         await page.locator("[data-member-papers]").click();
         assert.equal(new URL(page.url()).pathname, prefix + "publications/");
+        // The destination search initializes on window.load, after navigation commits.
+        await until(async () => (await page.locator(".search-input").inputValue()).includes(kind === "pi" ? "Xiaohua Duan" : "Yan Wang"));
         assert.ok((await page.locator(".search-input").inputValue()).includes(kind === "pi" ? "Xiaohua Duan" : "Yan Wang"));
         assert.equal(await page.locator(".citation:visible").count(), kind === "pi" ? 2 : 0);
         checks += 3;
