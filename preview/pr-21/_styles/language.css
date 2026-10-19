@@ -1,0 +1,34 @@
+/* Hidden translations and unavailable controls stay out of layout/accessibility. */
+[data-i18n-lang][hidden],
+[data-language-control][hidden] {
+  display: none !important;
+}
+
+.language-control {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+}
+
+.language-control button {
+  padding: 5px 8px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.language-control button[aria-pressed="true"] {
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.language-control button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
