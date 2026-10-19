@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: Example post 1
 author: sarah-johnson
 tags:
