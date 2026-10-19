@@ -23,19 +23,19 @@
 }
 
 :root {
-  --title: "Barlow", sans-serif;
-  --heading: "Barlow", sans-serif;
-  --body: "Barlow", sans-serif;
-  --code: "Roboto Mono", monospace;
+  --title: "Inter", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --heading: var(--title);
+  --body: var(--title);
+  --code: "Roboto Mono", ui-monospace, monospace;
   --large: 1.2rem;
   --xl: 1.4rem;
   --xxl: 1.6rem;
-  --thin: 200;
+  --thin: 400;
   --regular: 400;
   --semi-bold: 500;
-  --bold: 600;
-  --spacing: 2;
-  --compact: 1.5;
+  --bold: 700;
+  --spacing: 1.85;
+  --compact: 1.6;
   --rounded: 3px;
   --shadow: 0 0 10px 0 var(--overlay);
   --transition: 0.2s ease;

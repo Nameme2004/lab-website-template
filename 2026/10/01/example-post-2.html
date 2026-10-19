@@ -67,10 +67,10 @@
 
   <meta name="author" content="jane-smith">
   <meta property="og:type" content="article">
-  <meta property="og:updated_time" content="2026-10-19T21:22:39+00:00">
+  <meta property="og:updated_time" content="2026-10-19T22:05:43+00:00">
   <meta property="article:published_time" content="2026-10-01T00:00:00+00:00">
-  <meta property="article:modified_time" content="2026-10-19T21:22:39+00:00">
-  <meta name="revised" content="2026-10-19T21:22:39+00:00">
+  <meta property="article:modified_time" content="2026-10-19T22:05:43+00:00">
+  <meta name="revised" content="2026-10-19T22:05:43+00:00">
 
 
 <script type="application/ld+json">
@@ -80,7 +80,7 @@
       "@type": "BlogPosting",
       "author": { "@type": "Person", "name": "Example post 2" },
       "datePublished": "2026-10-01T00:00:00+00:00",
-      "dateModified": "2026-10-19T21:22:39+00:00",
+      "dateModified": "2026-10-19T22:05:43+00:00",
     
     "name": "Example post 2",
     "description": "Organoid Disease Modeling &amp; Therapeutic Discovery. Exploring human disease mechanisms and therapeutic strategies through organoid-based models.",
@@ -96,10 +96,11 @@
 <link rel="alternate" type="application/rss+xml" href="https://nameme2004.github.io/lab-website-template/feed.xml">
 
   <!-- Google Fonts -->
-<!-- automatically get url from fonts used in theme file -->
-
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?display=swap&&family=Barlow:ital,wght@0,200;0,400;0,500;0,600;1,200;1,400;1,500;1,600&amp;family=Roboto+Mono:ital,wght@0,200;0,400;0,500;0,600;1,200;1,400;1,500;1,600" rel="stylesheet">
+<!-- One request, normal weights only; Google supplies unicode-range CJK subsets.
+     System fallbacks remain readable while display=swap loads fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;family=Roboto+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 
 <!-- Font Awesome icons (load asynchronously due to size) -->
 
@@ -358,7 +359,12 @@
 
 
 <header class="background" style="--image: url('/lab-website-template/images/background.jpg')" data-dark="true" data-page-hero>
+  <div class="site-header__bar">
   <a href="/lab-website-template/" class="home">
+    <span class="brand-mark" aria-hidden="true">
+      <span>DL</span>
+      
+    </span>
     
       <span class="title-text" data-tooltip="Home">
         
@@ -372,9 +378,13 @@
     
   </a>
 
-  <input class="nav-toggle" type="checkbox" aria-label="show/hide nav">
+    <div class="language-control" role="group" aria-label="Choose language" data-language-control data-en-label="Choose language" data-zh-label="选择语言" data-language-storage-key="duan-lab:/lab-website-template:language" hidden>
+      <button type="button" data-language-choice="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+      <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
+    </div>
+  <input class="nav-toggle" type="checkbox" aria-controls="primary-navigation" aria-label="Open or close navigation" data-i18n-tooltip-en="Open or close navigation" data-i18n-tooltip-zh="展开或收起导航">
 
-  <nav>
+  <nav id="primary-navigation" aria-label="Primary navigation">
     
     
       
@@ -449,11 +459,8 @@
         </a>
       
     
-    <div class="language-control" role="group" aria-label="Choose language" data-language-control data-en-label="Choose language" data-zh-label="选择语言" data-language-storage-key="duan-lab:/lab-website-template:language" hidden>
-      <button type="button" data-language-choice="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
-      <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
-    </div>
   </nav>
+  </div>
   <div class="page-hero__intro">
 <h1>
 <span data-i18n-text><span data-i18n-lang="en" lang="en">Example post 2</span><span data-i18n-lang="zh" lang="en" hidden>Example post 2</span></span>
