@@ -27,6 +27,8 @@ const server = http.createServer((request, response) => {
 (async () => {
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const origin = `http://127.0.0.1:${server.address().port}`;
+  const screenshots = path.join(fixtures, "screenshots");
+  fs.mkdirSync(screenshots, { recursive: true });
   const browser = await chromium.launch(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {});
   let checks = 0;
   const errors = [];
@@ -125,6 +127,10 @@ const server = http.createServer((request, response) => {
         assert.ok(Math.abs(boxes[0].width - boxes[1].width) < 1);
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         assert.ok((await page.locator(".home-research-card__link").evaluateAll((links) => links.map((a) => a.pathname))).every((p) => p === `${fixturePrefix}2/research/`));
+        assert.ok(await page.locator(".home-research-card__number").evaluateAll((numbers) => numbers.every((n) => {
+          const range = document.createRange(); range.selectNodeContents(n); return range.getClientRects().length === 1;
+        })));
+        await page.screenshot({ path: path.join(screenshots, `fixture-news-${width}-${code}.png`), fullPage: true });
         checks += 5;
       }
     }
@@ -141,6 +147,7 @@ const server = http.createServer((request, response) => {
     assert.equal(await page.evaluate(() => navigator.clipboard.readText()), "fixture@university.edu");
     await language(page, "zh");
     assert.equal(await page.locator("[data-copy-status]").textContent(), "已复制");
+    await page.screenshot({ path: path.join(screenshots, "fixture-copy-email-375-zh.png"), fullPage: true });
     await page.clock.fastForward(2500);
     assert.equal(await page.locator("[data-copy-status]").textContent(), "");
     await page.evaluate(() => Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async () => { throw new Error("Denied fixture"); } } }));
@@ -197,8 +204,6 @@ const server = http.createServer((request, response) => {
       assert.equal(await page.locator("a.home-research-card__link").first().getAttribute("href"), prefix + "research/");
       checks += 3;
     }
-    const screenshots = path.join(fixtures, "screenshots");
-    fs.mkdirSync(screenshots, { recursive: true });
     for (const width of [1440, 375]) {
       await page.setViewportSize({ width, height: 1000 });
       for (const code of ["en", "zh"]) {
