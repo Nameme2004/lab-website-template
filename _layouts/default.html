@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-dark="false">
   {% include head.html %}
-  <body{% if page.hero or page.layout == "post" %} data-page-hero{% endif %}{% if page.url == "/research/" %} data-research-page{% endif %}{% if page.url == "/join-us/" %} data-join-page{% endif %}>
+  <body{% if page.hero or page.layout == "post" %} data-page-hero{% endif %}{% if page.layout == "post" %} data-news-detail{% endif %}{% if page.url == "/research/" %} data-research-page{% endif %}{% if page.url == "/join-us/" %} data-join-page{% endif %}>
     {% assign has_page_hero = false %}
     {% if page.hero or page.layout == 'post' %}{% assign has_page_hero = true %}{% endif %}
     {% assign hero_content = '' %}

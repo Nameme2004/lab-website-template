@@ -34,3 +34,12 @@ navigation/control hit targets above the stretched background link, no crystal
 header background, and white/blue-gray/white Join sections. Real Home, Research
 and Join desktop/mobile screenshots are generated in both languages. No fixtures
 are added to the repository news collection or deployed.
+
+Follow-up coverage: Hero/About left-edge alignment, a single visible news CTA,
+the existing News navigation at 1440/768/375px, Team gallery text without the old
+crystal section, bounded article images with their original aspect ratio, and
+both stable research-detail URLs. Details are compared with the shared research
+data in both languages, and return links/current navigation are checked.
+CMS YAML and coverage of nonempty research fields are checked before building;
+research IDs must be unique. Real Team, both research details and news-detail
+desktop/mobile screenshots are included with the existing Home screenshots.

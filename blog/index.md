@@ -1,6 +1,9 @@
 ---
 title: News
 hero: true
+nav:
+  order: 6
+  tooltip: Lab news and updates
 ---
 
 <h1 id="news">{% include bilingual-text.html en="News" zh="实验室动态" %}</h1>

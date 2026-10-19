@@ -13,6 +13,8 @@ layout: default
   tags=page.tags
 %}
 
+{% if page.category %}<p class="post-category">{% include bilingual-text.html en=page.category zh=page.category_zh %}</p>{% endif %}
+
 {% include section.html %}
 
 {% if page.image %}

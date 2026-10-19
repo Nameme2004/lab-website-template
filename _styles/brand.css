@@ -9,6 +9,9 @@
   --brand-border: #dce5ed;
   --brand-radius: 12px;
   --brand-space: clamp(28px, 4vw, 56px);
+  --brand-content-width: 1000px;
+  --brand-content-gutter: 40px;
+  --brand-content-padding: max(var(--brand-content-gutter), calc((100% - var(--brand-content-width)) / 2));
 }
 html[data-dark="false"] { --text: var(--brand-ink); --primary: var(--brand-blue); }
 html[data-dark="true"] { --brand-surface: #10283e; --brand-muted-surface: #17344d; --brand-ink: #f0f6fc; --brand-muted: #aec2d4; --brand-border: #355069; }
@@ -30,10 +33,13 @@ body[data-join-page] main > section { background: var(--brand-surface); padding-
 body[data-join-page] main > section:nth-child(even) { background: var(--brand-muted-surface); }
 body[data-join-page] main > section h2 { margin-top: 0; padding-bottom: 18px; border-color: var(--brand-border); }
 .post-cover { display: block; width: 100%; height: auto; border-radius: var(--brand-radius); }
+body[data-news-detail] .post-cover { width: auto; max-width: 100%; max-height: min(52vh, 420px); height: auto; object-fit: contain; margin-inline: auto; }
 header a:focus-visible { outline: 2px solid var(--brand-on-dark); outline-offset: 5px; }
 header nav > a:hover { color: var(--brand-on-dark); text-decoration: underline; text-underline-offset: .3em; }
+header nav > a[aria-current] { text-decoration: underline; text-underline-offset: .3em; }
 header .nav-toggle { z-index: 2; }
 @media (max-width: 700px) {
   header[data-page-hero] { padding-inline: 24px; }
   .page-hero__intro { padding: 16px 0; }
 }
+@media (max-width: 650px) { :root { --brand-content-gutter: 24px; } }

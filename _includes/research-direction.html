@@ -36,4 +36,7 @@
   {% else %}
     {{ direction_text }}
   {% endif %}
+  {% assign detail_page = nil %}
+  {% if direction.id and direction.id != '' %}{% assign detail_page = site.pages | where: 'direction_id', direction.id | first %}{% endif %}
+  {% if detail_page %}<a href="{{ detail_page.url | relative_url }}">{% include bilingual-text.html en=site.data.i18n.research.explore_more.en zh=site.data.i18n.research.explore_more.zh %} <span aria-hidden="true">→</span></a>{% endif %}
 </article>

@@ -7,6 +7,10 @@
   {% assign title = nil %}
 {% endif %}
 
+{% if page.direction_id %}
+  {% assign meta_direction = site.data.research.directions | where: 'id', page.direction_id | first %}
+  {% assign title = meta_direction.title | default: title %}
+{% endif %}
 {% assign title = title | xml_escape %}
 
 {% assign fulltitle = "" | split: "," %}

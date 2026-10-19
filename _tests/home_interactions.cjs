@@ -28,6 +28,8 @@ const server = http.createServer((request, response) => {
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const origin = `http://127.0.0.1:${server.address().port}`;
   const screenshots = path.join(fixtures, "screenshots");
+  const expectedContent = JSON.parse(fs.readFileSync(path.join(fixtures, "content-data.json"), "utf8"));
+  const detailPaths = expectedContent.research.directions.map((direction) => `research/${direction.id}/`);
   fs.mkdirSync(screenshots, { recursive: true });
   const browser = await chromium.launch(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {});
   let checks = 0;
@@ -63,6 +65,30 @@ const server = http.createServer((request, response) => {
     await page.mouse.move(-10, -10);
     await page.evaluate(() => document.activeElement.blur());
   };
+  const homeGeometry = async () => {
+    assert.equal(await page.locator(".home-hero__all-news").count(), 0);
+    if (await page.locator("[data-news-carousel]").count()) {
+      const news = await page.locator('[data-news-slide]:not([hidden]) .news-carousel__copy').boundingBox();
+      const about = await page.locator("#about-us").boundingBox();
+      assert.ok(Math.abs(news.x - about.x) < 1, `Hero ${news.x}, About ${about.x}`);
+      assert.equal(await page.locator('[data-news-slide]:not([hidden]) .news-carousel__read').count(), 1);
+      assert.equal(await page.locator('[data-news-carousel] a[href$="/blog/"]').count(), 0);
+    }
+    checks += 3;
+  };
+  const navigation = async (prefix, currentRoute) => {
+    const toggle = page.locator(".nav-toggle");
+    const opened = await toggle.isVisible() && !await toggle.isChecked();
+    if (opened) await toggle.check();
+    assert.equal(await page.locator(`header nav a[href="${prefix}blog/"]`).count(), 1);
+    assert.equal(await page.locator(`header nav a[href="${prefix}research/"]`).count(), 1);
+    if (currentRoute && currentRoute !== "contact/") assert.ok(await page.locator(`header nav a[href="${prefix}${currentRoute}"]`).getAttribute("aria-current"));
+    assert.ok(await page.locator("header nav > a").evaluateAll((links) => links.every((a) => {
+      const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth;
+    })));
+    if (opened) await toggle.uncheck();
+    checks += 4;
+  };
   try {
     for (const count of [0, 1, 2, 5]) {
       assert.equal((await page.goto(url(count), { waitUntil: "load" })).status(), 200);
@@ -91,6 +117,7 @@ const server = http.createServer((request, response) => {
             await page.clock.fastForward(12000);
             assert.equal(await active(), 0);
           }
+          await homeGeometry();
           checks += 2;
         }
       }
@@ -165,7 +192,7 @@ const server = http.createServer((request, response) => {
         assert.ok(boxes[1].y > boxes[0].bottom);
         assert.ok(Math.abs(boxes[0].width - boxes[1].width) < 1);
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-        assert.ok((await page.locator(".home-research-card__link").evaluateAll((links) => links.map((a) => a.pathname))).every((p) => p === `${fixturePrefix}2/research/`));
+        assert.deepEqual(await page.locator(".home-research-card__link").evaluateAll((links) => links.map((a) => a.pathname)), detailPaths.map((p) => `${fixturePrefix}2/${p}`));
         assert.ok(await page.locator(".home-research-card__number").evaluateAll((numbers) => numbers.every((n) => {
           const range = document.createRange(); range.selectNodeContents(n); return range.getClientRects().length === 1;
         })));
@@ -251,7 +278,7 @@ const server = http.createServer((request, response) => {
     for (const prefix of [productionPrefix, previewPrefix]) {
       assert.equal((await page.goto(origin + prefix)).status(), 200);
       assert.equal(await page.locator(".home-research-card").count(), 2);
-      assert.equal(await page.locator("a.home-research-card__link").first().getAttribute("href"), prefix + "research/");
+      assert.deepEqual(await page.locator("a.home-research-card__link").evaluateAll((a) => a.map((n) => n.pathname)), detailPaths.map((p) => prefix + p));
       assert.equal(await page.locator("main [data-news-carousel]").count(), 0);
       assert.equal(await page.locator("[data-news-carousel]").count(), await page.locator("header [data-news-carousel]").count());
       const newsLinks = await page.locator("[data-news-link]").evaluateAll((a) => a.map((n) => n.pathname));
@@ -269,7 +296,7 @@ const server = http.createServer((request, response) => {
       for (const route of ["research/", "team/", "publications/", "join-us/", "contact/", "blog/"]) {
         assert.equal((await page.goto(origin + prefix + route)).status(), 200);
         assert.equal(await page.locator("header[data-home-hero], header [data-news-carousel]").count(), 0);
-        for (const width of [1440, 375]) {
+        for (const width of [1440, 768, 375]) {
           await page.setViewportSize({ width, height: 1000 });
           assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h).position), "relative");
           assert.equal(await page.locator("header .page-hero__intro h1").count(), 1);
@@ -278,7 +305,13 @@ const server = http.createServer((request, response) => {
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
           for (const code of ["en", "zh"]) {
             await language(page, code);
-            if (prefix === previewPrefix && ["research/", "join-us/"].includes(route)) await page.screenshot({ path: path.join(screenshots, `${route.slice(0,-1)}-${width}-${code}.png`), fullPage: true });
+            await navigation(prefix, route);
+            if (route === "team/") {
+              assert.equal(await page.locator("main > section").count(), 1);
+              assert.ok(await page.locator("main > section").evaluateAll((items) => items.every((s) => getComputedStyle(s, "::before").backgroundImage === "none")));
+              assert.ok((await page.locator("main").innerText()).includes(expectedContent.team.gallery_intro[code]));
+            }
+            if (prefix === previewPrefix && width !== 768 && ["research/", "join-us/", "team/"].includes(route)) await page.screenshot({ path: path.join(screenshots, `${route.slice(0,-1)}-${width}-${code}.png`), fullPage: true });
           }
           if (route === "join-us/") {
             assert.deepEqual(await page.locator("main > section").evaluateAll((s) => s.slice(0,3).map((x) => getComputedStyle(x).backgroundColor)), ["rgb(255, 255, 255)", "rgb(240, 244, 248)", "rgb(255, 255, 255)"]);
@@ -292,6 +325,49 @@ const server = http.createServer((request, response) => {
         }
         checks += 3;
       }
+      for (const [index, detailPath] of detailPaths.entries()) {
+        assert.equal((await page.goto(origin + prefix + detailPath)).status(), 200);
+        const direction = expectedContent.research.directions[index];
+        for (const width of [1440, 375]) {
+          await page.setViewportSize({ width, height: 1000 });
+          for (const code of ["en", "zh"]) {
+            await language(page, code);
+            await navigation(prefix, "research/");
+            assert.equal((await page.locator("h1").innerText()).trim(), code === "zh" ? direction.title_zh : direction.title);
+            assert.ok((await page.locator("main").innerText()).includes(code === "zh" ? direction.description_zh : direction.description));
+            assert.equal(await page.locator(".research-detail__back").getAttribute("href"), prefix + "research/");
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+            assert.ok((await page.title()).includes(direction.title));
+            if (prefix === previewPrefix) await page.screenshot({ path: path.join(screenshots, `research-detail-${index+1}-${width}-${code}.png`), fullPage: true });
+            checks += 5;
+          }
+        }
+        await page.locator(".research-detail__back").click();
+        assert.equal(new URL(page.url()).pathname, prefix + "research/");
+      }
+      if (newsLinks.length) {
+        assert.equal((await page.goto(origin + newsLinks[0])).status(), 200);
+        for (const width of [1440, 375]) {
+          await page.setViewportSize({ width, height: 1000 });
+          for (const code of ["en", "zh"]) {
+            await language(page, code);
+            await navigation(prefix, "blog/");
+            const image = page.locator("body[data-news-detail] .post-cover");
+            if (await image.count()) {
+              await image.scrollIntoViewIfNeeded();
+              await until(() => image.evaluate((i) => i.complete && i.naturalWidth > 0));
+              assert.ok(await image.evaluate((i) => {
+                const r = i.getBoundingClientRect(), section = i.closest("section"), box = section.getBoundingClientRect(), css = getComputedStyle(section);
+                return r.height <= 420.1 && r.height <= innerHeight * .52 + .1 && r.width <= box.width - parseFloat(css.paddingLeft) - parseFloat(css.paddingRight) + .1 && Math.abs(r.width / r.height - i.naturalWidth / i.naturalHeight) < .02;
+              }));
+            }
+            assert.equal(await page.locator("header h1").count(), 1);
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+            if (prefix === previewPrefix) await page.screenshot({ path: path.join(screenshots, `news-detail-${width}-${code}.png`), fullPage: true });
+            checks += 3;
+          }
+        }
+      }
       checks += 3;
     }
     await page.goto(origin + previewPrefix);
@@ -299,6 +375,8 @@ const server = http.createServer((request, response) => {
       await page.setViewportSize({ width, height: 1000 });
       for (const code of ["en", "zh"]) {
         await language(page, code);
+        await homeGeometry();
+        await navigation(previewPrefix, "");
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         await page.screenshot({ path: path.join(screenshots, `home-${width}-${code}.png`), fullPage: true });
         checks++;
