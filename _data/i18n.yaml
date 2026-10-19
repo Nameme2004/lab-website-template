@@ -17,6 +17,19 @@ navigation:
 language_label:
   en: Choose language
   zh: 选择语言
+member_email:
+  label:
+    en: Email
+    zh: 电子邮箱
+  copy:
+    en: Copy Email
+    zh: 复制邮箱
+  success:
+    en: Copied!
+    zh: 已复制
+  failure:
+    en: Copy unavailable. Select the email address and copy it manually.
+    zh: 无法自动复制，请选中邮箱地址后手动复制。
 home:
   about_us:
     en: About Us

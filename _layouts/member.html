@@ -10,7 +10,11 @@ layout: default
   {% for link in page.links %}
     {% assign key = link[0] %}
     {% assign value = link[1] %}
-    {% include button.html type=key link=value style="bare" %}<br>
+    {% if key == "email" %}
+      {% include member-email.html email=value %}
+    {% else %}
+      {% include button.html type=key link=value style="bare" %}<br>
+    {% endif %}
   {% endfor %}
 </div>
 
