@@ -357,6 +357,12 @@
 
   <link href="/lab-website-template/_styles/member-email.css" rel="stylesheet">
 
+  <link href="/lab-website-template/_styles/member-profile.css" rel="stylesheet">
+
+  <link href="/lab-website-template/_styles/publications-search.css" rel="stylesheet">
+
+  <link href="/lab-website-template/_styles/team-members.css" rel="stylesheet">
+
 
   <!-- third party scripts -->
 <script src="https://unpkg.com/@popperjs/core@2" defer></script>
@@ -538,12 +544,43 @@
   <size></size>
 -->
 
+<div class="search-box" data-search-live="">
+  <input type="text" class="search-input" oninput="onSearchInput(this)" placeholder="Search items on this page" data-placeholder-en="Search authors, titles, keywords, year, journal or DOI" data-placeholder-zh="搜索作者、标题、关键词、年份、期刊或 DOI" aria-label="Search authors, titles, keywords, year, journal or DOI">
+  <button disabled data-tooltip="Clear search" aria-label="clear search" data-label-en="Clear search" data-label-zh="清除搜索" onclick="onSearchClear()">
+    <i class="icon fa-solid fa-magnifying-glass"></i>
+  </button>
+</div>
+
+<p class="publications-search-hint"><span data-i18n-text=""><span data-i18n-lang="en" lang="en">Search the publications displayed below. Use double quotes for an exact phrase.</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">搜索下方已收录的论文；词组可用英文双引号括起。</span></span>
+</p>
+<div class="search-info" role="status" aria-live="polite" aria-atomic="true" data-show-count="" data-empty-en="No matching publications." data-empty-zh="未找到匹配的论文。" data-results-en="Showing {x} of {n} results" data-results-zh="共 {n} 条结果，显示 {x} 条" data-clear-en="Clear search" data-clear-zh="清除搜索"></div>
+
 <h2 id="highlighted">
 <span data-i18n-text=""><span data-i18n-lang="en" lang="en">Selected Publications</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">负责人代表性论文</span></span>
 </h2>
 
 <div class="citation-container">
-  <div class="citation" data-search="Prior collaborative work of the lab lead: pancreatic cancer organoids and candidate inhibitor screening. Cell Stem Cell 31(1), 71–88.e8. [Verified record](https://pubmed.ncbi.nlm.nih.gov/38151022/). 负责人既往参与成果：胰腺癌类器官与候选抑制剂筛选。Cell Stem Cell 31(1), 71–88.e8。[核实记录](https://pubmed.ncbi.nlm.nih.gov/38151022/)。">
+  <div class="citation" data-publication-year="2024" data-search="
+  A pancreatic cancer organoid platform identifies an inhibitor specific to mutant KRAS Xiaohua Duan Tuo Zhang Lingling Feng Neranjan de Silva Benjamin Greenspun Xing Wang Jenna Moyer M Laura Martin Rohit Chandwani Olivier Elemento Steven D Leach Todd Evans Shuibing Chen Fong Cheng Pan Cell Stem Cell 2024-01-04 doi:10.1016/j.stem.2023.11.011 https://doi.org/10.1016/j.stem.2023.11.011   Prior collaborative work of the lab lead: pancreatic cancer organoids and candidate inhibitor screening. Cell Stem Cell 31(1), 71–88.e8. [Verified record](https://pubmed.ncbi.nlm.nih.gov/38151022/). 负责人既往参与成果：胰腺癌类器官与候选抑制剂筛选。Cell Stem Cell 31(1), 71–88.e8。[核实记录](https://pubmed.ncbi.nlm.nih.gov/38151022/)。
+  
+  
+  
+  
+    
+    
+      
+      
+    
+      
+      
+    
+  
+    
+    
+      
+      Xiaohua Duan X. Duan Duan X 段晓华
+  
+">
     
 
     <div class="citation-text">
@@ -590,7 +627,27 @@
 </div>
 
 <div class="citation-container">
-  <div class="citation" data-search="Prior collaborative work of the lab lead: lung and colonic organoid antiviral screening. Nature 589, 270–275; online publication 28 October 2020. [Publisher record](https://www.nature.com/articles/s41586-020-2901-9); [2024 author correction](https://doi.org/10.1038/s41586-024-07593-9). 负责人既往参与成果：肺和结肠类器官抗病毒药物筛选。Nature 589, 270–275；2020 年 10 月 28 日在线发表。[期刊记录](https://www.nature.com/articles/s41586-020-2901-9)；[2024 年作者更正](https://doi.org/10.1038/s41586-024-07593-9)。">
+  <div class="citation" data-publication-year="2021" data-search="
+  Identification of SARS-CoV-2 inhibitors using lung and colonic organoids Yuling Han Xiaohua Duan Liuliu Yang Benjamin E. Nilsson-Payant Pengfei Wang Fuyu Duan Xuming Tang Tomer M. Yaron Tuo Zhang Skyler Uhl Yaron Bram Chanel Richardson Jiajun Zhu Zeping Zhao David Redmond Sean Houghton Duc-Huy T. Nguyen Dong Xu Xing Wang Jose Jessurun Alain Borczuk Yaoxing Huang Jared L. Johnson Yuru Liu Jenny Xiang Hui Wang Lewis C. Cantley Benjamin R. tenOever David D. Ho Fong Cheng Pan Todd Evans Huanhuan Joyce Chen Robert E. Schwartz Shuibing Chen Nature 2021-01-14 doi:10.1038/s41586-020-2901-9 https://doi.org/10.1038/s41586-020-2901-9   Prior collaborative work of the lab lead: lung and colonic organoid antiviral screening. Nature 589, 270–275; online publication 28 October 2020. [Publisher record](https://www.nature.com/articles/s41586-020-2901-9); [2024 author correction](https://doi.org/10.1038/s41586-024-07593-9). 负责人既往参与成果：肺和结肠类器官抗病毒药物筛选。Nature 589, 270–275；2020 年 10 月 28 日在线发表。[期刊记录](https://www.nature.com/articles/s41586-020-2901-9)；[2024 年作者更正](https://doi.org/10.1038/s41586-024-07593-9)。
+  
+  
+  
+  
+    
+    
+      
+      
+    
+      
+      
+    
+  
+    
+    
+      
+      Xiaohua Duan X. Duan Duan X 段晓华
+  
+">
     
 
     <div class="citation-text">
