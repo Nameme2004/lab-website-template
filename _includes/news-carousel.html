@@ -49,7 +49,7 @@
       <span class="news-carousel__announcement" role="status" aria-live="polite" aria-atomic="true" data-news-announcement></span>
     {% endif %}
     {% if include.hero %}
-      <a class="home-hero__all-news" href="{{ '/blog/' | relative_url }}">{% include bilingual-text.html en=site.data.i18n.home.view_all_news.en zh=site.data.i18n.home.view_all_news.zh %} <span aria-hidden="true">→</span></a>
+      <a class="home-hero__all-news" href="{{ '/blog/' | relative_url }}">{% include bilingual-text.html en=site.data.i18n.home.view_all_news.en zh=site.data.i18n.home.view_all_news.zh %}</a>
     {% endif %}
   </div>
 {% elsif include.hero != true %}
