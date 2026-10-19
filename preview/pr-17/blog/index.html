@@ -41,6 +41,7 @@
 
 
 
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>News | Duan Lab</title>
@@ -344,6 +345,8 @@
 <!-- include all css in styles folder -->
 
 
+  <link href="/lab-website-template/preview/pr-17/_styles/brand.css" rel="stylesheet">
+
   <link href="/lab-website-template/preview/pr-17/_styles/home-hero.css" rel="stylesheet">
 
   <link href="/lab-website-template/preview/pr-17/_styles/home-news.css" rel="stylesheet">
@@ -386,11 +389,15 @@
 
 </head>
 
-  <body>
+  <body data-page-hero>
+    
+    
+    
+    
     
 
 
-<header class="background" style="--image: url('/lab-website-template/preview/pr-17/images/background.jpg')" data-dark="true">
+<header class="background" style="--image: url('/lab-website-template/preview/pr-17/images/background.jpg')" data-dark="true" data-page-hero>
   <a href="/lab-website-template/preview/pr-17/" class="home">
     
       <span class="title-text" data-tooltip="Home">
@@ -414,6 +421,8 @@
         
         
         
+        
+        
         <a href="/lab-website-template/preview/pr-17/" data-tooltip="Home" data-i18n-tooltip-en="Home" data-i18n-tooltip-zh="首页">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Home</span><span data-i18n-lang="zh" lang="zh-CN" hidden>首页</span></span>
 
@@ -421,6 +430,8 @@
       
     
       
+        
+        
         
         
         
@@ -434,6 +445,8 @@
         
         
         
+        
+        
         <a href="/lab-website-template/preview/pr-17/team/" data-tooltip="About our team" data-i18n-tooltip-en="About our team" data-i18n-tooltip-zh="团队成员">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Team</span><span data-i18n-lang="zh" lang="zh-CN" hidden>团队成员</span></span>
 
@@ -441,6 +454,8 @@
       
     
       
+        
+        
         
         
         
@@ -454,8 +469,22 @@
         
         
         
+        
+        
         <a href="/lab-website-template/preview/pr-17/join-us/" data-tooltip="Opportunities and how to join" data-i18n-tooltip-en="Opportunities and how to join" data-i18n-tooltip-zh="加入我们">
           <span data-i18n-text><span data-i18n-lang="en" lang="en">Join Us</span><span data-i18n-lang="zh" lang="zh-CN" hidden>加入我们</span></span>
+
+        </a>
+      
+    
+      
+        
+        
+        
+        
+        
+        <a href="/lab-website-template/preview/pr-17/blog/" aria-current="page" data-tooltip="Lab news and updates" data-i18n-tooltip-en="Lab news and updates" data-i18n-tooltip-zh="新闻动态">
+          <span data-i18n-text><span data-i18n-lang="en" lang="en">News</span><span data-i18n-lang="zh" lang="zh-CN" hidden>新闻动态</span></span>
 
         </a>
       
@@ -465,6 +494,12 @@
       <button type="button" data-language-choice="zh" lang="zh-CN" aria-label="中文" aria-pressed="false">中文</button>
     </div>
   </nav>
+  <div class="page-hero__intro">
+<h1 id="news">
+<span data-i18n-text=""><span data-i18n-lang="en" lang="en">News</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">实验室动态</span></span>
+</h1>
+
+</div>
   
 </header>
 
@@ -484,11 +519,15 @@
   
   
   
+  
+  
 
   <section class="background" data-size="page">
-    <h1 id="news">
-<span data-i18n-text=""><span data-i18n-lang="en" lang="en">News</span><span data-i18n-lang="zh" lang="zh-CN" hidden="">实验室动态</span></span>
-</h1>
+    <!--
+  <background></background>
+  <dark></dark>
+  <size></size>
+-->
 
 <div class="search-box">
   <input type="text" class="search-input" oninput="onSearchInput(this)" placeholder="Search items on this page" data-placeholder-en="Search items on this page" data-placeholder-zh="搜索本页内容" aria-label="Search items on this page">
