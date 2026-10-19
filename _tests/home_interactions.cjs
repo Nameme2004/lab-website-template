@@ -66,6 +66,7 @@ const server = http.createServer((request, response) => {
     await page.evaluate(() => document.activeElement.blur());
   };
   const homeGeometry = async () => {
+    assert.equal(await page.locator("header .title").evaluate((title) => getComputedStyle(title).textAlign), "left");
     assert.equal(await page.locator(".home-hero__all-news").count(), 0);
     if (await page.locator("[data-news-carousel]").count()) {
       const news = await page.locator('[data-news-slide]:not([hidden]) .news-carousel__copy').boundingBox();
