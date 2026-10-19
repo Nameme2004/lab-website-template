@@ -14,14 +14,14 @@
 {% endunless %}
 {% include bilingual-markdown.html en=description zh=description_zh %}
 {% endcapture %}
-<article class="research-direction">
-  <h2>
+<article>
+  <h3>
     {% if include.preview %}
       <a href="{{ '/research/' | relative_url }}">{{ title_text }}</a>
     {% else %}
       {{ title_text }}
     {% endif %}
-  </h2>
+  </h3>
   {% assign direction_image = direction.image | default: "" | strip %}
   {% if direction_image != "" %}
     <div class="feature">
@@ -36,7 +36,4 @@
   {% else %}
     {{ direction_text }}
   {% endif %}
-  {% assign detail_page = nil %}
-  {% if direction.id and direction.id != '' %}{% assign detail_page = site.pages | where: 'direction_id', direction.id | first %}{% endif %}
-  {% if detail_page %}<a href="{{ detail_page.url | relative_url }}">{% include bilingual-text.html en=site.data.i18n.research.explore_more.en zh=site.data.i18n.research.explore_more.zh %} <span aria-hidden="true">→</span></a>{% endif %}
 </article>

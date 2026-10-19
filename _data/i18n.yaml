@@ -14,19 +14,6 @@ navigation:
   Join Us:
     en: Join Us
     zh: 加入我们
-  News:
-    en: News
-    zh: 新闻动态
-research_detail:
-  objectives:
-    en: Research objectives
-    zh: 研究目标
-  context:
-    en: Research context and development stage
-    zh: 研究背景与建设阶段
-  back:
-    en: Back to Research
-    zh: 返回研究方向总览
 language_label:
   en: Choose language
   zh: 选择语言

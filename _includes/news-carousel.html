@@ -28,7 +28,7 @@
             {% endif %}
             <div class="news-carousel__copy">
               <div class="news-carousel__meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>{% if post.category %}<span>{% include bilingual-text.html en=post.category zh=post.category_zh %}</span>{% endif %}</div>
-              {% if include.hero %}<h2>{% else %}<h3>{% endif %}{% include bilingual-text.html en=post.title zh=post.title_zh %}{% if include.hero %}</h2>{% else %}</h3>{% endif %}
+              <h3>{% include bilingual-text.html en=post.title zh=post.title_zh %}</h3>
               {% if summary_en != "" or summary_zh != "" %}<p>{% include bilingual-text.html en=summary_en zh=summary_zh %}</p>{% endif %}
               <span class="news-carousel__read">{% include bilingual-text.html en=news_text.read.en zh=news_text.read.zh %} <span aria-hidden="true">→</span></span>
             </div>
@@ -47,6 +47,9 @@
         <span class="news-carousel__counter" data-news-counter aria-live="off"></span>
       </div>
       <span class="news-carousel__announcement" role="status" aria-live="polite" aria-atomic="true" data-news-announcement></span>
+    {% endif %}
+    {% if include.hero %}
+      <a class="home-hero__all-news" href="{{ '/blog/' | relative_url }}">{% include bilingual-text.html en=site.data.i18n.home.view_all_news.en zh=site.data.i18n.home.view_all_news.zh %}</a>
     {% endif %}
   </div>
 {% elsif include.hero != true %}

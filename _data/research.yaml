@@ -9,10 +9,7 @@
       "description_zh": "围绕复杂类器官与组织—免疫双人源化动物的互补模型，探索感染性疾病与肿瘤疾病中的免疫失效问题，并逐步建立从体外到体内的阶梯式人类组织特异性免疫研究平台。",
       "order": 10,
       "show_on_home": true,
-      "confirmed": true,
-      "id": "novel-disease-models",
-      "home_summary": "The lab aims to combine organoid and humanized animal models to explore immune dysfunction in disease.",
-      "home_summary_zh": "结合类器官与人源化动物模型，探索疾病中的免疫失效问题。"
+      "confirmed": true
     },
     {
       "title": "Microphysiological Systems and AI-Enabled Drug Discovery",
@@ -21,10 +18,7 @@
       "description_zh": "探索微生理系统与人工智能深度融合的研究体系，围绕方法学标准化、自动化与规模化、早期生物标志物识别，以及湿实验与计算分析闭环等方向开展研究。",
       "order": 20,
       "show_on_home": true,
-      "confirmed": true,
-      "id": "microphysiological-ai-drug-discovery",
-      "home_summary": "The lab aims to connect microphysiological systems and artificial intelligence for drug research.",
-      "home_summary_zh": "探索微生理系统与人工智能融合的药物研究方法。"
+      "confirmed": true
     }
   ]
 }

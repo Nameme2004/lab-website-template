@@ -3,23 +3,10 @@ require "jekyll"
 require "fileutils"
 require "tmpdir"
 require "yaml"
-require "json"
 
 root = File.expand_path("..", __dir__)
 output = File.expand_path(ARGV.fetch(0))
 FileUtils.mkdir_p(output)
-research = YAML.safe_load(File.read(File.join(root, "_data/research.yaml")))
-cms = YAML.safe_load(File.read(File.join(root, ".pages.yml")))
-research_fields = cms.fetch("content").find { |entry| entry["name"] == "research" }.fetch("fields")
-direction_fields = research_fields.find { |field| field["name"] == "directions" }.fetch("fields").map { |field| field["name"] }
-ids = research.fetch("directions").map { |direction| direction.fetch("id") }
-raise "Research IDs must be unique" unless ids.uniq == ids && ids.none?(&:empty?)
-research.fetch("directions").each do |direction|
-  raise "CMS is missing nonempty direction fields" unless (direction.keys - direction_fields).empty?
-end
-File.write(File.join(output, "content-data.json"), JSON.generate({
-  "research" => research, "team" => YAML.safe_load(File.read(File.join(root, "_data/team.yaml")))
-}))
 
 Dir.mktmpdir("duan-home-fixtures") do |temporary|
   [0, 1, 2, 5].each do |count|

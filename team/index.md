@@ -1,6 +1,5 @@
 ---
 title: Team
-hero: true
 nav:
   order: 3
   tooltip: About our team
@@ -14,6 +13,8 @@ nav:
 
 {% include list.html data="members" component="portrait" filter="role == 'principal-investigator' and published != false" %}
 {% include list.html data="members" component="portrait" filter="role != 'principal-investigator' and published != false" %}
+
+{% include section.html background="images/background.jpg" dark=true %}
 
 {% include bilingual-markdown.html en=site.data.team.gallery_intro.en zh=site.data.team.gallery_intro.zh %}
 

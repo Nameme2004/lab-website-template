@@ -292,11 +292,6 @@ content:
             collapsed: true
             summary: "{title} (order {order})"
         fields:
-          - name: id
-            label: Internal page ID — do not change after publication
-            type: string
-            required: true
-            description: "Stable research-detail URL key. Keep existing IDs when changing titles or display order."
           - name: title
             label: Direction title — English
             type: string
