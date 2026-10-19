@@ -11,6 +11,7 @@
   --brand-space: clamp(28px, 4vw, 56px);
 }
 html[data-dark="false"] { --text: var(--brand-ink); --primary: var(--brand-blue); }
+html[data-dark="true"] { --brand-surface: #10283e; --brand-muted-surface: #17344d; --brand-ink: #f0f6fc; --brand-muted: #aec2d4; --brand-border: #355069; }
 header.background, footer.background { background: var(--brand-navy); color: var(--brand-on-dark); }
 header.background::before, footer.background::before { background-image: none; }
 header[data-page-hero] { position: relative !important; row-gap: 28px; padding-inline: max(24px, calc((100% - 1120px) / 2)); }
