@@ -226,6 +226,16 @@ contact:
   pending:
     en: Confirmed contact information will be added here when available.
     zh: 确认后的联系方式将在此发布。
+publications_search:
+  placeholder:
+    en: Search authors, titles, keywords, year, journal or DOI
+    zh: 搜索作者、标题、关键词、年份、期刊或 DOI
+  hint:
+    en: Search the publications displayed below. Use double quotes for an exact phrase.
+    zh: 搜索下方已收录的论文；词组可用英文双引号括起。
+  empty:
+    en: No matching publications.
+    zh: 未找到匹配的论文。
 search:
   placeholder:
     en: Search items on this page

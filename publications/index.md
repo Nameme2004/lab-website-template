@@ -14,6 +14,10 @@ nav:
 
 {% include section.html %}
 
+{% include search-box.html context='publications' live=true %}
+<p class="publications-search-hint">{% include bilingual-text.html en=site.data.i18n.publications_search.hint.en zh=site.data.i18n.publications_search.hint.zh %}</p>
+{% include search-info.html context='publications' %}
+
 {% assign highlighted_en = publications.highlighted_heading.en | default: "Selected Publications" %}
 <h2 id="highlighted">{% include bilingual-text.html en=highlighted_en zh=publications.highlighted_heading.zh %}</h2>
 
