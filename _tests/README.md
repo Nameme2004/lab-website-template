@@ -53,3 +53,11 @@ phrases, Chinese descriptions, publication years, journals, DOI, clear/no result
 and 1440/768/375px layouts. CMS member YAML is parsed and round-tripped without
 losing values, and every history key must be represented in the CMS schema.
 This is not an actual Pages CMS Save test. No fictional publications are added.
+
+Current visual refinement checks add 1280/768px to all core viewports, true
+navigation centering with unequal brand/language tracks, independent mobile
+language controls, 1360px top-container alignment, centered long Hero titles,
+and fallback screenshots. A separate probe allows the actual Google Fonts
+service and reports Inter/Noto load status plus observed CLS (threshold <0.1
+when loaded). External-service timeout is explicitly reported as unverified;
+all main interaction checks also run with external resources blocked.

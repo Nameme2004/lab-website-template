@@ -69,8 +69,11 @@ const server = http.createServer((request, response) => {
     assert.equal(await page.locator(".home-hero__all-news").count(), 0);
     if (await page.locator("[data-news-carousel]").count()) {
       const news = await page.locator('[data-news-slide]:not([hidden]) .news-carousel__copy').boundingBox();
-      const about = await page.locator("#about-us").boundingBox();
-      assert.ok(Math.abs(news.x - about.x) < 1, `Hero ${news.x}, About ${about.x}`);
+      const viewport = page.viewportSize().width;
+      assert.ok(news.width <= 900.1);
+      assert.ok(Math.abs(news.x + news.width / 2 - viewport / 2) < 1, "Hero title stays centered");
+      assert.ok((await page.locator('[data-news-slide]:not([hidden]) h2').innerText()).trim().length > 0);
+      assert.equal(await page.locator('[data-news-slide]:not([hidden]) h2').evaluate((h) => getComputedStyle(h).textAlign), "center");
       assert.equal(await page.locator('[data-news-slide]:not([hidden]) .news-carousel__read').count(), 1);
       assert.equal(await page.locator('[data-news-carousel] a[href$="/blog/"]').count(), 0);
     }
@@ -78,6 +81,19 @@ const server = http.createServer((request, response) => {
   };
   const navigation = async (prefix, currentRoute) => {
     const toggle = page.locator(".nav-toggle");
+    assert.ok(await page.locator("[data-language-control]").isVisible());
+    if (page.viewportSize().width > 1100) {
+      const nav = await page.locator("header nav").boundingBox();
+      assert.ok(Math.abs(nav.x + nav.width / 2 - page.viewportSize().width / 2) < 1, "Navigation is geometrically centered");
+      const brand = await page.locator("header .home").boundingBox();
+      const language = await page.locator("[data-language-control]").boundingBox();
+      assert.ok(brand.x + brand.width <= nav.x && nav.x + nav.width <= language.x);
+    }
+    const bar = await page.locator(".site-header__bar").boundingBox();
+    if (page.viewportSize().width === 1440) { assert.ok(Math.abs(bar.x - 40) < 1); assert.ok(Math.abs(bar.width - 1360) < 1); }
+    const intro = page.locator(".page-hero__intro");
+    if (await intro.count()) { const box = await intro.boundingBox(); assert.ok(Math.abs(box.x - bar.x) < 1 && Math.abs(box.width - bar.width) < 1); }
+
     const opened = await toggle.isVisible() && !await toggle.isChecked();
     if (opened) await toggle.check();
     assert.equal(await page.locator(`header nav a[href="${prefix}blog/"]`).count(), 1);
@@ -106,7 +122,7 @@ const server = http.createServer((request, response) => {
       assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h, "::before").backgroundImage), "none");
       for (const href of links) assert.equal((await page.request.get(origin + href)).status(), 200);
       // Every count must fit both viewports, including all five dots and long translated titles.
-      for (const width of [1440, 375]) {
+      for (const width of [1440, 1280, 768, 375]) {
         await page.setViewportSize({ width, height: 1000 });
         for (const code of ["en", "zh"]) {
           await language(page, code);
@@ -122,6 +138,7 @@ const server = http.createServer((request, response) => {
         }
       }
       if (count) {
+        await page.screenshot({path: path.join(screenshots, `fixture-${count}-fallback.png`), fullPage: true});
         await page.locator("[data-news-slide]").first().scrollIntoViewIfNeeded();
         await until(() => page.locator("[data-news-slide]").first().locator(".news-carousel__media").evaluateAll((media) => media.every((m) => m.hidden)));
         assert.equal(await page.locator("[data-news-slide]").first().locator(".news-carousel__media:visible").count(), 0);
@@ -165,7 +182,7 @@ const server = http.createServer((request, response) => {
     assert.ok((await page.locator('[data-news-slide]:not([hidden])').textContent()).includes("测试新闻"));
     checks += 2;
 
-    for (const width of [1440, 375]) {
+    for (const width of [1440, 1280, 768, 375]) {
       await page.setViewportSize({ width, height: 1000 });
       for (const code of ["en", "zh"]) {
         await language(page, code);
@@ -316,7 +333,7 @@ const server = http.createServer((request, response) => {
       for (const route of ["research/", "team/", "publications/", "join-us/", "contact/", "blog/"]) {
         assert.equal((await page.goto(origin + prefix + route)).status(), 200);
         assert.equal(await page.locator("header[data-home-hero], header [data-news-carousel]").count(), 0);
-        for (const width of [1440, 768, 375]) {
+        for (const width of [1440, 1280, 768, 375]) {
           await page.setViewportSize({ width, height: 1000 });
           assert.equal(await page.locator("header").evaluate((h) => getComputedStyle(h).position), "relative");
           assert.equal(await page.locator("header .page-hero__intro h1").count(), 1);
@@ -338,7 +355,7 @@ const server = http.createServer((request, response) => {
               assert.equal(await page.locator("[data-team-role] .portrait").count(), members.length);
               checks += 2;
             }
-            if (prefix === previewPrefix && ["research/", "join-us/", "team/"].includes(route)) await page.screenshot({ path: path.join(screenshots, `${route.slice(0,-1)}-${width}-${code}.png`), fullPage: true });
+            if (prefix === previewPrefix && ["research/", "join-us/", "team/", "publications/", "blog/"].includes(route)) await page.screenshot({ path: path.join(screenshots, `${route.slice(0,-1)}-${width}-${code}.png`), fullPage: true });
           }
           if (route === "join-us/") {
             assert.deepEqual(await page.locator("main > section").evaluateAll((s) => s.slice(0,3).map((x) => getComputedStyle(x).backgroundColor)), ["rgb(255, 255, 255)", "rgb(240, 244, 248)", "rgb(255, 255, 255)"]);
@@ -358,13 +375,13 @@ const server = http.createServer((request, response) => {
       const studentHref = await page.locator('a.portrait[aria-label="Yan Wang"]').getAttribute("href");
       for (const [kind, memberHref] of [["pi", piHref], ["student", studentHref]]) {
         await page.goto(origin + memberHref);
-        for (const width of [1440, 768, 375]) {
+        for (const width of [1440, 1280, 768, 375]) {
           await page.setViewportSize({ width, height: 1000 });
           for (const code of ["en", "zh"]) {
             await language(page, code);
             assert.equal(await page.locator("h1").count(), 1);
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-            if (width === 768) assert.ok(await page.locator("header .home").evaluate((home) => home.getBoundingClientRect().width >= 700));
+            assert.ok(await page.locator("[data-language-control]").isVisible());
             if (kind === "pi") {
               assert.equal(await page.locator('[data-member-history="work_experience"] li').count(), 2);
               assert.equal(await page.locator('[data-member-history="education"] li').count(), 2);
@@ -408,7 +425,7 @@ const server = http.createServer((request, response) => {
         assert.ok((await page.locator(".search-info").innerText()).includes("2"));
         checks += 3;
       }
-      for (const width of [1440, 768, 375]) {
+      for (const width of [1440, 1280, 768, 375]) {
         await page.setViewportSize({ width, height: 1000 });
         for (const code of ["en", "zh"]) {
           await language(page, code);
@@ -422,7 +439,7 @@ const server = http.createServer((request, response) => {
       for (const [index, detailPath] of detailPaths.entries()) {
         assert.equal((await page.goto(origin + prefix + detailPath)).status(), 200);
         const direction = expectedContent.research.directions[index];
-        for (const width of [1440, 375]) {
+        for (const width of [1440, 1280, 768, 375]) {
           await page.setViewportSize({ width, height: 1000 });
           for (const code of ["en", "zh"]) {
             await language(page, code);
@@ -441,7 +458,7 @@ const server = http.createServer((request, response) => {
       }
       if (newsLinks.length) {
         assert.equal((await page.goto(origin + newsLinks[0])).status(), 200);
-        for (const width of [1440, 375]) {
+        for (const width of [1440, 1280, 768, 375]) {
           await page.setViewportSize({ width, height: 1000 });
           for (const code of ["en", "zh"]) {
             await language(page, code);
@@ -465,7 +482,7 @@ const server = http.createServer((request, response) => {
       checks += 3;
     }
     await page.goto(origin + previewPrefix);
-    for (const width of [1440, 375]) {
+    for (const width of [1440, 1280, 768, 375]) {
       await page.setViewportSize({ width, height: 1000 });
       for (const code of ["en", "zh"]) {
         await language(page, code);
@@ -476,6 +493,47 @@ const server = http.createServer((request, response) => {
         checks++;
       }
     }
+    // Separate real-font probe: other checks deliberately block external services.
+    // Network availability is reported, not confused with system-fallback coverage.
+    const fontContext = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+    await fontContext.route("**/*", (route) => {
+      const host = new URL(route.request().url()).hostname;
+      return ["127.0.0.1", "fonts.googleapis.com", "fonts.gstatic.com"].includes(host) ? route.continue() : route.abort();
+    });
+    const fontPage = await fontContext.newPage();
+    await fontPage.addInitScript(() => {
+      window.fontCLS = 0;
+      new PerformanceObserver((list) => list.getEntries().forEach((entry) => {
+        if (!entry.hadRecentInput) window.fontCLS += entry.value;
+      })).observe({ type: "layout-shift", buffered: true });
+    });
+    let fontReport;
+    try {
+      await fontPage.goto(origin + previewPrefix, { waitUntil: "load", timeout: 20000 });
+      fontReport = await fontPage.evaluate(async () => {
+        const fonts = await Promise.race([
+          Promise.all([document.fonts.load('400 16px "Inter"', "Duan Lab"), document.fonts.load('400 16px "Noto Sans SC"', "类器官")]),
+          new Promise((resolve) => setTimeout(() => resolve(null), 12000)),
+        ]);
+        return { loaded: !!fonts && fonts.every((items) => items.length > 0), CLS: window.fontCLS, family: getComputedStyle(document.body).fontFamily };
+      });
+      if (fontReport.loaded) {
+        assert.ok(fontReport.CLS < .1, `Font/load CLS ${fontReport.CLS}`);
+        for (const width of [1440, 1280, 768, 375]) {
+          await fontPage.setViewportSize({ width, height: 1000 });
+          assert.ok(await fontPage.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+          if (width > 1100) assert.ok(await fontPage.locator("header nav").evaluate((nav) => { const b = nav.getBoundingClientRect(); return Math.abs(b.x + b.width / 2 - innerWidth / 2) < 1; }));
+          await fontPage.screenshot({ path: path.join(screenshots, `home-webfonts-${width}.png`), fullPage: true });
+        }
+      }
+    } catch (error) {
+      // Assertions remain failures; only a service timeout may fall back.
+      if (error.name !== "TimeoutError") throw error;
+      fontReport = { loaded: false, unavailable: "External font service timeout; system fallback checked separately" };
+    }
+    fs.writeFileSync(path.join(screenshots, "font-load-report.json"), JSON.stringify(fontReport, null, 2));
+    console.log(JSON.stringify({ fontReport }));
+    await fontContext.close();
     assert.deepEqual(errors, []);
     console.log(JSON.stringify({ browserChecksPassed: checks, notes: "Actual Chromium, real clipboard and touch input; visibility state is simulated; fixtures are isolated and unpublished." }));
   } finally {
