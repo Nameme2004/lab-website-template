@@ -1,10 +1,12 @@
 /* Home only: the brand, navigation and news share one deep-blue banner. */
 header[data-home-hero] {
   position: relative !important;
+  background: #0c2134;
   gap: 28px;
   padding: clamp(36px, 5vw, 64px) max(20px, calc((100vw - 1160px) / 2));
 }
-header[data-home-hero] .subtitle { opacity: 0.9; line-height: 1.6; }
+header[data-home-hero] .title { font-size: clamp(2.4rem, 4vw, 3.25rem); line-height: 1.2; }
+header[data-home-hero] .subtitle { opacity: 0.9; line-height: 1.6; font-weight: 400; }
 header[data-home-hero] nav { gap: 8px 16px; }
 header[data-home-hero] .news-carousel--hero {
   width: 100%;
@@ -22,7 +24,7 @@ header[data-home-hero] .news-carousel--hero {
   align-items: center;
 }
 .news-carousel--hero .news-carousel__copy { padding: clamp(24px, 3vw, 40px); }
-.news-carousel--hero h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.35; }
+header[data-home-hero] .news-carousel h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.35; }
 .news-carousel--hero .news-carousel__meta { color: #c3d4e3; }
 .news-carousel--hero .news-carousel__read,
 header[data-home-hero] .home-hero__all-news { color: #b9e2ff; }
