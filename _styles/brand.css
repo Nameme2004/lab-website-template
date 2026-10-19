@@ -17,6 +17,7 @@ header.background::before, footer.background::before { background-image: none; }
 header[data-page-hero] { position: relative !important; row-gap: 28px; padding-inline: max(24px, calc((100% - 1120px) / 2)); }
 .page-hero__intro { flex-basis: 100%; width: 100%; padding: 32px 0 24px; max-width: 900px; }
 .page-hero__intro h1 { margin: 0 0 20px; text-align: left; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.25; text-transform: none; }
+.page-hero__intro h1 > .icon { color: inherit; font-size: .75em; margin-right: .6em; }
 .page-hero__intro p { margin: 16px 0 0; text-align: left; line-height: 1.8; }
 .page-hero__intro a { color: #b9e2ff; }
 .page-hero__intro .post-info { justify-content: flex-start; }

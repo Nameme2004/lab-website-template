@@ -281,8 +281,11 @@ const server = http.createServer((request, response) => {
           if (route === "join-us/") {
             assert.deepEqual(await page.locator("main > section").evaluateAll((s) => s.slice(0,3).map((x) => getComputedStyle(x).backgroundColor)), ["rgb(255, 255, 255)", "rgb(240, 244, 248)", "rgb(255, 255, 255)"]);
             await page.locator(".dark-toggle").check();
+            assert.equal(await page.locator("html").getAttribute("data-dark"), "true");
+            await until(async () => await page.locator("main > section").nth(1).evaluate((s) => getComputedStyle(s).backgroundColor) === "rgb(23, 52, 77)");
             assert.equal(await page.locator("main > section").nth(1).evaluate((s) => getComputedStyle(s).backgroundColor), "rgb(23, 52, 77)");
             await page.locator(".dark-toggle").uncheck();
+            await until(async () => await page.locator("main > section").nth(1).evaluate((s) => getComputedStyle(s).backgroundColor) === "rgb(240, 244, 248)");
           }
         }
         checks += 3;
