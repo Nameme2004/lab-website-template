@@ -1,30 +1,43 @@
-{
-  "intro": "The lab is establishing its research framework around the two directions below, guided by the group’s research strategy. Methods and model systems will be developed step by step; confirmation of a direction does not mean that its models, platforms or results have already been established.\n\nRelevant background includes prior collaborative work on cancer organoids, viral infection models and organoid-based drug screening, including antiviral screening and KRAS-mutant pancreatic cancer organoid studies. These examples inform the directions below and are not presented as completed projects of the new laboratory.",
-  "intro_zh": "实验室正依据课题组研究策略，围绕以下两个核心方向建立研究体系，逐步推进方法学与模型建设。研究方向经过确认，不代表相关模型、平台或研究成果已经建成。\n\n相关背景包括负责人既往参与的肿瘤类器官、病毒感染模型及类器官药物筛选研究，如抗病毒药物筛选与 KRAS 突变相关胰腺癌类器官研究。这些示例为以下方向提供背景，不作为新实验室已完成的项目。",
-  "directions": [
-    {
-      "title": "Development of Novel Disease Models",
-      "title_zh": "新型疾病模型开发",
-      "description": "The lab aims to develop complementary disease-modeling approaches using complex organoids and tissue–immune humanized animal models to investigate immune dysfunction in infectious and tumor diseases. A longer-term goal is to establish a stepwise, human tissue-specific immune research platform spanning in vitro and in vivo models.",
-      "description_zh": "围绕复杂类器官与组织—免疫双人源化动物的互补模型，探索感染性疾病与肿瘤疾病中的免疫失效问题，并逐步建立从体外到体内的阶梯式人类组织特异性免疫研究平台。",
-      "order": 10,
-      "show_on_home": true,
-      "confirmed": true,
-      "id": "novel-disease-models",
-      "home_summary": "The lab aims to combine organoid and humanized animal models to explore immune dysfunction in disease.",
-      "home_summary_zh": "结合类器官与人源化动物模型，探索疾病中的免疫失效问题。"
-    },
-    {
-      "title": "Microphysiological Systems and AI-Enabled Drug Discovery",
-      "title_zh": "微生理系统与智能药物研发",
-      "description": "The lab aims to integrate microphysiological systems with artificial intelligence to explore more standardized, automated, and scalable approaches to drug research. Key areas include early biomarker identification and the integration of wet-lab experiments with computational analysis in a closed-loop workflow.",
-      "description_zh": "探索微生理系统与人工智能深度融合的研究体系，围绕方法学标准化、自动化与规模化、早期生物标志物识别，以及湿实验与计算分析闭环等方向开展研究。",
-      "order": 20,
-      "show_on_home": true,
-      "confirmed": true,
-      "id": "microphysiological-ai-drug-discovery",
-      "home_summary": "The lab aims to connect microphysiological systems and artificial intelligence for drug research.",
-      "home_summary_zh": "探索微生理系统与人工智能融合的药物研究方法。"
-    }
-  ]
-}
+intro: >-
+  The lab is establishing its research framework around the two directions
+  below, guided by the group’s research strategy. 
+
+
+  Relevant background includes prior collaborative work on cancer organoids,
+  viral infection models and organoid-based drug screening, including antiviral
+  screening and KRAS-mutant pancreatic cancer organoid studies. 
+intro_zh: |-
+  实验室正依据课题组研究策略，围绕以下两个核心方向建立研究体系，逐步推进方法学与模型建设。
+
+  相关背景包括负责人既往参与的肿瘤类器官、病毒感染模型及类器官药物筛选研究，如抗病毒药物筛选与 KRAS 突变相关胰腺癌类器官研究。
+directions:
+  - id: novel-disease-models
+    title: Development of Novel Disease Models
+    title_zh: 新型疾病模型开发
+    description: The lab aims to develop complementary disease-modeling approaches
+      using complex organoids and tissue–immune humanized animal models to
+      investigate immune dysfunction in infectious and tumor diseases. A
+      longer-term goal is to establish a stepwise, human tissue-specific immune
+      research platform spanning in vitro and in vivo models.
+    description_zh: 围绕复杂类器官与组织—免疫双人源化动物的互补模型，探索感染性疾病与肿瘤疾病中的免疫失效问题，并逐步建立从体外到体内的阶梯式人类组织特异性免疫研究平台。
+    order: 10
+    show_on_home: true
+    home_summary: The lab aims to combine organoid and humanized animal models to
+      explore immune dysfunction in disease.
+    home_summary_zh: 结合类器官与人源化动物模型，探索疾病中的免疫失效问题。
+    confirmed: true
+  - id: microphysiological-ai-drug-discovery
+    title: Microphysiological Systems and AI-Enabled Drug Discovery
+    title_zh: 微生理系统与智能药物研发
+    description: The lab aims to integrate microphysiological systems with
+      artificial intelligence to explore more standardized, automated, and
+      scalable approaches to drug research. Key areas include early biomarker
+      identification and the integration of wet-lab experiments with
+      computational analysis in a closed-loop workflow.
+    description_zh: 探索微生理系统与人工智能深度融合的研究体系，围绕方法学标准化、自动化与规模化、早期生物标志物识别，以及湿实验与计算分析闭环等方向开展研究。
+    order: 20
+    show_on_home: true
+    home_summary: The lab aims to connect microphysiological systems and artificial
+      intelligence for drug research.
+    home_summary_zh: 探索微生理系统与人工智能融合的药物研究方法。
+    confirmed: true
