@@ -1,22 +1,16 @@
-{
-  "intro": {
-    "en": "Selected published work involving the lab lead, completed before the establishment of Duan Lab. These papers are academic background, not independent outputs of the new laboratory.",
-    "zh": "以下为负责人在 Duan Lab 成立前参与的已发表代表作，作为学术背景，不属于新实验室独立产出。"
-  },
-  "highlighted_heading": {
-    "en": "Selected Publications",
-    "zh": "负责人代表性论文"
-  },
-  "all_heading": {
-    "en": "Verified references",
-    "zh": "已核实文献"
-  },
-  "empty_highlights": {
-    "en": "References are being prepared.",
-    "zh": "文献资料正在整理。"
-  },
-  "highlighted_ids": [
-    "doi:10.1016/j.stem.2023.11.011",
-    "doi:10.1038/s41586-020-2901-9"
-  ]
-}
+intro:
+  en: "Selected published work involving the lab lead, completed before the
+    establishment of Duan Lab. "
+  zh: 以下为负责人在 Duan Lab 成立前参与的已发表代表作.
+highlighted_heading:
+  en: Selected Publications
+  zh: 负责人代表性论文
+all_heading:
+  en: Verified references
+  zh: 已核实文献
+empty_highlights:
+  en: References are being prepared.
+  zh: 文献资料正在整理。
+highlighted_ids:
+  - doi:10.1016/j.stem.2023.11.011
+  - doi:10.1038/s41586-020-2901-9
