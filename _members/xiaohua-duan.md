@@ -20,7 +20,6 @@ body_zh: |-
   [资料来源：华东师范大学官方主页](https://faculty.ecnu.edu.cn/_s49/dxh/main.psp)。既往成果作为新实验室的学术背景。
 work_experience:
   - start: "2026.01"
-    end: ""
     institution: School of Pharmacy, East China Normal University
     institution_zh: 华东师范大学药学院
     qualification: Researcher
@@ -36,7 +35,8 @@ education:
     end: "2021.01"
     institution: Shanghai Institute of Nutrition and Health, Chinese Academy of Sciences
     institution_zh: 中国科学院上海营养与健康研究所
-    qualification: PhD in Biochemistry and Molecular Biology; joint training with ShanghaiTech University
+    qualification: PhD in Biochemistry and Molecular Biology; joint training with
+      ShanghaiTech University
     qualification_zh: 生物化学与分子生物学博士，与上海科技大学联合培养
   - start: "2009.09"
     end: "2014.07"
